@@ -1,0 +1,2 @@
+# hugopress
+A hugo theme.
