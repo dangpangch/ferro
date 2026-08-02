@@ -1,4 +1,12 @@
+@import "./fonts.css";
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Zira Sans", sans-serif;
+  --font-serif: "Zira Serif", serif;
+  --font-mono: "Zira Mono", monospace;
+}
