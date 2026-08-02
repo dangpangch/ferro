@@ -1,0 +1,35 @@
+baseURL: https://example.org/
+locale: en-US
+title: My New Hugo Project
+
+menus:
+  main:
+    - name: Home
+      pageRef: /
+      weight: 10
+    - name: Posts
+      pageRef: /posts
+      weight: 20
+    - name: Tags
+      pageRef: /tags
+      weight: 30
+
+module:
+  hugoVersion:
+    extended: false
+    min: 0.146.0
+  mounts:
+    - source: assets
+      target: assets
+    - disableWatch: true
+      source: hugo_stats.json
+      target: assets/notwatching/hugo_stats.json
+
+build:
+  buildStats:
+    enable: true
+  cachebusters:
+    - source: 'assets/notwatching/hugo_stats\.json'
+      target: css
+    - source: '(postcss|tailwind)\.config\.js'
+      target: css
