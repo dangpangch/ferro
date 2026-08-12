@@ -1,0 +1,36 @@
+/* ── Single page ── */
+.single-header {
+  margin-bottom: 2rem;
+  h1 {
+    margin: 0.5rem 0 0.25rem;
+  }
+  time {
+    display: block;
+    margin: 0.25rem 0 0.75rem;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-smudge);
+  }
+}
+
+section.page-section {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  a {
+    text-decoration: underline;
+  }
+  p + p {
+    margin-top: 1.25rem;
+  }
+  h2 {
+    margin-top: 2.5rem;
+  }
+  h3 {
+    margin-top: 2rem;
+  }
+  hr {
+    margin: 2rem 0;
+    border: none;
+    border-top: 1px solid var(--color-border);
+  }
+}

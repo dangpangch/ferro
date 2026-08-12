@@ -1,0 +1,6 @@
+/* ── Home ── */
+.centered-container {
+  text-align: center;
+  margin: 2.5rem auto 4rem;
+  width: fit-content;
+}

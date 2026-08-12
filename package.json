@@ -1,9 +1,9 @@
 {
-  "name": "rusty-typewriter",
+  "name": "hugopress",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "hugo server",
+    "dev": "hugo server --disableFastRender",
     "build": "hugo --minify --gc"
   },
   "devDependencies": {

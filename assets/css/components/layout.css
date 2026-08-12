@@ -1,0 +1,41 @@
+/* ── Layout ── */
+.site-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100dvh - 3rem);
+  max-width: fit-content;
+  margin: 0 auto;
+}
+
+.main-pane {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  width: 680px;
+  max-width: calc(100vw - 3rem);
+  margin: 0 auto;
+  padding: 0 0.5rem;
+}
+
+.main-header {
+  padding-bottom: 1.25rem;
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+#main-content {
+  flex-grow: 1;
+  img {
+    max-width: 100%;
+    border: 1px solid var(--color-border);
+    border-radius: 0.375rem;
+    margin: 1.5rem 0;
+  }
+}
+
+.main-footer {
+  margin: 4rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+}

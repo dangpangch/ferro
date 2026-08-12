@@ -1,0 +1,13 @@
+/* ── Footer ── */
+.footer {
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--color-smudge);
+}
+
+.footer-copyright {
+  margin: 0.75rem 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}

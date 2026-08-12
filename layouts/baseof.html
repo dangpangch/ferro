@@ -10,12 +10,12 @@
     {{ end }}
   </head>
   <body class="transition-none">
-    <div id="container">
-      <header id="main-header">{{- partial "header.html" . -}}</header>
+    <div class="site-shell">
+      <header class="main-header">{{- partial "header.html" . -}}</header>
       <div class="flex grow">
-        <div id="main-pane">
+        <div class="main-pane">
           <main id="main-content">{{- block "main" . -}}{{- end -}}</main>
-          <footer id="main-footer">{{- partial "footer.html" . -}}</footer>
+          <footer class="main-footer">{{- partial "footer.html" . -}}</footer>
         </div>
         {{- if (and (default true .Params.hugopress.sidePane)
           site.Params.hugopress.sidePane)

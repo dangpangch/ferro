@@ -1,0 +1,19 @@
+/* ── Breadcrumbs ── */
+.breadcrumbs {
+  padding: 0;
+  margin: 0 0 0.25rem;
+  list-style-type: none;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-smudge);
+  li {
+    display: inline-block;
+  }
+  a {
+    color: var(--color-smudge);
+    text-decoration: none;
+    &:hover {
+      color: var(--color-rust);
+    }
+  }
+}

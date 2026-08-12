@@ -1,0 +1,19 @@
+/* ── TOC in side pane ── */
+#TableOfContents {
+  font-size: var(--text-xs);
+  line-height: 1.6;
+  ul {
+    list-style: none;
+    padding-left: 0.75rem;
+  }
+  li {
+    margin: 0.25rem 0;
+  }
+  a {
+    color: var(--color-smudge);
+    text-decoration: none;
+    &:hover {
+      color: var(--color-rust);
+    }
+  }
+}

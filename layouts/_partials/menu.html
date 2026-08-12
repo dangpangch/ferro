@@ -6,7 +6,7 @@
   {{- if $isDropdown }}
   <nav class="nav-dropdown-list" role="list">
   {{- else }}
-  <nav id="nav-menu" role="list" aria-label="{{ $menuID }}">
+  <nav class="nav-menu" role="list" aria-label="{{ $menuID }}">
   {{- end }}
     {{- range . }}
       {{- $attrs := dict "href" .URL }}

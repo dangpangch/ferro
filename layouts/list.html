@@ -30,7 +30,7 @@
 {{- define
   "side"
 -}}
-  <!-- <aside id="side-pane" class="{{- cond site.Params.hugopress.side.list.sidePaneSticky "side-sticky" "" -}}">
+  <!-- <aside class="side-pane{{ cond site.Params.hugopress.side.list.sidePaneSticky " side-sticky" "" }}">
     {{- partial "side/list.html" . -}}
   </aside> -->
 {{- end -}}

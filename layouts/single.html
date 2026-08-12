@@ -14,8 +14,7 @@
 
 {{- define "side" -}}
   <aside
-    id="side-pane"
-    class="{{- cond site.Params.hugopress.side.single.sidePaneSticky "side-sticky" "" -}}"
+    class="side-pane{{ cond site.Params.hugopress.side.single.sidePaneSticky " side-sticky" "" }}"
   >
     {{- partial "side/single.html" . -}}
   </aside>
