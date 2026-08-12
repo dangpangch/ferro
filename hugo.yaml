@@ -1,29 +1,70 @@
 baseURL: https://example.org/
 locale: en-US
-title: My New Hugo Project
+title: HugoPress
+enableRobotsTXT: true
+
+params:
+  summaryLength: 1
+  author:
+    name: Matheus Queiroz
+  hugopress:
+    sidePane: true
+    countPageItems: 7
+    searchPath: search
+    home:
+      showBio: true
+      showAuthorImg: true
+      sidePaneTags: true
+      showFeatured: true
+      showRecent: true
+      hideRecentWhenFeatured: true
+      countRecent: 5
+    side:
+      home:
+        sidePaneSticky: false
+        taxonomies:
+          - tags
+          - series
+        countTaxonomy: 3
+      list:
+        sidePaneSticky: false
+      single:
+        sidePaneSticky: true
+        showDetails: true
+        showTableOfContents: true
+        showAttachments: true
+        showRelated: true
+        countRelated: 5
+  links:
+    hugo: https://gohugo.io/
+    theme: https://github.com/math-queiroz/rusty-typewriter
+
+related:
+  includeNewer: true
+  indices:
+    - name: tags
+      weight: 100
+
+taxonomies:
+  tag: tags
+  topic: topics
+  series: series
 
 menus:
   main:
-    - name: Home
-      pageRef: /
-      weight: 10
     - name: Posts
       pageRef: /posts
-      weight: 20
-    - name: Tags
-      pageRef: /tags
-      weight: 30
-
-module:
-  hugoVersion:
-    extended: false
-    min: 0.146.0
-  mounts:
-    - source: assets
-      target: assets
-    - disableWatch: true
-      source: hugo_stats.json
-      target: assets/notwatching/hugo_stats.json
+      weight: 1
+    - name: Hardware
+      pageRef: /posts/hardware
+      parent: Posts
+      weight: 10
+    - name: Features
+      pageRef: /features
+      weight: 2
+    - name: About
+      pageRef: /about
+      weight: 3
 
 build:
   buildStats:
@@ -33,3 +74,33 @@ build:
       target: css
     - source: '(postcss|tailwind)\.config\.js'
       target: css
+
+module:
+  mounts:
+    - source: assets
+      target: assets
+    - disableWatch: true
+      source: hugo_stats.json
+      target: assets/notwatching/hugo_stats.json
+  hugoVersion:
+    extended: false
+    min: 0.146.0
+
+# Search index output format
+outputFormats:
+  SearchIndex:
+    mediaType: application/json
+    baseName: searchindex
+    isPlainText: true
+    notAlternative: true
+
+mediaTypes:
+  application/json:
+    suffixes:
+      - json
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - SearchIndex

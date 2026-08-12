@@ -1,0 +1,21 @@
+<!doctype html>
+<html
+  lang="{{ site.Language.Locale }}"
+  dir="{{ or site.Language.Direction `ltr` }}"
+>
+  <head>
+    {{ partial "head.html" . }} {{ with (templates.Defer (dict "key" "global"))
+    }} {{ partial "css.html" . }} {{ end }}
+  </head>
+  <body class="transition-none">
+    <div id="container">
+      <header id="main-header">{{- partial "header.html" . -}}</header>
+      <div class="flex grow">
+        <div id="main-pane">
+          <main id="main-content">{{- .Content -}}</main>
+          <footer id="main-footer">{{- partial "footer.html" . -}}</footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

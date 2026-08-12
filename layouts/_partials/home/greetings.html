@@ -1,0 +1,22 @@
+{{- if site.Params.hugopress.home.showBio -}}
+  <div class="centered-container">
+    {{- if site.Params.hugopress.home.showAuthorImg -}}
+      <img
+        class="border-border mx-auto block rounded-full border"
+        width="70"
+        height="70"
+        src="{{- hugo.Data.hugopress.content.home.image | default "images/profile.jpg" -}}"
+        alt="{{- site.Params.author.name | default "Author" -}}"
+        loading="lazy"
+      />
+    {{- end -}}
+
+
+    <h1 class="mt-0 mb-1">
+      {{- hugo.Data.hugopress.content.home.greetings -}}
+    </h1>
+    <div class="text-smudge mx-auto max-w-[70%]">
+      {{- hugo.Data.hugopress.content.home.text -}}
+    </div>
+  </div>
+{{- end -}}

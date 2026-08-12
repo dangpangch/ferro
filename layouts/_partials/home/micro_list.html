@@ -1,0 +1,21 @@
+{{- $title := .title -}}
+{{- $items := .items -}}
+
+
+<h2 class="mt-8 mb-3">{{- $title -}}</h2>
+<div class="flat-list">
+  {{- range first (default 5 site.Params.hugopress.home.countRecent) $items -}}
+    <div class="flat-list-item">
+      <div>
+        <a href="{{- .RelPermalink -}}">{{- .LinkTitle -}}</a>
+        <time
+          class="dim float-right text-sm"
+          datetime="{{- .Date | time.Format "2006-01-02T15:04:05-07:00" -}}"
+        >
+          {{- dateFormat (or .Site.Params.dateFormat "January 2, 2006") .Date -}}
+        </time>
+      </div>
+      <small><p>{{- partial "components/summary.html" . -}}</p></small>
+    </div>
+  {{- end -}}
+</div>

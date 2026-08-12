@@ -1,0 +1,14 @@
+name = "HugoPress"
+license = "MIT"
+licenselink = "https://github.com/dangpangch/hugopress/LICENSE"
+description = "A hugo theme"
+
+# homepage = "https://github.com/dangpangch/hugopress"
+# demosite = "https://hugopress.netlify.app/demo"
+
+tags = ["responsive", "minimal", "blog"]
+features = ["blog", "themes", "search"]
+
+[author]
+name = "dangpangch"
+homepage = "https://github.com/dangpangch"

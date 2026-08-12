@@ -1,2 +1,21 @@
-<h1>{{ site.Title }}</h1>
-{{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+<a class="skip-link" href="#main-content">{{- i18n "skip_to_content" | default "Skip to content" -}}</a>
+<div role="navigation" aria-label="Main">
+  <div class="nav-left">
+    <a href="{{- absURL "" -}}">{{- site.Title -}}</a>
+  </div>
+  <div class="nav-right">
+    <div class="absolute h-0 w-0">
+      <div id="nav-dropdown-menu" class="hidden" href="#">
+        {{- partial "menu.html" (dict "menuID" "main" "page" . "isDropdown" true) -}}
+      </div>
+    </div>
+    <a id="nav-dropdown-button" href="#">
+      {{- partial "svg/menu.svg" -}}
+    </a>
+    {{- partial "menu.html" (dict "menuID" "main" "page" .) -}}
+    <a id="theme-switcher" href="#">
+      {{- partial "svg/sun.svg" -}}
+      {{- partial "svg/moon.svg" -}}
+    </a>
+  </div>
+</div>

@@ -1,9 +1,31 @@
-{{ define "main" }}
-  {{ .Content }}
-  {{ range site.RegularPages }}
-    <section>
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-      {{ .Summary }}
-    </section>
-  {{ end }}
-{{ end }}
+{{- define "main" -}}
+  {{- partial "home/greetings.html" -}}
+
+  {{- $indexablePages := where site.RegularPages "Params.indexable" "ne" false -}}
+
+
+  <div class="mx-auto max-w-[95%]">
+    <div class="show-md hidden">
+      {{- partial "search_bar" . -}}
+    </div>
+
+    {{- $featured := where $indexablePages "Params.featured" true -}}
+    {{- if (and $featured site.Params.hugopress.home.showFeatured) -}}
+      {{- partial "home/micro_list.html" (dict "items" $featured "title" (i18n "featured_posts")) -}}
+    {{- end -}}
+
+    {{- if and site.RegularPages site.Params.hugopress.home.showRecent -}}
+      {{- $recent := cond site.Params.hugopress.home.hideRecentWhenFeatured (where $indexablePages "Params.featured" "!=" true) site.RegularPages -}}
+      {{- partial "home/micro_list.html" (dict "items" $recent "title" (i18n "recent_posts")) -}}
+    {{- end -}}
+  </div>
+{{- end -}}
+
+{{- define "side" -}}
+  <aside
+    id="side-pane"
+    class="{{- cond site.Params.hugopress.side.home.sidePaneSticky "side-sticky" "" -}}"
+  >
+    {{- partial "side/home.html" . -}}
+  </aside>
+{{- end -}}
