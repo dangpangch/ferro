@@ -1,0 +1,41 @@
+{{- /*
+  Side pane social links.
+  Reads entries from data/hugopress/socials.yaml.
+  Renders nothing when the data file is missing or empty.
+  */
+-}}
+{{- $data := hugo.Data.hugopress -}}
+{{- $socials := "" -}}
+{{- if and $data (isset $data "socials") -}}
+  {{- $socials = index $data "socials" -}}
+{{- end -}}
+
+{{- if $socials -}}
+  {{- $icons := slice "github" "x_twitter" "mastodon" "bluesky" "rss" "email" "linkedin" "link" -}}
+  <h3>{{- i18n "side_social" | default "Social" -}}</h3>
+  <ul class="side-social">
+    {{- range $socials -}}
+      {{- $name := .name | default "" -}}
+      {{- $url := .url | default "" -}}
+      {{- if and $name $url -}}
+        {{- $label := .handle | default $name -}}
+        {{- $icon := .icon | default "link" -}}
+        {{- if not (in $icons $icon) -}}
+          {{- $icon = "link" -}}
+        {{- end -}}
+        <li>
+          <a
+            href="{{- $url -}}"
+            aria-label="{{- $name -}}"
+            {{- if strings.HasPrefix $url "http" }}
+              target="_blank" rel="noopener noreferrer"
+            {{- end -}}
+          >
+            {{- partial (printf "svg/%s.svg" $icon) . -}}
+            <span>{{- $label -}}</span>
+          </a>
+        </li>
+      {{- end -}}
+    {{- end -}}
+  </ul>
+{{- end -}}

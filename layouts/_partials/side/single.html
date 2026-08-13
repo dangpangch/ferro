@@ -1,5 +1,7 @@
 {{ partial "components/side_content.html" (dict "section" "single") }}
 
+{{- partial "components/social_links.html" . -}}
+
 {{- if site.Params.hugopress.side.single.showDetails -}}
   <div class="side-details">
     <span>{{- .WordCount }} {{ i18n "details_words" -}}</span>

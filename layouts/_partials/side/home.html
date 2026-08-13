@@ -2,6 +2,8 @@
 
 {{ partial "components/side_content.html" (dict "section" "home") }}
 
+{{- partial "components/social_links.html" . -}}
+
 {{- range $filter := site.Params.hugopress.side.home.taxonomies -}}
   {{- with (index site.Taxonomies $filter) -}}
     {{ $i18nTaxonomy := printf "taxonomies.%s" $filter }}
@@ -16,7 +18,7 @@
         {{- if lt $i 0 -}}{{- break -}}{{- end -}}
         <li>
           <a class="tag" href="{{- .Page.Permalink -}}">
-            #{{- .Page.Title | lower -}}&nbsp<span class="dim text-sm"
+            #{{- .Page.Title | lower -}}&nbsp<span class="tag-count text-sm"
               >{{ .Count }}</span
             >
           </a>

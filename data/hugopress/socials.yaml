@@ -1,0 +1,18 @@
+# Social links shown at the bottom of the side pane (home & single pages).
+# Each entry:
+#   name   - network or site name (required; used as the link's accessible label)
+#   url    - link target (required)
+#   icon   - one of: github, x_twitter, mastodon, bluesky, rss, email, linkedin, link
+#            (optional; defaults to "link")
+#   handle - short display label, e.g. "@user" (optional; falls back to name)
+#
+# Override or extend these entries by defining data/hugopress/socials.yaml
+# in your own site (the site's data dir takes precedence over the theme's).
+- name: "GitHub"
+  url: "https://github.com/dangpangch/hugopress"
+  icon: "github"
+  handle: "@dangpangch"
+
+- name: "RSS"
+  url: "/index.xml"
+  icon: "rss"

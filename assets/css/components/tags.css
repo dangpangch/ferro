@@ -4,13 +4,28 @@
 }
 
 .tag {
-  @apply border-border text-smudge hover:border-rust hover:text-rust inline-flex cursor-pointer items-center rounded-full border px-3 py-[0.2rem] font-sans font-normal transition-[border-color,color] duration-150 ease-out;
+  @apply border-border text-ink hover:border-rust hover:text-rust inline-flex cursor-pointer items-center rounded-full border px-3 py-[0.2rem] font-sans font-normal transition-[border-color,color] duration-150 ease-out;
   font-size: var(--text-xs);
   a {
     @apply text-inherit no-underline;
   }
+  .tag-count {
+    @apply text-rust;
+  }
+}
+
+@variant dark {
+  .tag {
+    @apply text-cream;
+    .tag-count {
+      @apply text-rust-bright;
+    }
+    &:hover .tag-count {
+      @apply text-rust;
+    }
+  }
 }
 
 .taxonomy-list {
-  @apply flex list-none flex-wrap gap-1.5;
+  @apply flex list-none flex-wrap gap-1.5 p-0;
 }

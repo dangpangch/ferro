@@ -1,0 +1,33 @@
+/* ── Side social links ──
+   A colophon-style list: monochrome icon + typewriter-handle label,
+   hairline-separated rows. */
+.side-social {
+  @apply m-0 list-none p-0;
+
+  li + li {
+    @apply mt-0;
+  }
+
+  a {
+    @apply text-ink flex min-h-11 items-center gap-2.5 no-underline transition-colors duration-150 ease-out;
+    &:hover {
+      @apply text-rust;
+    }
+  }
+
+  svg {
+    @apply m-0 size-4 shrink-0;
+    color: currentColor;
+  }
+
+  span {
+    @apply font-mono;
+    font-size: var(--text-sm);
+  }
+}
+
+@variant dark {
+  .side-social a {
+    @apply text-cream;
+  }
+}
