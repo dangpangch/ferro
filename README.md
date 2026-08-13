@@ -1,51 +1,80 @@
 # HugoPress
 
-一个基于 [Rusty Typewriter](https://github.com/math-queiroz/rusty-typewriter) 二次开发的 Hugo 博客主题，延续其复古打字机风格，适合个人博客与写作。
+🌐 **English** | [简体中文](README.zh-CN.md)
 
-## 特性
+A Hugo blog theme forked from [Rusty Typewriter](https://github.com/math-queiroz/rusty-typewriter), keeping its retro typewriter character and adding built-in bilingual (English & Simplified Chinese) support. Built for personal blogs and writing.
 
-- 响应式布局，适配桌面与移动端
-- 明暗主题切换
-- 内置搜索（FlexSearch）
-- 侧边栏、目录、相关文章
-- 分类、系列、主题（Taxonomies）支持
+## Features
 
-## 要求
+- Responsive layout for desktop and mobile
+- Light/dark theme switcher
+- **Bilingual i18n**: translation tables in `i18n/en.yaml` and `i18n/zh.yaml`; the language switcher in the navbar jumps to the current page's counterpart in the other language
+- **Built-in search (FlexSearch)**: a separate index per language (`/searchindex.json` for English, `/zh/searchindex.json` for Chinese), with friendly empty-query and no-results states
+- Side pane, table of contents, related posts
+- Data-driven social links; side pane static content lives in the home page front matter (`hugopress.side`) and can be localized per language
+- Taxonomies (tags, topics, series)
 
-- [Hugo](https://gohugo.io/installation/) ≥ 0.146.0
+## Requirements
 
-## 快速开始
+- [Hugo](https://gohugo.io/installation/) ≥ 0.158.0
+
+## Quick Start
 
 ```sh
-# 1. 新建站点
+# 1. Create a new site
 hugo new site my-blog
 cd my-blog
 
-# 2. 安装主题
+# 2. Install the theme
 git clone https://github.com/dangpangch/hugopress themes/hugopress
 
-# 3. 在 hugo.yaml 中启用主题
+# 3. Enable the theme in hugo.yaml
 # theme: hugopress
 
-# 4. 新建文章
-hugo new content posts/first-post.md
+# 4. Create a post
+hugo new content content/posts/first-post.md
 
-# 5. 本地预览
+# 5. Preview locally
 hugo server -D
 ```
 
-## 开发
+## Multilingual
+
+The theme ships with English (`/`) and Simplified Chinese (`/zh/`) configured via `languages`:
+
+```yaml
+languages:
+  en:
+    weight: 1
+    locale: en-US
+    label: English
+    contentDir: content/en
+  zh:
+    weight: 2
+    locale: zh-CN
+    label: 中文
+    contentDir: content/zh
+```
+
+How each layer is localized:
+
+- **Content**: each language has its own `contentDir`; files with the same path are automatically linked as translations, and the language switcher jumps between them
+- **UI strings**: translation tables in `i18n/<lang>.yaml`, rendered with `{{ T "key" }}`; missing keys fall back to the default language (`hugo --printI18nWarnings` lists gaps)
+- **Home greetings**: defaults come from i18n (`home_greetings` / `home_text`) and can be overridden in `data/hugopress/content.yaml`
+- **Side pane content**: defined in the home page front matter (`hugopress.side`) and translated per language; resolution order is current language → default language → data file
+
+## Development
 
 ```sh
-npm install       # 安装依赖（Tailwind CSS、Prettier）
+npm install       # Install dependencies (Tailwind CSS, Prettier)
 npm run dev       # hugo server
 npm run build     # hugo --minify --gc
 ```
 
-## TODO List
+## TODO
 
-- [ ] fonts: 对字体Zira的Woff2文件做子集化，减少字体文件体积 OR 使用预加载 OR 对字体进行限制
+- [ ] Fonts: subset the Zira WOFF2 files to reduce font file size, or use preloading, or limit the fonts
 
-## 致谢
+## Credits
 
-本主题基于 [Rusty Typewriter](https://github.com/math-queiroz/rusty-typewriter) 开发，感谢原作者 [Matheus Queiroz](https://github.com/math-queiroz) 的开源贡献。
+This theme is based on [Rusty Typewriter](https://github.com/math-queiroz/rusty-typewriter); thanks to the original author [Matheus Queiroz](https://github.com/math-queiroz) for the open-source contribution.
