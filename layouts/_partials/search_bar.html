@@ -1,21 +1,11 @@
-<form onsubmit="searchBarSubmit(event)">
-  <div class="search-bar">
-    {{- partial "svg/search.svg" -}}
-    <label for="searchInput" class="sr-only"
-      >{{- i18n "search_placeholder" -}}</label
-    >
-    <input
-      id="searchInput"
-      type="text"
-      placeholder="{{- i18n "search_placeholder" -}}"
-    />
-  </div>
-</form>
-
-<script>
-  function searchBarSubmit(event) {
-    event.preventDefault();
-    const relativeUrl = `{{- absURL site.Params.hugopress.searchPath -}}/?q=${encodeURIComponent(event.target.elements['searchInput'].value)}`;
-    window.location.href = relativeUrl;
-  }
-</script>
+{{- /* Opens the global search panel (see search_panel.html) */ -}}
+<button
+  class="search-bar search-bar-button"
+  type="button"
+  aria-haspopup="dialog"
+  aria-expanded="false"
+  aria-controls="search-panel"
+>
+  {{- partial "svg/search.svg" -}}
+  <span class="search-bar-placeholder">{{- i18n "search_placeholder" -}}</span>
+</button>

@@ -1,118 +1,65 @@
 /* ── List items ── */
 .flat-list-item {
-  padding: 1rem 0;
-  border-top: 1px solid var(--color-border);
-  &:first-child {
-    border-top: none;
-  }
+  @apply border-border border-t py-4 first:border-t-0;
 }
 
 .flat-list-item > div,
 .list-group-heading {
-  display: grid;
-}
-
-@media (min-width: 768px) {
-  .flat-list-item > div,
-  .list-group-heading {
-    grid-gap: 1em;
-    grid-template-columns: 1fr auto;
-  }
+  @apply grid md:grid-cols-[1fr_auto] md:gap-[1em];
 }
 
 .flat-list-item > div > a,
 .list-group-heading > a {
-  overflow-wrap: anywhere;
-  font-family: var(--font-sans);
-  font-weight: 700;
-  &:hover {
-    text-decoration: underline;
-  }
+  @apply font-sans font-bold wrap-anywhere hover:underline;
 }
 
 .flat-list-item > small {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
+  @apply line-clamp-2 overflow-hidden;
   p {
-    margin: 0.25rem 0 0;
-    font-size: 0.9375rem;
-    line-height: 1.6;
-    color: var(--color-smudge);
+    @apply text-smudge mt-1 text-[0.9375rem] leading-[1.6];
   }
 }
 
 .list-group-key {
-  text-align: right;
-  padding-bottom: 0.4rem;
-  margin: 1.5rem 0 0.25rem;
-  border-bottom: 1px solid var(--color-border);
-  font-family: var(--font-sans);
+  @apply border-border text-smudge mt-6 mb-1 border-b pb-[0.4rem] text-right font-sans font-bold tracking-[0.05em] uppercase first:mt-0;
   font-size: var(--text-sm);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-smudge);
-  &:first-child {
-    margin-top: 0;
-  }
 }
 
 .list-group-heading {
-  margin-top: 0.75rem;
+  @apply mt-3;
   a {
-    font-size: 1.0625rem;
+    @apply text-[1.0625rem];
   }
 }
 
 .list-group-summary {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  color: var(--color-smudge);
+  @apply text-smudge line-clamp-3 text-[0.9375rem] leading-[1.6];
 }
 
 /* ── Pagination ── */
 .pagination {
-  padding-left: 0;
-  width: fit-content;
-  margin: 2.5rem auto 0;
-  font-family: var(--font-sans);
+  @apply mx-auto mt-10 w-fit font-sans;
   font-size: var(--text-sm);
   li {
-    display: inline;
-    margin: 0 0.25rem;
+    @apply mx-1 inline;
     &:not(.disabled) > a {
-      text-decoration: underline;
+      @apply underline;
     }
     &.active > a {
-      color: var(--color-ink);
-      text-decoration: none;
+      @apply text-ink no-underline;
     }
   }
 }
 
 @variant dark {
   .pagination li.active > a {
-    color: var(--color-cream);
+    @apply text-cream;
   }
-  .flat-list-item > small p {
-    color: rgba(232, 228, 223, 0.65);
-  }
+  .flat-list-item > small p,
   .list-group-summary {
-    color: rgba(232, 228, 223, 0.65);
+    @apply text-[#e8e4df]/65;
   }
   .list-group-key {
-    color: rgba(232, 228, 223, 0.55);
-  }
-  .flat-list-item > div > a:hover,
-  .list-group-heading > a:hover {
-    text-decoration: underline;
+    @apply text-[#e8e4df]/55;
   }
 }

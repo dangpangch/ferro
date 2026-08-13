@@ -1,0 +1,40 @@
+{{- /* Taxonomy overview page — lists every term with its page count, e.g. /tags/ */ -}}
+{{- define "main" -}}
+  {{- $taxonomyName := i18n (printf "taxonomies.%s" .Data.Plural) | default (title .Data.Plural) -}}
+  <div class="taxonomy-header">
+    {{- partial "components/breadcrumbs.html" . -}}
+    <h1>{{- $taxonomyName -}}</h1>
+    <p class="taxonomy-meta dim">
+      {{- len .Data.Terms -}}&nbsp;{{- $taxonomyName | lower -}}
+    </p>
+  </div>
+
+  {{- with .Content -}}
+    <section class="page-section">{{- . -}}</section>
+  {{- end -}}
+
+  {{- if .Data.Terms -}}
+    <div class="terms-grid">
+      {{- range .Data.Terms.ByCount -}}
+        <div class="term-card">
+          <a class="term-card-title" href="{{- .Page.RelPermalink -}}">
+            <span aria-hidden="true">#</span>{{- .Page.Title -}}
+            <span
+              class="term-count"
+              aria-label="{{- i18n "taxonomy_post_count" .Count -}}"
+              >{{- .Count -}}</span
+            >
+          </a>
+          {{- $latest := .Page.Pages.ByDate.Reverse | first 3 -}}
+          {{- with $latest -}}
+            <ul class="term-card-posts">
+              {{- range . -}}
+                <li><a href="{{- .RelPermalink -}}">{{- .LinkTitle -}}</a></li>
+              {{- end -}}
+            </ul>
+          {{- end -}}
+        </div>
+      {{- end -}}
+    </div>
+  {{- end -}}
+{{- end -}}

@@ -1,0 +1,64 @@
+/* ── Taxonomy pages ── */
+
+/* Term & taxonomy overview header */
+.taxonomy-header {
+  @apply mb-8;
+  h1 {
+    @apply mt-2 mb-1;
+  }
+}
+
+.taxonomy-title-mark {
+  @apply text-rust;
+}
+
+.taxonomy-meta {
+  @apply mt-1 font-sans;
+  font-size: var(--text-sm);
+}
+
+/* ── Sibling term navigation on term pages ── */
+.term-siblings {
+  @apply border-border mb-8 flex flex-wrap gap-2 border-b pb-5;
+}
+
+.tag-current {
+  @apply border-rust text-rust;
+}
+
+/* ── Terms overview grid ── */
+.terms-grid {
+  @apply grid grid-cols-[1fr] gap-4 sm:grid-cols-2;
+}
+
+.term-card {
+  @apply border-border hover:border-rust flex flex-col gap-2 rounded-lg border px-5 py-4 transition-colors duration-150 ease-out;
+}
+
+.term-card-title {
+  @apply flex items-baseline gap-1.5 font-sans text-[1.0625rem] font-bold hover:underline;
+}
+
+.term-count {
+  @apply text-smudge font-mono font-normal;
+  font-size: var(--text-sm);
+}
+
+.term-card-posts {
+  @apply list-none;
+  li {
+    @apply border-border border-t py-1 first:border-t-0;
+  }
+  a {
+    @apply text-ink hover:text-rust;
+  }
+}
+
+@variant dark {
+  .term-count {
+    @apply text-[#e8e4df]/55;
+  }
+  .term-card-posts a {
+    @apply text-cream;
+  }
+}

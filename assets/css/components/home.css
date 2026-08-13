@@ -1,6 +1,4 @@
 /* ── Home ── */
 .centered-container {
-  text-align: center;
-  margin: 2.5rem auto 4rem;
-  width: fit-content;
+  @apply mx-auto mt-10 mb-16 w-fit text-center;
 }

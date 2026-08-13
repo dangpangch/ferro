@@ -10,7 +10,12 @@
   {{ end }}
 </title>
 {{ $faviconPath := default site.Params.favicon "/favicon.svg" }}
-<link rel="icon" href="{{ $faviconPath | relURL }}" sizes="any" type="image/svg+xml" />
+<link
+  rel="icon"
+  href="{{ $faviconPath | relURL }}"
+  sizes="any"
+  type="image/svg+xml"
+/>
 
 {{ with (templates.Defer (dict "key" "global")) }}
   {{ partial "head/css.html" . }}

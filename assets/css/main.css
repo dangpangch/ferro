@@ -13,7 +13,6 @@
   --font-mono: "Zira Mono", monospace;
 
   /* Type scale — keyed to a literary reading rhythm */
-  --text-2xs: 0.6875rem;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1.125rem;
@@ -37,9 +36,6 @@
   --color-selection-dark: #6b3535;
 
   /* Z-index scale */
-  --z-base: 0;
-  --z-raised: 10;
-  --z-sticky: 20;
   --z-dropdown: 50;
   --z-overlay: 100;
 
@@ -47,12 +43,22 @@
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
-  /* Spacing scale (overriding Tailwind's default for more room) */
-  --spacing: 0.25rem;
-
   /* Line heights */
   --leading-relaxed: 1.75;
   --leading-snug: 1.35;
+}
+
+/* ── Custom utilities ────────────────────────── */
+@utility dim {
+  @apply text-smudge opacity-75;
+}
+
+/* Shows the element below the side-pane breakpoint (see .side-pane) */
+@utility show-md {
+  display: none;
+  @media (width <= 1100px) {
+    display: block !important;
+  }
 }
 
 /* ── Base layer ──────────────────────────────── */
@@ -139,24 +145,6 @@
     font-size: var(--text-base);
   }
 
-  /* ── Skip link ── */
-  .skip-link {
-    position: absolute;
-    top: -100%;
-    left: 0.5rem;
-    z-index: var(--z-overlay);
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    background: var(--color-rust);
-    color: var(--color-paper);
-    font-family: var(--font-sans);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    text-decoration: none;
-    &:focus {
-      top: 0.5rem;
-    }
-  }
   /* ── Links ── */
   a {
     color: var(--color-rust);
@@ -258,19 +246,6 @@
     outline: 1px solid var(--color-rust);
     outline-offset: 1px;
     border-radius: 1px;
-  }
-
-  /* sr-only utility */
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
   }
 }
 

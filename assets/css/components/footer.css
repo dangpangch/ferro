@@ -1,13 +1,8 @@
 /* ── Footer ── */
 .footer {
-  width: fit-content;
-  margin: 0 auto;
-  text-align: center;
-  color: var(--color-smudge);
+  @apply text-smudge mx-auto w-fit text-center;
 }
 
 .footer-copyright {
-  margin: 0.75rem 0 0;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--color-border);
+  @apply border-border mt-3 border-t pt-3;
 }

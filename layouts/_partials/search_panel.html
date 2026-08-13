@@ -1,0 +1,67 @@
+{{- /* Global search panel — command palette, mounted in baseof.html.
+  Driven by assets/js/search/search.js against the /searchindex.json index. */
+-}}
+<div class="search-panel" id="search-panel" hidden>
+  <div class="search-panel-backdrop" data-search-close></div>
+  <div
+    class="search-panel-dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{- i18n "search" -}}"
+  >
+    <div class="search-panel-input">
+      {{- partial "svg/search.svg" -}}
+      <input
+        class="search-text"
+        type="text"
+        role="combobox"
+        aria-expanded="true"
+        aria-controls="search-results"
+        aria-autocomplete="list"
+        aria-activedescendant=""
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="{{- i18n "search_placeholder" -}}"
+      />
+      <button
+        class="search-panel-close"
+        type="button"
+        aria-label="{{- i18n "search_close" -}}"
+        data-search-close
+      >
+        {{- partial "svg/x.svg" -}}
+      </button>
+    </div>
+
+    <div class="search-panel-body">
+      <p class="search-loading">{{- i18n "search_loading" -}}</p>
+
+      <div
+        class="search-empty"
+        id="search-empty"
+        hidden
+        role="status"
+        data-no-results="{{- i18n "search_no_results" -}}"
+      ></div>
+
+      <ul
+        class="search-results"
+        id="search-results"
+        role="listbox"
+        aria-label="{{- i18n "search" -}}"
+      ></ul>
+    </div>
+
+    <footer class="search-panel-footer">
+      <p
+        class="search-count"
+        role="status"
+        data-count-one="{{- i18n "search_count_one" -}}"
+        data-count-many="{{- i18n "search_count_many" -}}"
+      ></p>
+      <p class="search-keys" aria-hidden="true">
+        ↑↓ navigate&nbsp;&nbsp;↵ open&nbsp;&nbsp;esc close
+      </p>
+    </footer>
+  </div>
+</div>

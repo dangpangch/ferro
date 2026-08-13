@@ -1,9 +1,6 @@
 {{- define "main" -}}
   {{- $title := partial "title.html" . }}
-  {{- $i18nTaxonomy
-    := printf "taxonomies.%s" (lower $title)
-  }}
-  <h1>{{- i18n (lower $i18nTaxonomy) | default $title -}}</h1>
+  <h1>{{- $title -}}</h1>
   {{- .Content -}}
   {{- $pages := (.Paginate (.Pages.GroupByDate "2006")
     site.Params.hugopress.countPageItems)

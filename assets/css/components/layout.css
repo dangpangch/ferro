@@ -1,40 +1,24 @@
 /* ── Layout ── */
 .site-shell {
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100dvh - 3rem);
-  max-width: fit-content;
-  margin: 0 auto;
+  @apply mx-auto flex min-h-[calc(100dvh-3rem)] max-w-fit flex-col;
 }
 
 .main-pane {
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-  width: 680px;
-  max-width: calc(100vw - 3rem);
-  margin: 0 auto;
-  padding: 0 0.5rem;
+  @apply mx-auto flex w-[680px] max-w-[calc(100vw-3rem)] flex-col overflow-auto px-2;
 }
 
 .main-header {
-  padding-bottom: 1.25rem;
-  margin-bottom: 3rem;
-  border-bottom: 1px solid var(--color-border);
+  @apply border-border mb-12 border-b pb-5;
 }
 
 #main-content {
-  flex-grow: 1;
+  @apply grow;
   img {
-    max-width: 100%;
-    border: 1px solid var(--color-border);
-    border-radius: 0.375rem;
-    margin: 1.5rem 0;
+    @apply border-border my-6 max-w-full rounded-md border;
   }
 }
 
 .main-footer {
-  margin: 4rem auto 0;
-  padding-top: 1.5rem;
+  @apply mx-auto mt-16 pt-6;
   font-size: var(--text-xs);
 }

@@ -7,9 +7,9 @@
   @import "./list.css";
   @import "./single.css";
   @import "./tags.css";
+  @import "./taxonomy.css";
   @import "./breadcrumbs.css";
   @import "./search.css";
   @import "./side-details.css";
   @import "./toc.css";
-  @import "./helpers.css";
 }

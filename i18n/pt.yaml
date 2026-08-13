@@ -17,8 +17,13 @@ recent_posts: Recentes
 
 # Search
 js_required: É necessário ativar o Javascript
+search: Pesquisar
 search_loading: Carregando...
 search_placeholder: Pesquisar...
+search_close: Fechar pesquisa
+search_count_one: resultado
+search_count_many: resultados
+search_no_results: 'Nenhum resultado para "%s"'
 
 # SidePane for home
 see_all: Ver tudo...
@@ -38,3 +43,12 @@ taxonomies:
   tags: "palavras-chave"
   series: "séries"
   topics: "tópicos"
+
+taxonomy_post_count:
+  one: "{{ .Count }} publicação"
+  other: "{{ .Count }} publicações"
+
+# Pagination
+pagination: Paginação
+pagination_prev: ← Anterior
+pagination_next: Próximo →

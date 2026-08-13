@@ -17,14 +17,35 @@ recent_posts: Recent Posts
 
 # Search
 js_required: It's necessary to enable Javascript
+search: Search
 search_loading: Loading...
 search_placeholder: Search...
+search_close: Close search
+search_count_one: result
+search_count_many: results
+search_no_results: 'No results for "%s"'
 
 # SidePane for home
 see_all: See all...
 
 # Page
 breadcrumb_home: Home
+
+# Taxonomies
+# Display names shown on taxonomy overview and term pages
+taxonomies:
+  tags: Tags
+  topics: Topics
+  series: Series
+
+taxonomy_post_count:
+  one: "{{ .Count }} post"
+  other: "{{ .Count }} posts"
+
+# Pagination
+pagination: Pagination
+pagination_prev: ← Previous
+pagination_next: Next →
 
 # SidePane for single pages
 details_words: words

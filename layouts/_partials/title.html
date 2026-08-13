@@ -1,1 +1,8 @@
-{{- default (path.Dir . | path.Base | title) .Title -}}
+{{- /* Page title, falling back to the parent section name for empty titles */ -}}
+{{- $fallback := site.Title -}}
+{{- with .File -}}
+  {{- with .Dir | strings.TrimSuffix "/" -}}
+    {{- $fallback = . | path.Base | title -}}
+  {{- end -}}
+{{- end -}}
+{{- default $fallback .Title -}}

@@ -1,49 +1,199 @@
 /* ── Search ── */
+
+/* Trigger bar (button) */
 .search-bar {
-  display: flex;
-  align-items: center;
-  background-color: var(--color-border);
-  border-radius: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  margin: 0 0 1rem;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  transition: outline-color 150ms var(--ease-out);
-  &:focus-within {
-    outline-color: var(--color-rust);
-  }
-  input {
-    flex-grow: 1;
-    margin: 0 0.5rem;
-    color: var(--color-ink);
-    border: none;
-    background-color: transparent;
-    font-size: var(--text-sm);
-    font-family: var(--font-sans);
-    outline: none;
-    &::placeholder {
-      color: var(--color-smudge);
-    }
-  }
+  @apply bg-border text-smudge hover:text-ink focus-visible:outline-rust mb-4 flex w-full cursor-pointer items-center gap-2 rounded-lg border-none px-3 py-2 text-left font-sans outline-2 outline-offset-2 outline-transparent transition-[outline-color,color] duration-150 ease-out;
+  font-size: var(--text-sm);
   svg {
-    opacity: 0.5;
+    @apply m-0 opacity-50;
   }
+}
+
+.search-bar-placeholder {
+  @apply opacity-80;
 }
 
 @variant dark {
-  .search-bar input {
-    color: var(--color-cream);
+  .search-bar:hover {
+    @apply text-cream;
   }
 }
 
-.search-result {
-  padding: 1rem 0;
-  border-top: 1px solid var(--color-border);
-  &:first-child {
-    border-top: none;
+/* ── Panel overlay ── */
+.search-panel {
+  @apply fixed inset-0 z-(--z-overlay) flex items-start justify-center px-4 pt-[12vh] pb-4;
+}
+
+/* Explicit hidden state — do not rely on Tailwind's preflight [hidden] rule */
+.search-panel[hidden] {
+  display: none !important;
+}
+
+.search-panel-backdrop {
+  @apply absolute inset-0 bg-black/40;
+  animation: search-backdrop-in 150ms var(--ease-out);
+}
+
+@variant dark {
+  .search-panel-backdrop {
+    @apply bg-black/60;
   }
+}
+
+.search-panel-dialog {
+  @apply border-border bg-paper relative flex max-h-[70vh] w-[min(560px,100%)] flex-col overflow-hidden rounded-lg border shadow-[0_4px_12px_rgba(0,0,0,0.06)];
+  animation: search-dialog-in 200ms var(--ease-out);
+}
+
+@variant dark {
+  .search-panel-dialog {
+    @apply bg-charcoal shadow-[0_4px_12px_rgba(0,0,0,0.3)];
+  }
+}
+
+/* ── Input row ── */
+.search-panel-input {
+  @apply border-border relative flex items-center gap-2 border-b px-4 pt-2;
+  svg {
+    @apply m-0 opacity-50;
+  }
+}
+
+/* Rust underline — the panel's single motion signature */
+.search-panel-input::after {
+  content: "";
+  @apply bg-rust absolute right-4 -bottom-px left-4 h-px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms var(--ease-out);
+}
+
+.search-panel-input:focus-within::after {
+  transform: scaleX(1);
+}
+
+.search-text {
+  @apply text-ink dark:text-cream min-w-0 flex-1 border-none bg-transparent font-sans outline-none;
+  font-size: var(--text-base);
+  &::placeholder {
+    @apply text-smudge;
+  }
+}
+
+.search-panel-close {
+  @apply text-smudge hover:bg-border inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-md border-none bg-transparent transition-colors duration-150 ease-out;
+  svg {
+    @apply m-0;
+  }
+}
+
+/* ── Body ── */
+.search-panel-body {
+  @apply overflow-y-auto px-4;
 }
 
 .search-loading {
-  display: none;
+  @apply text-smudge my-4 font-sans;
+  font-size: var(--text-sm);
+}
+
+/* ── Results ── */
+.search-results {
+  @apply list-none;
+}
+
+.search-result {
+  @apply border-border border-t first:border-t-0;
+  > a {
+    @apply block py-4;
+  }
+}
+
+.search-result-title {
+  @apply text-ink dark:text-cream block font-sans text-[1.0625rem] font-bold;
+}
+
+.search-result-head {
+  @apply flex items-baseline justify-between gap-4;
+}
+
+.search-result-date {
+  @apply text-smudge shrink-0 font-sans whitespace-nowrap;
+  font-size: var(--text-xs);
+}
+
+.search-result-summary {
+  @apply text-smudge mt-1 line-clamp-2 text-[0.9375rem] leading-[1.6] dark:text-[#e8e4df]/65;
+}
+
+/* Query term highlight — matches the theme's selection color */
+.search-result mark {
+  @apply bg-selection-light dark:bg-selection-dark rounded-[2px] px-px text-inherit;
+}
+
+.search-result.is-active .search-result-title {
+  @apply text-rust underline;
+}
+
+/* ── Empty state ── */
+.search-empty {
+  @apply text-smudge py-4 text-[0.9375rem];
+}
+
+/* ── Footer ── */
+.search-panel-footer {
+  @apply border-border flex items-center justify-between gap-4 border-t px-4 py-2;
+  p {
+    @apply text-smudge font-mono;
+    font-size: var(--text-xs);
+  }
+}
+
+.search-keys {
+  @apply whitespace-nowrap;
+}
+
+@media (width <= 480px) {
+  .search-keys {
+    display: none;
+  }
+}
+
+/* Body scroll lock while the panel is open */
+body.search-open {
+  @apply overflow-hidden;
+}
+
+@keyframes search-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes search-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.search-panel.is-closing .search-panel-dialog,
+.search-panel.is-closing .search-panel-backdrop {
+  animation: search-fade-out 120ms var(--ease-in-out) forwards;
+}
+
+@keyframes search-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

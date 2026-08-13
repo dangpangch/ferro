@@ -1,19 +1,11 @@
 /* ── Breadcrumbs ── */
 .breadcrumbs {
-  padding: 0;
-  margin: 0 0 0.25rem;
-  list-style-type: none;
-  font-family: var(--font-sans);
+  @apply text-smudge mb-1 list-none font-sans;
   font-size: var(--text-sm);
-  color: var(--color-smudge);
   li {
-    display: inline-block;
+    @apply inline-block;
   }
   a {
-    color: var(--color-smudge);
-    text-decoration: none;
-    &:hover {
-      color: var(--color-rust);
-    }
+    @apply text-smudge hover:text-rust no-underline;
   }
 }

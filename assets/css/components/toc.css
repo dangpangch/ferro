@@ -1,19 +1,13 @@
 /* ── TOC in side pane ── */
 #TableOfContents {
-  font-size: var(--text-xs);
-  line-height: 1.6;
+  @apply text-xs leading-[1.6];
   ul {
-    list-style: none;
-    padding-left: 0.75rem;
+    @apply list-none pl-3;
   }
   li {
-    margin: 0.25rem 0;
+    @apply my-1;
   }
   a {
-    color: var(--color-smudge);
-    text-decoration: none;
-    &:hover {
-      color: var(--color-rust);
-    }
+    @apply text-smudge hover:text-rust no-underline;
   }
 }
