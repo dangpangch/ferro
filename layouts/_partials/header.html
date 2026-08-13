@@ -3,7 +3,7 @@
 >
 <div role="navigation" aria-label="Main">
   <div class="nav-left">
-    <a href="{{- absURL "" -}}">{{- site.Title -}}</a>
+    <a href="{{- absLangURL "" -}}">{{- site.Title -}}</a>
   </div>
   <div class="nav-right">
     <div class="absolute h-0 w-0">
@@ -19,5 +19,31 @@
       {{- partial "svg/sun.svg" -}}
       {{- partial "svg/moon.svg" -}}
     </a>
+    {{- /* Language switcher: jump to this page's counterpart in the other language
+      (falls back to the other language's home when no counterpart exists). */ -}}
+    {{- $target := "" -}}
+    {{- range hugo.Sites -}}
+      {{- if ne .Language.Lang site.Language.Lang -}}
+        {{- $target = . -}}
+      {{- end -}}
+    {{- end -}}
+    {{- with $target -}}
+      {{- $langHref := .Home.RelPermalink -}}
+      {{- range $.Translations -}}
+        {{- if eq .Language.Lang $target.Language.Lang -}}
+          {{- $langHref = .RelPermalink -}}
+        {{- end -}}
+      {{- end -}}
+      <a
+        class="lang-switch"
+        href="{{ $langHref }}"
+        hreflang="{{ .Language.Lang }}"
+        rel="alternate"
+        aria-label="{{ i18n "switch_language" }}"
+      >
+        {{- partial "svg/globe.svg" . -}}
+        <span>{{ .Language.Label }}</span>
+      </a>
+    {{- end -}}
   </div>
 </div>

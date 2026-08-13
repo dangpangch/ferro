@@ -1,7 +1,41 @@
 baseURL: https://example.org/
-locale: en-US
 title: "}{ugoPress"
 enableRobotsTXT: true
+defaultContentLanguage: en
+
+languages:
+  en:
+    weight: 1
+    locale: en-US
+    label: English
+    contentDir: content/en
+    menus:
+      main:
+        - name: Posts
+          pageRef: /posts
+          weight: 1
+        - name: Features
+          pageRef: /features
+          weight: 2
+        - name: About
+          pageRef: /about
+          weight: 3
+  zh:
+    weight: 2
+    locale: zh-CN
+    label: 中文
+    contentDir: content/zh
+    menus:
+      main:
+        - name: 文章
+          pageRef: /posts
+          weight: 1
+        - name: 功能
+          pageRef: /features
+          weight: 2
+        - name: 关于
+          pageRef: /about
+          weight: 3
 
 params:
   summaryLength: 1
@@ -50,22 +84,6 @@ taxonomies:
   topic: topics
   series: series
 
-menus:
-  main:
-    - name: Posts
-      pageRef: /posts
-      weight: 1
-    - name: Hardware
-      pageRef: /posts/hardware
-      parent: Posts
-      weight: 10
-    - name: Features
-      pageRef: /features
-      weight: 2
-    - name: About
-      pageRef: /about
-      weight: 3
-
 build:
   buildStats:
     enable: true
@@ -84,7 +102,7 @@ module:
       target: assets/notwatching/hugo_stats.json
   hugoVersion:
     extended: false
-    min: 0.146.0
+    min: 0.158.0
 
 # Search index output format
 outputFormats:

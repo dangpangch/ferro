@@ -1,11 +1,17 @@
 {{- if site.Params.hugopress.home.showBio -}}
+  {{- /* Data values (data/hugopress/content.yaml) win; i18n keys provide
+    per-language defaults. */ -}}
+  {{- $home := dict -}}
+  {{- with hugo.Data.hugopress.content.home -}}
+    {{- $home = . -}}
+  {{- end -}}
   <div class="centered-container">
     {{- if site.Params.hugopress.home.showAuthorImg -}}
       <img
         class="border-border mx-auto block rounded-full border"
         width="70"
         height="70"
-        src="{{- hugo.Data.hugopress.content.home.image | default "images/profile.jpg" -}}"
+        src="{{- absURL ($home.image | default "images/profile.jpg") -}}"
         alt="{{- site.Params.author.name | default "Author" -}}"
         loading="lazy"
       />
@@ -13,10 +19,10 @@
 
 
     <h1 class="mb-1">
-      {{- hugo.Data.hugopress.content.home.greetings -}}
+      {{- $home.greetings | default (T "home_greetings") -}}
     </h1>
     <div class="text-smudge mx-auto max-w-[70%]">
-      {{- hugo.Data.hugopress.content.home.text -}}
+      {{- $home.text | default (T "home_text") -}}
     </div>
   </div>
 {{- end -}}

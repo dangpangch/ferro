@@ -24,7 +24,7 @@
       {{- end -}}
       {{- if (gt (len .) $limit) -}}
         <li>
-          <a href="{{- absURL $filter -}}">{{- i18n "see_all" -}}</a>
+          <a href="{{- absLangURL $filter -}}">{{- i18n "see_all" -}}</a>
         </li>
       {{- end -}}
     </ul>

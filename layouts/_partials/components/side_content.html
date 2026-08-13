@@ -1,31 +1,56 @@
 {{- with .section }}
   {{- $section := . -}}
-  {{- $data := index hugo.Data.hugopress.content.side $section -}}
-  {{- range $data -}}
-    <div class="side-content">
-      <h3>{{- .title -}}</h3>
-      {{- if .imagePath -}}
-        {{- if .imageHref -}}
-          <a
-            href="{{- .imageHref -}}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              class="side-content-image"
-              src="{{- .imagePath -}}"
-              width="{{- default "80%" .imageWidth -}}"
-            />
-          </a>
-        {{- else -}}
-          <img
-            class="side-content-image"
-            src="{{- .imagePath -}}"
-            width="{{- default "80%" .imageWidth -}}"
-          />
-        {{- end -}}
+
+  {{- /* Side-pane content resolves in order:
+    1. current language's home page front matter (hugopress.side)
+    2. the default language's home front matter (fallback for untranslated keys)
+    3. the global data file (data/hugopress/content.yaml, legacy override) */ -}}
+  {{- $side := "" -}}
+  {{- with site.Home.Params.hugopress.side -}}
+    {{- $side = . -}}
+  {{- end -}}
+  {{- if not $side -}}
+    {{- /* site.Sites is ordered by weight; the default content language
+      carries the lowest weight in the standard configuration. */ -}}
+    {{- with (index site.Sites 0).Home.Params.hugopress.side -}}
+      {{- $side = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $side -}}
+    {{- with hugo.Data.hugopress.content.side -}}
+      {{- $side = . -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- with $side -}}
+    {{- with index . $section -}}
+      {{- range . -}}
+        <div class="side-content">
+          <h3>{{- .title -}}</h3>
+          {{- if .imagePath -}}
+            {{- if .imageHref -}}
+              <a
+                href="{{- .imageHref -}}"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  class="side-content-image"
+                  src="{{- absURL .imagePath -}}"
+                  width="{{- default "80%" .imageWidth -}}"
+                />
+              </a>
+            {{- else -}}
+              <img
+                class="side-content-image"
+                src="{{- absURL .imagePath -}}"
+                width="{{- default "80%" .imageWidth -}}"
+              />
+            {{- end -}}
+          {{- end -}}
+          <p>{{- markdownify .content -}}</p>
+        </div>
       {{- end -}}
-      <p>{{- markdownify .content -}}</p>
-    </div>
+    {{- end -}}
   {{- end -}}
 {{- end }}

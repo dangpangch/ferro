@@ -29,6 +29,25 @@
   }
 }
 
+/* Language switcher — the header's only text-bearing control, so it names
+   the language it switches to rather than showing a cryptic code */
+.lang-switch {
+  @apply text-smudge hover:bg-border inline-flex min-h-11 cursor-pointer items-center justify-center gap-1.5 rounded-md px-2.5 font-sans whitespace-nowrap no-underline transition-colors duration-150 ease-out;
+  font-size: var(--text-sm);
+  svg {
+    @apply m-0 size-4;
+  }
+  &:hover {
+    @apply text-ink;
+  }
+}
+
+@variant dark {
+  .lang-switch:hover {
+    @apply text-cream;
+  }
+}
+
 /* Theme toggle icons */
 .light-icon {
   @apply hidden dark:inline;

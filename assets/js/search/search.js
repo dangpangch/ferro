@@ -118,7 +118,9 @@ import * as params from "@params";
     activeIndex = -1;
     input.setAttribute("aria-activedescendant", "");
     countEl.textContent = "";
-    hide([resultsEl, emptyEl]);
+    emptyEl.textContent = emptyEl.dataset.empty;
+    hide([resultsEl]);
+    show([emptyEl]);
   }
 
   function renderEmpty(query) {

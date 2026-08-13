@@ -24,6 +24,14 @@ search_close: Close search
 search_count_one: result
 search_count_many: results
 search_no_results: 'No results for "%s"'
+search_empty: Start typing to search…
+
+# Header
+switch_language: Switch language
+
+# Home greetings (overridable via data/hugopress/content.yaml → home.greetings / home.text)
+home_greetings: A Hugo Theme for Bloggers!
+home_text: The definitive, configurable, customizable, old fashioned rusty coloured theme for web writers and readers.
 
 # SidePane for home
 see_all: See all...
@@ -53,3 +61,6 @@ details_read_time: minutes read
 side_table_of_contents: Table Of Contents
 side_attachments: Attachments
 side_related: Related
+
+# SidePane (shared)
+side_social: Social

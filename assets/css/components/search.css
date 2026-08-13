@@ -81,7 +81,7 @@
 }
 
 .search-panel-close {
-  @apply text-smudge hover:bg-border inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-md border-none bg-transparent transition-colors duration-150 ease-out;
+  @apply text-smudge inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-md border-none bg-transparent;
   svg {
     @apply m-0;
   }

@@ -17,7 +17,7 @@
             {{ range (index page.Params $k) -}}
               <span class="details-taxonomy"
                 ><a
-                  href="{{- absURL (printf "%s/%s" ($k | urlize) (. | urlize)) -}}"
+                  href="{{- absLangURL (printf "%s/%s" ($k | urlize) (. | urlize)) -}}"
                   >{{- . -}}</a
                 ></span
               >
