@@ -5,9 +5,6 @@
 >
   <head>
     {{ partial "head.html" . }}
-    {{ with (templates.Defer (dict "key" "global")) }}
-      {{ partial "css.html" . }}
-    {{ end }}
   </head>
   <body class="transition-none">
     <div class="site-shell">

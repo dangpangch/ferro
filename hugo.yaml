@@ -1,12 +1,13 @@
 baseURL: https://example.org/
 locale: en-US
-title: HugoPress
+title: "}{ugoPress"
 enableRobotsTXT: true
 
 params:
   summaryLength: 1
+  favicon: /favicon.svg
   author:
-    name: Matheus Queiroz
+    name: DangPang
   hugopress:
     sidePane: true
     countPageItems: 7
@@ -37,7 +38,7 @@ params:
         countRelated: 5
   links:
     hugo: https://gohugo.io/
-    theme: https://github.com/math-queiroz/rusty-typewriter
+    theme: https://github.com/dangpangch/hugopress
 
 related:
   includeNewer: true

@@ -1,11 +1,18 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 <title>
-  {{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title
-  site.Title }}{{ end }}
+  {{ if .IsHome }}
+    {{ site.Title }}
+  {{ else }}
+    {{ printf "%s | %s" .Title
+      site.Title
+    }}
+  {{ end }}
 </title>
-<link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
+{{ $faviconPath := default site.Params.favicon "/favicon.svg" }}
+<link rel="icon" href="{{ $faviconPath | relURL }}" sizes="any" type="image/svg+xml" />
 
-{{- partial "opengraph.html" . -}} {{- partial "twitter_cards.html" . -}} {{-
-partialCached "head/js.html" . -}}
+{{ with (templates.Defer (dict "key" "global")) }}
+  {{ partial "head/css.html" . }}
+{{ end }}
+{{- partialCached "head/js.html" . -}}

@@ -6,7 +6,8 @@
   <div class="side-details">
     <span>{{- .WordCount }} {{ i18n "details_words" -}}</span>
     <span
-      >{{- div (len .RawContent) 1096 }} - {{ div (len .RawContent) 860 }}
+      >{{- div (len .RawContent) 1096 }} -
+      {{ div (len .RawContent) 860 }}
       {{ i18n "details_read_time" -}}</span
     >
     {{- range $k, $v := site.Taxonomies -}}
