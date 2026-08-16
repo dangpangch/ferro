@@ -9,7 +9,7 @@
 }
 
 .taxonomy-title-mark {
-  @apply text-rust;
+  @apply text-accent;
 }
 
 .taxonomy-meta {
@@ -23,7 +23,7 @@
 }
 
 .tag-current {
-  @apply border-rust text-rust;
+  @apply border-accent text-accent;
 }
 
 /* ── Terms overview grid ── */
@@ -32,7 +32,7 @@
 }
 
 .term-card {
-  @apply border-border hover:border-rust flex flex-col gap-2 rounded-lg border px-5 py-4 transition-colors duration-150 ease-out;
+  @apply border-border hover:border-accent flex flex-col gap-2 rounded-lg border px-5 py-4 transition-colors duration-150 ease-out;
 }
 
 .term-card-title {
@@ -50,14 +50,11 @@
     @apply border-border border-t py-1 first:border-t-0;
   }
   a {
-    @apply text-ink hover:text-rust;
+    @apply text-ink hover:text-accent;
   }
 }
 
 @variant dark {
-  .term-count {
-    @apply text-[#e8e4df]/55;
-  }
   .term-card-posts a {
     @apply text-cream;
   }

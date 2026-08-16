@@ -1,9 +1,17 @@
 /* ── Skip link ── */
 .skip-link {
-  @apply bg-rust text-paper absolute -top-full left-2 z-(--z-overlay) rounded-sm px-4 py-2 font-sans font-bold no-underline;
+  @apply bg-accent text-paper absolute -top-full left-2 z-(--z-overlay) rounded-sm px-4 py-2 font-sans font-bold no-underline;
   font-size: var(--text-sm);
   &:focus {
     top: 0.5rem;
+  }
+}
+
+@variant dark {
+  /* In dark mode the accent resolves to bright rust, so 米白 text would
+     drop to 2.7:1 — flip the text to ink (5.5:1) instead. */
+  .skip-link {
+    @apply text-ink;
   }
 }
 
@@ -13,14 +21,15 @@
 }
 
 .nav-left a {
-  @apply text-ink hover:text-rust dark:text-cream;
+  @apply text-ink dark:text-cream;
 }
 
 .nav-right {
   @apply float-right flex h-12 items-center gap-2;
 }
 
-/* Theme toggle & dropdown button touch targets */
+/* Theme toggle, mobile menu & global search touch targets */
+.nav-icon-button,
 #theme-switcher,
 #nav-dropdown-button {
   @apply hover:bg-border inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-md;
@@ -61,7 +70,7 @@
 }
 
 .nav-item a[aria-current="page"] {
-  @apply text-rust font-bold;
+  @apply text-accent font-bold;
 }
 
 /* ── Submenu indicator ── */
@@ -81,9 +90,9 @@
     @apply m-0;
   }
   a {
-    @apply text-ink hover:text-rust block px-4 py-[0.35rem] text-sm leading-[1.4] whitespace-nowrap no-underline transition-colors duration-150 ease-out;
+    @apply text-ink hover:text-accent block px-4 py-[0.35rem] text-sm leading-[1.4] whitespace-nowrap no-underline transition-colors duration-150 ease-out;
     &[aria-current="page"] {
-      @apply text-rust font-bold;
+      @apply text-accent font-bold;
     }
   }
 }
@@ -101,7 +110,7 @@
     a {
       @apply text-cream;
       &[aria-current="page"] {
-        @apply text-rust;
+        @apply text-accent;
       }
     }
   }
@@ -172,6 +181,32 @@
     display: none;
   }
   #nav-dropdown-button {
-    display: unset !important;
+    /* Override the `hidden` utility (display: none) and keep the shared
+       44px touch-target layout — `unset` would resolve to `inline` on the
+       <a>, dropping the flex centering and min-size that align it with
+       the search and theme buttons. */
+    display: inline-flex !important;
+  }
+}
+
+/* Narrow screens: the header holds up to four 44px controls next to the
+   wordmark — drop the language label to an icon-only globe first, then
+   tighten the wordmark and gaps below that. */
+@media (width <= 400px) {
+  .lang-switch {
+    @apply min-w-11 px-0;
+  }
+  .lang-switch span {
+    display: none;
+  }
+}
+
+@media (width <= 360px) {
+  .nav-left {
+    font-size: 1.125rem;
+    line-height: 44px;
+  }
+  .nav-right {
+    gap: 0.375rem;
   }
 }

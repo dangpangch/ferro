@@ -10,10 +10,10 @@
     aria-label="{{- i18n "search" -}}"
   >
     <div class="search-panel-input">
-      {{- partial "svg/search.svg" -}}
+      {{- partial "icon.html" (dict "name" "search") -}}
       <input
         class="search-text"
-        type="text"
+        type="search"
         role="combobox"
         aria-expanded="true"
         aria-controls="search-results"
@@ -29,7 +29,7 @@
         aria-label="{{- i18n "search_close" -}}"
         data-search-close
       >
-        {{- partial "svg/x.svg" -}}
+        {{- partial "icon.html" (dict "name" "x") -}}
       </button>
     </div>
 
@@ -43,6 +43,7 @@
         role="status"
         data-empty="{{- i18n "search_empty" -}}"
         data-no-results="{{- i18n "search_no_results" -}}"
+        data-hint="{{- i18n "search_no_results_hint" -}}"
       ></div>
 
       <ul
@@ -60,9 +61,7 @@
         data-count-one="{{- i18n "search_count_one" -}}"
         data-count-many="{{- i18n "search_count_many" -}}"
       ></p>
-      <p class="search-keys" aria-hidden="true">
-        ↑↓ navigate&nbsp;&nbsp;↵ open&nbsp;&nbsp;esc close
-      </p>
+      <p class="search-keys" aria-hidden="true">{{- i18n "search_keys" -}}</p>
     </footer>
   </div>
 </div>

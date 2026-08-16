@@ -7,28 +7,39 @@
 
     if (!menu || !menuBtn) return;
 
+    const isOpen = () => !menu.classList.contains("hidden");
+
+    const setOpen = (open) => {
+      menu.classList.toggle("hidden", !open);
+      menuBtn.setAttribute("aria-expanded", String(open));
+    };
+
     const closeOnOutside = (e) => {
-      if (
-        !menu.classList.contains("hidden") &&
-        !menu.contains(e.target) &&
-        !menuBtn.contains(e.target)
-      ) {
-        menu.classList.add("hidden");
+      if (isOpen() && !menu.contains(e.target) && !menuBtn.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+
+    const closeOnEscape = (e) => {
+      if (e.key === "Escape" && isOpen()) {
+        setOpen(false);
+        menuBtn.focus();
       }
     };
 
     menuBtn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      menu.classList.toggle("hidden");
+      setOpen(!isOpen());
     });
 
     document.addEventListener("click", closeOnOutside);
+    document.addEventListener("keydown", closeOnEscape);
     window.addEventListener(
       "scroll",
       () => {
-        if (!menu.classList.contains("hidden")) {
-          menu.classList.add("hidden");
+        if (isOpen()) {
+          setOpen(false);
         }
       },
       { passive: true },

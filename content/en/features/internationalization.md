@@ -30,7 +30,7 @@ switch_language: Switch language
 
 # Home greetings
 home_greetings: A Hugo Theme for Bloggers!
-home_text: The definitive, configurable, customizable, old fashioned rusty coloured theme for web writers and readers.
+home_text: The definitive, configurable, customizable rice-white and warm-charcoal theme for web writers and readers.
 
 # SidePane for single pages
 details_words: words

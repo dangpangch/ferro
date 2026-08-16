@@ -1,5 +1,16 @@
-{{- $.Scratch.Add "searchindex" slice -}}
-{{- range $index, $element := where site.RegularPages "Params.indexable" "ne" false -}}
-    {{- $.Scratch.Add "searchindex" (dict "id" $index "title" $element.Title "permalink" $element.RelPermalink "tags" (delimit ($element.Params.tags | default "") " ") "content" $element.Plain "summary" (plainify (partial "components/summary.html" $element)) "date" ($element.Date.Format ($.Param "dateformat" | default "2 January, 2006"))) -}}
+{{- /* Search index for the home output format SearchIndex (hugo.yaml).
+  "id" is required by FlexSearch (see assets/js/search/search.js). */
+-}}
+{{- $index := slice -}}
+{{- range $i, $page := where site.RegularPages "Params.indexable" "ne" false -}}
+  {{- $index = $index | append (dict
+    "id" $i
+    "title" $page.Title
+    "permalink" $page.RelPermalink
+    "tags" (delimit ($page.Params.tags | default slice) " ")
+    "content" $page.Plain
+    "summary" (plainify (partial "components/summary.html" $page))
+    "date" ($page.Date | time.Format (or site.Params.dateFormat ":date_medium"))
+  ) -}}
 {{- end -}}
-{{- $.Scratch.Get "searchindex" | jsonify -}}
+{{- $index | jsonify -}}

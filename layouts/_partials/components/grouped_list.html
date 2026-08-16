@@ -1,0 +1,22 @@
+{{- /* Grouped by-year list of the current page's pages, shared by list.html and
+  term.html. Paginates with hugopress.countPageItems. Expects the page context. */
+-}}
+{{- $pages := .Paginate (.Pages.GroupByDate "2006") site.Params.hugopress.countPageItems -}}
+{{- range $pages.PageGroups -}}
+  <div class="list-group-key">{{- .Key -}}</div>
+  {{- range .Pages -}}
+    <div class="list-group-heading">
+      <a href="{{- .RelPermalink -}}">{{- partial "title.html" . -}}</a>
+      <time
+        class="dim text float-right text-sm"
+        datetime="{{- .Date | time.Format "2006-01-02T15:04:05-07:00" -}}"
+      >
+        {{- .Date | time.Format (or site.Params.dateFormat ":date_medium") -}}
+      </time>
+    </div>
+    <div class="list-group-summary">
+      {{- partial "components/summary.html" . -}}
+    </div>
+  {{- end -}}
+{{- end -}}
+{{- partial "pagination.html" . -}}

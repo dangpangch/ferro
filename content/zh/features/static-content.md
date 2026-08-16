@@ -16,7 +16,7 @@ series: ["内容", "功能"]
 home:
   image: "images/greetings.jpg"
   greetings: "A Hugo Theme for Bloggers!"
-  text: "The definitive, configurable, customizable, old fashioned rusty coloured theme for web writers and readers."
+  text: "The definitive, configurable, customizable rice-white and warm-charcoal theme for web writers and readers."
 ```
 
 > 注意：可以使用 YAML 以外的文件格式，但键的结构必须保持一致！

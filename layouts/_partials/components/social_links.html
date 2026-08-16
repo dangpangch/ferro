@@ -11,7 +11,16 @@
 {{- end -}}
 
 {{- if $socials -}}
-  {{- $icons := slice "github" "x_twitter" "mastodon" "bluesky" "rss" "email" "linkedin" "link" -}}
+  {{- $iconMap := dict
+    "github" "brand-github"
+    "x_twitter" "brand-x"
+    "mastodon" "brand-mastodon"
+    "bluesky" "brand-bluesky"
+    "rss" "rss"
+    "email" "mail"
+    "linkedin" "brand-linkedin"
+    "link" "link"
+  -}}
   <h3>{{- i18n "side_social" | default "Social" -}}</h3>
   <ul class="side-social">
     {{- range $socials -}}
@@ -20,9 +29,7 @@
       {{- if and $name $url -}}
         {{- $label := .handle | default $name -}}
         {{- $icon := .icon | default "link" -}}
-        {{- if not (in $icons $icon) -}}
-          {{- $icon = "link" -}}
-        {{- end -}}
+        {{- $tabler := index $iconMap $icon | default "link" -}}
         <li>
           <a
             href="{{- $url -}}"
@@ -31,7 +38,7 @@
               target="_blank" rel="noopener noreferrer"
             {{- end -}}
           >
-            {{- partial (printf "svg/%s.svg" $icon) . -}}
+            {{- partial "icon.html" (dict "name" $tabler) -}}
             <span>{{- $label -}}</span>
           </a>
         </li>

@@ -38,11 +38,12 @@ languages:
           weight: 3
 
 params:
-  summaryLength: 1
+  summaryLength: 70
   favicon: /favicon.svg
   author:
     name: DangPang
   hugopress:
+    enablei18n: true
     sidePane: true
     countPageItems: 7
     home:
@@ -103,6 +104,14 @@ module:
   hugoVersion:
     extended: false
     min: 0.158.0
+
+# Syntax highlighting: class-based tokens (noClasses: false), colored by
+# assets/css/code/gruvbox-light.css (light) and gruvbox-dark.css (dark).
+markup:
+  highlight:
+    codeFences: true
+    noClasses: false
+    style: gruvbox
 
 # Search index output format
 outputFormats:

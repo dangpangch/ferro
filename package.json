@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "hugo server --disableFastRender",
-    "build": "hugo --minify --gc"
+    "icons": "node scripts/build-icons.mjs",
+    "dev": "npm run icons && hugo server --disableFastRender --buildDrafts",
+    "build": "npm run icons && hugo --minify --gc"
   },
   "devDependencies": {
+    "@tabler/icons": "^3.46.0",
     "@tailwindcss/cli": "^4.3.3",
     "@tailwindcss/typography": "^0.5.20",
     "prettier": "^3.9.5",

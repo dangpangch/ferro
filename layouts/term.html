@@ -1,7 +1,7 @@
 {{- /* Term page — lists every page assigned to one term, e.g. /tags/red/ */ -}}
 {{- define "main" -}}
+  {{- partial "components/breadcrumbs.html" . -}}
   <div class="taxonomy-header">
-    {{- partial "components/breadcrumbs.html" . -}}
     <h1>
       <span class="taxonomy-title-mark" aria-hidden="true">#</span
       >{{- .Title -}}
@@ -44,23 +44,5 @@
     {{- end -}}
   {{- end -}}
 
-  {{- $pages := (.Paginate (.Pages.GroupByDate "2006") site.Params.hugopress.countPageItems) -}}
-  {{- range $pages.PageGroups -}}
-    <div class="list-group-key">{{- .Key -}}</div>
-    {{- range .Pages -}}
-      <div class="list-group-heading">
-        <a href="{{- .RelPermalink -}}">{{- partial "title.html" . -}}</a>
-        <time
-          class="dim float-right"
-          datetime="{{- .Date | time.Format "2006-01-02T15:04:05-07:00" -}}"
-        >
-          {{- dateFormat (or .Site.Params.dateFormat "Jan 2") .Date -}}
-        </time>
-      </div>
-      <div class="list-group-summary">
-        {{- partial "components/summary.html" . -}}
-      </div>
-    {{- end -}}
-  {{- end -}}
-  {{ partial "pagination.html" . }}
+  {{- partial "components/grouped_list.html" . -}}
 {{- end -}}

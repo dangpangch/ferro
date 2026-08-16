@@ -16,7 +16,7 @@ To override them, define the values in `data/hugopress/content.yaml` — data va
 home:
   image: "images/greetings.jpg"
   greetings: "A Hugo Theme for Bloggers!"
-  text: "The definitive, configurable, customizable, old fashioned rusty coloured theme for web writers and readers."
+  text: "The definitive, configurable, customizable rice-white and warm-charcoal theme for web writers and readers."
 ```
 
 > Note: It's possible to use file formats other than YAML, but the key structure must remain the same!

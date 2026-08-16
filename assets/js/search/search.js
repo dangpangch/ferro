@@ -127,7 +127,17 @@ import * as params from "@params";
     activeIndex = -1;
     input.setAttribute("aria-activedescendant", "");
     countEl.textContent = "";
-    emptyEl.textContent = emptyEl.dataset.noResults.replace("%s", query);
+    emptyEl.textContent = "";
+    emptyEl.appendChild(
+      document.createTextNode(emptyEl.dataset.noResults.replace("%s", query)),
+    );
+    const hint = emptyEl.dataset.hint;
+    if (hint) {
+      const hintEl = document.createElement("span");
+      hintEl.className = "search-empty-hint";
+      hintEl.textContent = hint;
+      emptyEl.appendChild(hintEl);
+    }
     hide([resultsEl]);
     show([emptyEl]);
   }

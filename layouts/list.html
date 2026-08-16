@@ -1,33 +1,8 @@
 {{- define "main" -}}
   {{- $title := partial "title.html" . }}
   <h1>{{- $title -}}</h1>
-  {{- .Content -}}
-  {{- $pages := (.Paginate (.Pages.GroupByDate "2006")
-    site.Params.hugopress.countPageItems)
-  -}}
-  {{- range $pages.PageGroups -}}
-    <div class="list-group-key">{{- .Key -}}</div>
-    {{- range .Pages -}}
-      <div class="list-group-heading">
-        <a href="{{- .RelPermalink -}}">{{- partial "title.html" . -}}</a>
-        <time
-          class="dim float-right"
-          datetime="{{- .Date | time.Format "2006-01-02T15:04:05-07:00" -}}"
-        >
-          {{- dateFormat (or .Site.Params.dateFormat "Jan 2") .Date -}}
-        </time>
-      </div>
-      <div class="list-group-summary">
-        {{- partial "components/summary.html" . -}}
-      </div>
-    {{- end -}}
+  {{- with .Content -}}
+    <section class="page-section">{{- . -}}</section>
   {{- end -}}
-  {{ partial "pagination.html" . }}
-{{- end -}}
-{{- define
-  "side"
--}}
-  <!-- <aside class="side-pane{{ cond site.Params.hugopress.side.list.sidePaneSticky " side-sticky" "" }}">
-    {{- partial "side/list.html" . -}}
-  </aside> -->
+  {{- partial "components/grouped_list.html" . -}}
 {{- end -}}

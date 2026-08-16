@@ -1,18 +1,11 @@
 {{- with .section }}
   {{- $section := . -}}
-
-  {{- /* Side-pane content resolves in order:
-    1. current language's home page front matter (hugopress.side)
-    2. the default language's home front matter (fallback for untranslated keys)
-    3. the global data file (data/hugopress/content.yaml, legacy override) */ -}}
   {{- $side := "" -}}
   {{- with site.Home.Params.hugopress.side -}}
     {{- $side = . -}}
   {{- end -}}
   {{- if not $side -}}
-    {{- /* site.Sites is ordered by weight; the default content language
-      carries the lowest weight in the standard configuration. */ -}}
-    {{- with (index site.Sites 0).Home.Params.hugopress.side -}}
+    {{- with (index hugo.Sites 0).Home.Params.hugopress.side -}}
       {{- $side = . -}}
     {{- end -}}
   {{- end -}}

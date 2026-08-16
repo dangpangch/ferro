@@ -6,6 +6,7 @@
   <head>
     {{ partial "head.html" . }}
   </head>
+  {{- partial "_dev/dev-tools.html" . -}}
   <body class="transition-none">
     <div class="site-shell">
       <header class="main-header">{{- partial "header.html" . -}}</header>
@@ -21,5 +22,6 @@
         {{- end -}}
       </div>
       {{- partial "search_panel.html" . -}}
-    </body>
+    </div>
+  </body>
 </html>

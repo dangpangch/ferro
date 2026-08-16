@@ -1,6 +1,6 @@
 /* ── Side pane ── */
 .side-pane {
-  @apply border-border h-fit w-[220px] overflow-hidden rounded-lg border px-4 py-5 text-sm leading-normal;
+  @apply border-border h-fit w-[220px] overflow-hidden rounded-lg border px-4 pt-0 pb-5 text-sm leading-normal;
 }
 
 .side-pane h3 {
@@ -12,7 +12,8 @@
 }
 
 .side-pane.side-sticky {
-  @apply sticky top-6;
+  /* top-24 clears the sticky header (nav 48px + pb-5 20px + border) */
+  @apply sticky top-24;
 }
 
 @media (width <= 1100px) {

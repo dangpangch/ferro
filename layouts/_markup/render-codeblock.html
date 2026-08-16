@@ -1,0 +1,17 @@
+{{- /* Code block render hook (Hugo ≥ 0.129).
+  Keeps Hugo's default Chroma output with class-based tokens; colors are
+  provided by assets/css/code/gruvbox-light.css and gruvbox-dark.css.
+  Falls back to plain text for unknown or missing languages.
+  The language is exposed as data-lang on <pre> so CSS can render the
+  language label (see single.css, pre.chroma::before). */
+-}}
+{{- $opts := dict -}}
+{{- if not (transform.CanHighlight .Type) -}}
+  {{- $opts = dict "type" "text" -}}
+{{- end -}}
+{{- $result := transform.HighlightCodeBlock . $opts -}}
+{{- $wrapped := $result.Wrapped -}}
+{{- if .Type -}}
+  {{- $wrapped = $wrapped | replaceRE "<pre" (printf "<pre data-lang=%q" .Type) -}}
+{{- end -}}
+{{- $wrapped | safeHTML -}}

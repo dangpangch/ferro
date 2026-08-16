@@ -1,6 +1,4 @@
 {{- if site.Params.hugopress.home.showBio -}}
-  {{- /* Data values (data/hugopress/content.yaml) win; i18n keys provide
-    per-language defaults. */ -}}
   {{- $home := dict -}}
   {{- with hugo.Data.hugopress.content.home -}}
     {{- $home = . -}}
@@ -18,7 +16,7 @@
     {{- end -}}
 
 
-    <h1 class="mb-1">
+    <h1 class="mb-1 font-serif">
       {{- $home.greetings | default (T "home_greetings") -}}
     </h1>
     <div class="text-smudge mx-auto max-w-[70%]">

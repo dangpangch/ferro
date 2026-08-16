@@ -15,11 +15,15 @@
         </li>
       {{- else -}}
         <li class="disabled">
-          <span aria-disabled="true">{{- i18n "pagination_prev" | default "Previous" -}}</span>
+          <span aria-disabled="true"
+            >{{- i18n "pagination_prev" | default "Previous" -}}</span
+          >
         </li>
       {{- end -}}
       {{- range $paginator.Pagers -}}
-        <li{{ if eq .PageNumber $paginator.PageNumber }} class="active"{{ end }}>
+        <li
+          class="{{ if eq .PageNumber $paginator.PageNumber }}active{{ end }}"
+        >
           <a href="{{- .URL -}}">{{- .PageNumber -}}</a>
         </li>
       {{- end -}}
@@ -31,7 +35,9 @@
         </li>
       {{- else -}}
         <li class="disabled">
-          <span aria-disabled="true">{{- i18n "pagination_next" | default "Next" -}}</span>
+          <span aria-disabled="true"
+            >{{- i18n "pagination_next" | default "Next" -}}</span
+          >
         </li>
       {{- end -}}
     </ul>

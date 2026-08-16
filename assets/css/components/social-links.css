@@ -4,14 +4,18 @@
 .side-social {
   @apply m-0 list-none p-0;
 
+  li {
+    @apply h-[2rem];
+  }
+
   li + li {
     @apply mt-0;
   }
 
   a {
-    @apply text-ink flex min-h-11 items-center gap-2.5 no-underline transition-colors duration-150 ease-out;
+    @apply text-ink flex h-full items-center gap-2.5 no-underline transition-colors duration-150 ease-out;
     &:hover {
-      @apply text-rust;
+      @apply text-accent;
     }
   }
 
@@ -29,5 +33,10 @@
 @variant dark {
   .side-social a {
     @apply text-cream;
+    /* The dark palette resolves the accent to a bright tone; hover
+       lightens one step further, matching the global a:hover behavior. */
+    &:hover {
+      @apply text-accent-hover;
+    }
   }
 }

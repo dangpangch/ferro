@@ -55,11 +55,4 @@
   .pagination li.active > a {
     @apply text-cream;
   }
-  .flat-list-item > small p,
-  .list-group-summary {
-    @apply text-[#e8e4df]/65;
-  }
-  .list-group-key {
-    @apply text-[#e8e4df]/55;
-  }
 }

@@ -1,12 +1,22 @@
 /* ── Single page ── */
 .single-header {
   @apply mb-8;
+  /* h1 left / time right on one baseline row; tags wrap to their own line */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
   h1 {
-    @apply mt-2 mb-1;
+    /* Article titles step up a size on wide screens, keeping the
+       hierarchy distinct from list-page headings. */
+    @apply mt-2 mb-1 md:text-4xl;
   }
   time {
-    @apply text-smudge mt-1 mb-3 block font-sans;
+    @apply text-smudge font-sans;
     font-size: var(--text-sm);
+  }
+  .term-container {
+    flex-basis: 100%;
   }
 }
 
@@ -18,13 +28,115 @@ section.page-section {
   p + p {
     @apply mt-5;
   }
+  /* Article heading rhythm — h2 carries the theme's hairline signature */
+  h1 {
+    @apply mt-2 mb-6;
+  }
   h2 {
-    @apply mt-10;
+    @apply border-border mt-10 mb-4 border-b pb-2;
   }
   h3 {
-    @apply mt-8;
+    @apply mt-8 mb-2;
+  }
+  h4 {
+    @apply mt-6 mb-2;
+    font-size: var(--text-lg);
+  }
+  h5 {
+    @apply mt-6 mb-2 text-base;
+  }
+  /* h6 doubles as an editorial label, matching the table-head style */
+  h6 {
+    @apply text-smudge mt-6 mb-2 font-sans font-bold uppercase;
+    font-size: var(--text-xs);
+    letter-spacing: 0.05em;
+  }
+  /* Wide tables scroll inside the section instead of breaking the layout */
+  table {
+    @apply block max-w-full overflow-x-auto;
+  }
+  /* Content images pick up the theme's corner radius */
+  img {
+    border-radius: 0.375rem;
+  }
+  /* Article lists breathe a little more than UI lists */
+  li + li {
+    margin-top: 0.5rem;
   }
   hr {
     @apply border-border my-8 border-t;
+  }
+}
+
+/* ── Code block chrome (language label + copy button) ── */
+.highlight {
+  position: relative;
+}
+
+pre.chroma {
+  position: relative;
+  padding-top: 2.5rem;
+}
+
+pre.chroma::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0.625rem;
+  left: 1.25rem;
+  color: var(--color-smudge);
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+@variant dark {
+  pre.chroma::before {
+    color: var(--color-cream);
+  }
+}
+
+.code-copy {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  background: transparent;
+  color: var(--color-smudge);
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  cursor: pointer;
+  transition:
+    color 150ms var(--ease-out),
+    border-color 150ms var(--ease-out);
+  &:hover,
+  &.is-copied {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+}
+
+/* Coarse pointers get a full 44px target; fine pointers keep the compact
+   pill so it doesn't crowd the language label on the code block. */
+@media (pointer: coarse) {
+  .code-copy {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@variant dark {
+  .code-copy {
+    color: var(--color-cream);
+    &:hover,
+    &.is-copied {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
   }
 }

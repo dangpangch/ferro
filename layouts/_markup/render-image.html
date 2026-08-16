@@ -1,0 +1,14 @@
+{{- /* Image render hook — adds lazy loading + async decoding to every
+  markdown image, and forwards explicit {width=} / {height=} attributes so
+  authors can reserve space and prevent layout shift. Styling (border,
+  radius) stays in CSS under #main-content img. */
+-}}
+<img
+  src="{{- .Destination | safeURL -}}"
+  alt="{{- .Text -}}"
+  {{- with .Title }}title="{{- . -}}"{{- end }}
+  {{- with .Attributes.width }}width="{{- . -}}"{{- end }}
+  {{- with .Attributes.height }}height="{{- . -}}"{{- end }}
+  loading="lazy"
+  decoding="async"
+/>

@@ -63,13 +63,33 @@ languages:
 - **首页问候语**：默认来自 i18n（`home_greetings` / `home_text`），可在 `data/hugopress/content.yaml` 中覆盖
 - **侧边栏内容**：定义在首页 front matter（`hugopress.side`），按语言各自翻译；解析顺序为当前语言 → 默认语言 → data 文件回退
 
+如需完全关闭 i18n（单语言站点），将 `hugopress.enablei18n` 设为 `false` —— 语言切换按钮会隐藏，logo 始终链接到 `defaultContentLanguage` 首页：
+
+```yaml
+params:
+  hugopress:
+    enablei18n: false
+```
+
 ## 开发
 
 ```sh
-npm install       # 安装依赖（Tailwind CSS、Prettier）
-npm run dev       # hugo server
-npm run build     # hugo --minify --gc
+npm install       # 安装依赖（Tailwind CSS、Prettier、@tabler/icons）
+npm run icons     # 从 @tabler/icons 重新生成图标 sprite（outline、16px、stroke 2）
+npm run dev       # hugo server（先执行 icons）
+npm run build     # hugo --minify --gc（先执行 icons）
 ```
+
+## 图标
+
+图标来自 [Tabler Icons](https://tabler.io/icons)（`@tabler/icons`，outline 描边风格，UI 控件尺寸 16px，stroke 2，使用 `currentColor` 跟随主题配色）。
+
+- **事实来源**：`scripts/icons.config.mjs` 维护图标名 → Tabler 图标名的映射
+- **构建**：`npm run icons` 将用到的图标提取到 `assets/icons/tabler.svg`（子集 sprite，约 6KB），经 Hugo 资源管线发布
+- **用法**：`{{ partial "icon.html" (dict "name" "search") }}` 直接渲染单个图标（可选 `size`、`class` 参数）
+- **新增图标**：在映射文件加一行，运行 `npm run icons`，提交重新生成的 sprite
+
+生成的 `assets/icons/tabler.svg` 已提交进仓库，因此不运行 `npm install` 也能正常构建。
 
 ## TODO List
 

@@ -1,8 +1,8 @@
 {{- /* Taxonomy overview page — lists every term with its page count, e.g. /tags/ */ -}}
 {{- define "main" -}}
   {{- $taxonomyName := i18n (printf "taxonomies.%s" .Data.Plural) | default (title .Data.Plural) -}}
+  {{- partial "components/breadcrumbs.html" . -}}
   <div class="taxonomy-header">
-    {{- partial "components/breadcrumbs.html" . -}}
     <h1>{{- $taxonomyName -}}</h1>
     <p class="taxonomy-meta dim">
       {{- len .Data.Terms -}}&nbsp;{{- $taxonomyName | lower -}}

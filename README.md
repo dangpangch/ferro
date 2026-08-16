@@ -63,13 +63,42 @@ How each layer is localized:
 - **Home greetings**: defaults come from i18n (`home_greetings` / `home_text`) and can be overridden in `data/hugopress/content.yaml`
 - **Side pane content**: defined in the home page front matter (`hugopress.side`) and translated per language; resolution order is current language → default language → data file
 
+To turn i18n off entirely (single-language site), set `hugopress.enablei18n` to `false` — the
+language switcher is hidden and the logo always links to the `defaultContentLanguage` home:
+
+```yaml
+params:
+  hugopress:
+    enablei18n: false
+```
+
 ## Development
 
 ```sh
-npm install       # Install dependencies (Tailwind CSS, Prettier)
-npm run dev       # hugo server
-npm run build     # hugo --minify --gc
+npm install       # Install dependencies (Tailwind CSS, Prettier, @tabler/icons)
+npm run icons     # Regenerate the icon sprite from @tabler/icons (outline, 16px, stroke 2)
+npm run dev       # hugo server (runs `icons` first)
+npm run build     # hugo --minify --gc (runs `icons` first)
 ```
+
+## Icons
+
+Icons come from [Tabler Icons](https://tabler.io/icons) (`@tabler/icons`, outline
+style, 16px UI-control size, stroke 2, `currentColor` so they follow the theme
+palette).
+
+- **Source of truth**: `scripts/icons.config.mjs` maps each icon name to its
+  Tabler icon name.
+- **Build**: `npm run icons` extracts the used icons into
+  `assets/icons/tabler.svg` (a subset sprite, ~6KB), served through Hugo's
+  asset pipeline.
+- **Usage**: `{{ partial "icon.html" (dict "name" "search") }}` renders one
+  icon directly (optional `size` and `class` keys).
+- **Adding an icon**: add a mapping line, run `npm run icons`, commit the
+  regenerated sprite.
+
+The generated `assets/icons/tabler.svg` is committed so the theme builds even
+without running `npm install`.
 
 ## TODO
 

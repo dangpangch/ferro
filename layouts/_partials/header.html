@@ -1,9 +1,25 @@
 <a class="skip-link" href="#main-content"
   >{{- i18n "skip_to_content" | default "Skip to content" -}}</a
 >
+{{- $enableI18n := default true site.Params.hugopress.enablei18n -}}
+{{- /* Relative link: renders "/" (or "/zh/") regardless of the configured
+  baseURL or the hugo server port — absLangURL would follow the dev server's
+  port and bake stale localhost links into public/. */
+-}}
+{{- $homeURL := relLangURL "" -}}
+{{- if not $enableI18n -}}
+  {{- /* i18n disabled: point the logo at the default content language home */ -}}
+  {{- $defaultSite := index hugo.Sites 0 -}}
+  {{- range hugo.Sites -}}
+    {{- if lt .Language.Weight $defaultSite.Language.Weight -}}
+      {{- $defaultSite = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $homeURL = $defaultSite.Home.RelPermalink -}}
+{{- end -}}
 <div role="navigation" aria-label="Main">
-  <div class="nav-left">
-    <a href="{{- absLangURL "" -}}">{{- site.Title -}}</a>
+  <div class="nav-left font-serif">
+    <a href="{{ $homeURL }}">{{- site.Title -}}</a>
   </div>
   <div class="nav-right">
     <div class="absolute h-0 w-0">
@@ -11,39 +27,62 @@
         {{- partial "menu.html" (dict "menuID" "main" "page" . "isDropdown" true) -}}
       </div>
     </div>
-    <a id="nav-dropdown-button" class="hidden" href="#">
-      {{- partial "svg/menu.svg" -}}
+    <a
+      id="nav-dropdown-button"
+      class="nav-icon-button hidden"
+      href="#"
+      role="button"
+      aria-expanded="false"
+      aria-controls="nav-dropdown-menu"
+      aria-label="{{- i18n "menu" -}}"
+    >
+      {{- partial "icon.html" (dict "name" "menu-2") -}}
     </a>
     {{- partial "menu.html" (dict "menuID" "main" "page" .) -}}
-    <a id="theme-switcher" href="#">
-      {{- partial "svg/sun.svg" -}}
-      {{- partial "svg/moon.svg" -}}
+    <button
+      class="search-bar-button nav-icon-button"
+      type="button"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      aria-controls="search-panel"
+      aria-label="{{- i18n "search" -}}"
+    >
+      {{- partial "icon.html" (dict "name" "search") -}}
+    </button>
+    <a
+      id="theme-switcher"
+      class="nav-icon-button"
+      href="#"
+      aria-label="{{- i18n "toggle_theme" -}}"
+    >
+      {{- partial "icon.html" (dict "name" "sun" "class" "light-icon") -}}
+      {{- partial "icon.html" (dict "name" "moon" "class" "dark-icon") -}}
     </a>
-    {{- /* Language switcher: jump to this page's counterpart in the other language
-      (falls back to the other language's home when no counterpart exists). */ -}}
-    {{- $target := "" -}}
-    {{- range hugo.Sites -}}
-      {{- if ne .Language.Lang site.Language.Lang -}}
-        {{- $target = . -}}
-      {{- end -}}
-    {{- end -}}
-    {{- with $target -}}
-      {{- $langHref := .Home.RelPermalink -}}
-      {{- range $.Translations -}}
-        {{- if eq .Language.Lang $target.Language.Lang -}}
-          {{- $langHref = .RelPermalink -}}
+    {{- if $enableI18n -}}
+      {{- $target := "" -}}
+      {{- range hugo.Sites -}}
+        {{- if ne .Language.Lang site.Language.Lang -}}
+          {{- $target = . -}}
         {{- end -}}
       {{- end -}}
-      <a
-        class="lang-switch"
-        href="{{ $langHref }}"
-        hreflang="{{ .Language.Lang }}"
-        rel="alternate"
-        aria-label="{{ i18n "switch_language" }}"
-      >
-        {{- partial "svg/globe.svg" . -}}
-        <span>{{ .Language.Label }}</span>
-      </a>
+      {{- with $target -}}
+        {{- $langHref := .Home.RelPermalink -}}
+        {{- range $.Translations -}}
+          {{- if eq .Language.Lang $target.Language.Lang -}}
+            {{- $langHref = .RelPermalink -}}
+          {{- end -}}
+        {{- end -}}
+        <a
+          class="lang-switch"
+          href="{{ $langHref }}"
+          hreflang="{{ .Language.Lang }}"
+          rel="alternate"
+          aria-label="{{ i18n "switch_language" }}"
+        >
+          {{- partial "icon.html" (dict "name" "globe") -}}
+          <span>{{ .Language.Label }}</span>
+        </a>
+      {{- end -}}
     {{- end -}}
   </div>
 </div>

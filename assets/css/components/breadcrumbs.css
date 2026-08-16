@@ -1,11 +1,11 @@
 /* ── Breadcrumbs ── */
 .breadcrumbs {
-  @apply text-smudge mb-1 list-none font-sans;
+  @apply text-smudge mb-4 list-none pl-0 font-sans;
   font-size: var(--text-sm);
   li {
     @apply inline-block;
   }
   a {
-    @apply text-smudge hover:text-rust no-underline;
+    @apply text-smudge hover:text-accent no-underline;
   }
 }

@@ -3,11 +3,15 @@
 {{- $isDropdown := .isDropdown | default false }}
 
 {{- with index site.Menus $menuID }}
-  {{- if $isDropdown }}
-  <nav class="nav-dropdown-list" role="list">
-  {{- else }}
-  <nav class="nav-menu" role="list" aria-label="{{ $menuID }}">
-  {{- end }}
+  <nav
+    class="{{ if $isDropdown }}
+      nav-dropdown-list
+    {{ else }}
+      nav-menu
+    {{ end }}"
+    role="list"
+    aria-label="{{ if not $isDropdown }}{{ $menuID }}{{ end }}"
+  >
     {{- range . }}
       {{- $attrs := dict "href" .URL }}
       {{- $isCurrent := or ($page.IsMenuCurrent .Menu .) ($page.HasMenuCurrent .Menu .) }}
@@ -20,32 +24,37 @@
           {{- $name = . }}
         {{- end }}
       {{- end }}
-      <div class="nav-item{{ if .HasChildren }} nav-item--has-children{{ end }}" role="listitem">
+      <div
+        class="nav-item{{ if .HasChildren }}nav-item--has-children{{ end }}"
+        role="listitem"
+      >
         <a
           {{- range $k, $v := $attrs }}
             {{- with $v }}
               {{- printf " %s=%q" $k $v | safeHTMLAttr }}
             {{- end }}
           {{- end }}
-        >{{ $name }}</a>
+          >{{ $name }}</a
+        >
         {{- if .HasChildren }}
-        <ul class="nav-submenu" role="list">
-          {{- range .Children }}
-            {{- $cAttrs := dict "href" .URL }}
-            {{- if $page.IsMenuCurrent .Menu . }}
-              {{- $cAttrs = merge $cAttrs (dict "aria-current" "page") }}
-            {{- end }}
-            <li>
-              <a
-                {{- range $k, $v := $cAttrs }}
-                  {{- with $v }}
-                    {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+          <ul class="nav-submenu" role="list">
+            {{- range .Children }}
+              {{- $cAttrs := dict "href" .URL }}
+              {{- if $page.IsMenuCurrent .Menu . }}
+                {{- $cAttrs = merge $cAttrs (dict "aria-current" "page") }}
+              {{- end }}
+              <li>
+                <a
+                  {{- range $k, $v := $cAttrs }}
+                    {{- with $v }}
+                      {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+                    {{- end }}
                   {{- end }}
-                {{- end }}
-              >{{ .Name }}</a>
-            </li>
-          {{- end }}
-        </ul>
+                  >{{ .Name }}</a
+                >
+              </li>
+            {{- end }}
+          </ul>
         {{- end }}
       </div>
     {{- end }}

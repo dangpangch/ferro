@@ -9,7 +9,7 @@ not_found_home_link: Go Home
 
 # Footer
 scroll_top: Scroll to Top
-footer: Made with ❤️ and powered by {{ .ThemeAnchor }} theme for {{ .HugoAnchor }}
+footer: Powered by {{ .ThemeAnchor }} theme for {{ .HugoAnchor }}
 
 # Home
 featured_posts: Featured Posts
@@ -24,14 +24,18 @@ search_close: Close search
 search_count_one: result
 search_count_many: results
 search_no_results: 'No results for "%s"'
+search_no_results_hint: Try fewer or shorter keywords
 search_empty: Start typing to search…
+search_keys: "↑↓ navigate  ↵ open  esc close"
 
 # Header
 switch_language: Switch language
+toggle_theme: Toggle theme
+menu: Menu
 
 # Home greetings (overridable via data/hugopress/content.yaml → home.greetings / home.text)
 home_greetings: A Hugo Theme for Bloggers!
-home_text: The definitive, configurable, customizable, old fashioned rusty coloured theme for web writers and readers.
+home_text: The definitive, configurable, customizable rice-white and warm-charcoal theme for web writers and readers.
 
 # SidePane for home
 see_all: See all...

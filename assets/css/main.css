@@ -7,10 +7,12 @@
 
 /* ── Design tokens ───────────────────────────── */
 @theme {
-  /* Typeface */
-  --font-sans: "Zira Sans", sans-serif;
-  --font-body: "Zira Serif", serif;
-  --font-mono: "Zira Mono", monospace;
+  /* Typeface — CJK fallbacks keep the serif/sans editorial contrast alive
+     on Chinese pages, where Zira has no glyphs (system fonts take over). */
+  --font-sans:
+    "Zira Sans", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-serif: "Zira Serif", "Noto Serif SC", "Songti SC", "SimSun", serif;
+  --font-mono: "Zira Mono", "Noto Sans Mono CJK SC", monospace;
 
   /* Type scale — keyed to a literary reading rhythm */
   --text-xs: 0.75rem;
@@ -20,15 +22,19 @@
   --text-xl: 1.5rem;
   --text-2xl: 1.875rem;
   --text-3xl: 2.25rem;
+  --text-4xl: 2.75rem;
 
-  /* Palette */
-  --color-rust: #b8473e;
-  --color-rust-hover: #9a3a32;
-  --color-rust-bright: #d97757;
+  /* Palette — the page grounds keep the 米白 (rice white) / 炭暖 (warm
+     charcoal) backgrounds, while every supporting colour returns to the
+     classic rust scheme: terracotta accent, warm-taupe secondary text
+     and hairlines, and the matching selection tints. */
+  --color-accent: #b8473e;
+  --color-accent-hover: #9a3a32;
+  --color-accent-bright: #d97757;
   --color-ink: #1b1b1b;
-  --color-paper: #faf9f6;
+  --color-paper: #f5f0e3;
   --color-smudge: #5c5044;
-  --color-charcoal: #1c1a18;
+  --color-charcoal: #262220;
   --color-cream: #f0ede6;
   --color-code-bg: #2b2826;
   --color-code-text: #e8e4df;
@@ -37,6 +43,7 @@
   --color-selection-dark: #6b3535;
 
   /* Z-index scale */
+  --z-header: 40;
   --z-dropdown: 50;
   --z-overlay: 100;
 
@@ -50,8 +57,10 @@
 }
 
 /* ── Custom utilities ────────────────────────── */
+/* Dimmed secondary text: 0.85 opacity keeps ≈ 3.7:1 on rice white and
+   ≈ 6.2:1 on warm charcoal — the old 0.75 opacity dropped below 3.5:1. */
 @utility dim {
-  @apply text-smudge opacity-75;
+  @apply text-smudge opacity-85;
 }
 
 /* Shows the element below the side-pane breakpoint (see .side-pane) */
@@ -66,6 +75,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Sticky header clearance for in-page anchor jumps (TOC links) */
+    scroll-padding-top: 5rem;
     touch-action: manipulation;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -100,16 +111,42 @@
     margin: 1.5rem;
     background-color: var(--color-paper);
     color: var(--color-ink);
-    font-family: var(--font-body);
+    font-family: var(--font-serif);
     font-size: var(--text-base);
     font-weight: 400;
     line-height: var(--leading-relaxed);
+  }
+
+  /* Very narrow screens: reclaim the margin so the header controls fit. */
+  @media (width <= 360px) {
+    body {
+      margin: 1rem;
+    }
   }
 
   @variant dark {
     body {
       background-color: var(--color-charcoal);
       color: var(--color-cream);
+    }
+  }
+
+  /* ── Dark-mode token overrides ──
+     One place that lifts every secondary-text, link, and border usage to
+     WCAG AA contrast on warm charcoal: the utilities and components all
+     read these variables, so no per-component dark overrides are needed. */
+  @variant dark {
+    html {
+      /* Links & emphasis: the light-mode rust is too dim on charcoal
+         (3.3:1) — swap to the brighter rust-bright tone (5.6:1) with a
+         lighter hover. */
+      --color-accent: #d97757;
+      --color-accent-hover: #e8956f;
+      /* Secondary text: smudge is unreadable on charcoal (2.2:1) — a warm
+         grey-tan matching the gruvbox palette (7.8:1). */
+      --color-smudge: #b3ada4;
+      /* Hairlines need to stay visible on the dark ground. */
+      --color-border: rgba(240, 237, 230, 0.16);
     }
   }
 
@@ -123,8 +160,6 @@
     font-family: var(--font-sans);
     font-weight: 700;
     line-height: var(--leading-snug);
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   h1 {
@@ -148,20 +183,20 @@
 
   /* ── Links ── */
   a {
-    color: var(--color-rust);
+    color: var(--color-accent);
     text-decoration: none;
     cursor: pointer;
     text-underline-offset: 3px;
     transition: color 150ms var(--ease-out);
     &:hover {
-      color: var(--color-rust-hover);
+      color: var(--color-accent-hover);
     }
   }
 
   a svg {
     color: var(--color-ink);
-    height: 22px;
-    width: 22px;
+    height: 16px;
+    width: 16px;
     margin: 5px 5px 0;
   }
 
@@ -175,7 +210,7 @@
   blockquote {
     margin: 1.5rem 0;
     padding: 0.25rem 0 0.25rem 1.25rem;
-    border-left: 3px solid var(--color-rust);
+    border-left: 3px solid var(--color-accent);
     font-style: italic;
     p {
       color: var(--color-smudge);
@@ -184,7 +219,8 @@
   }
 
   /* ── Code ── */
-  pre:has(code) {
+  /* Plain (unhighlighted) code blocks keep the theme's own colors. */
+  pre:has(code):not(.chroma) {
     display: grid;
     overflow-x: auto;
     margin: 1.5rem 0;
@@ -198,14 +234,52 @@
     line-height: 1.6;
   }
 
+  /* Chroma-highlighted blocks: layout from the theme, colors from
+     ./code/gruvbox-light.css and ./code/gruvbox-dark.css */
+  pre.chroma {
+    display: grid;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.375rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  /* Slim scrollbars on code blocks */
+  pre {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+  pre::-webkit-scrollbar {
+    height: 0.5rem;
+    width: 0.5rem;
+  }
+  pre::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background: var(--color-border);
+  }
+  pre::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
   :not(pre) > code {
     padding: 0.15rem 0.4rem;
     border: 1px solid var(--color-border);
     border-radius: 0.25rem;
     font-family: var(--font-mono);
     font-size: 0.875em;
-    color: var(--color-code-text);
-    background-color: var(--color-code-bg);
+    color: var(--color-ink);
+    background-color: var(--color-cream);
+  }
+
+  @variant dark {
+    :not(pre) > code {
+      color: var(--color-code-text);
+      background-color: var(--color-code-bg);
+    }
   }
 
   /* ── Tables ── */
@@ -244,10 +318,15 @@
 
   /* ── Focus ── */
   :focus-visible {
-    outline: 1px solid var(--color-rust);
+    outline: 1px solid var(--color-accent);
     outline-offset: 1px;
     border-radius: 1px;
   }
 }
 
 @import "./components/_components.css";
+
+/* Chroma syntax highlighting palettes — gruvbox-light (default) and
+   gruvbox (dark mode, scoped to [color-scheme="dark"]) */
+@import "./code/gruvbox-light.css";
+@import "./code/gruvbox-dark.css";

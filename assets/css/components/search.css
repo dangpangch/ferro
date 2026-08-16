@@ -2,7 +2,7 @@
 
 /* Trigger bar (button) */
 .search-bar {
-  @apply bg-border text-smudge hover:text-ink focus-visible:outline-rust mb-4 flex w-full cursor-pointer items-center gap-2 rounded-lg border-none px-3 py-2 text-left font-sans outline-2 outline-offset-2 outline-transparent transition-[outline-color,color] duration-150 ease-out;
+  @apply bg-border text-smudge hover:text-ink focus-visible:outline-accent mb-4 flex w-full cursor-pointer items-center gap-2 rounded-lg border-none px-3 py-2 text-left font-sans outline-2 outline-offset-2 outline-transparent transition-[outline-color,color] duration-150 ease-out;
   font-size: var(--text-sm);
   svg {
     @apply m-0 opacity-50;
@@ -59,10 +59,10 @@
   }
 }
 
-/* Rust underline — the panel's single motion signature */
+/* Accent underline — the panel's single motion signature */
 .search-panel-input::after {
   content: "";
-  @apply bg-rust absolute right-4 -bottom-px left-4 h-px;
+  @apply bg-accent absolute right-4 -bottom-px left-4 h-px;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 200ms var(--ease-out);
@@ -75,8 +75,14 @@
 .search-text {
   @apply text-ink dark:text-cream min-w-0 flex-1 border-none bg-transparent font-sans outline-none;
   font-size: var(--text-base);
+  appearance: none;
   &::placeholder {
     @apply text-smudge;
+  }
+  /* Hide the native webkit search decorations; the panel owns its chrome */
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-decoration {
+    appearance: none;
   }
 }
 
@@ -123,7 +129,7 @@
 }
 
 .search-result-summary {
-  @apply text-smudge mt-1 line-clamp-2 text-[0.9375rem] leading-[1.6] dark:text-[#e8e4df]/65;
+  @apply text-smudge mt-1 line-clamp-2 text-[0.9375rem] leading-[1.6];
 }
 
 /* Query term highlight — matches the theme's selection color */
@@ -132,12 +138,17 @@
 }
 
 .search-result.is-active .search-result-title {
-  @apply text-rust underline;
+  @apply text-accent underline;
 }
 
 /* ── Empty state ── */
 .search-empty {
   @apply text-smudge py-4 text-[0.9375rem];
+}
+
+/* Dead-end recovery hint shown under "no results" */
+.search-empty-hint {
+  @apply mt-1 block text-xs opacity-75;
 }
 
 /* ── Footer ── */

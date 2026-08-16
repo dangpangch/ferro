@@ -1,6 +1,6 @@
 /* ── Layout ── */
 .site-shell {
-  @apply mx-auto flex min-h-[calc(100dvh-3rem)] max-w-fit flex-col;
+  @apply mx-auto flex min-h-[calc(100dvh-3rem)] w-[900px] max-w-[calc(100vw-3rem)] flex-col;
 }
 
 .main-pane {
@@ -8,7 +8,13 @@
 }
 
 .main-header {
-  @apply border-border mb-12 border-b pb-5;
+  @apply border-border bg-paper/80 sticky top-0 z-(--z-header) mb-12 border-b pb-5 backdrop-blur-md;
+}
+
+@variant dark {
+  .main-header {
+    @apply bg-charcoal/80;
+  }
 }
 
 #main-content {
