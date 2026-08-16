@@ -8,6 +8,6 @@
     @apply my-1;
   }
   a {
-    @apply text-smudge hover:text-accent no-underline;
+    @apply text-muted hover:text-accent no-underline;
   }
 }

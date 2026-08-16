@@ -1,61 +1,141 @@
 /* ── Taxonomy pages ── */
 
-/* Term & taxonomy overview header */
-.taxonomy-header {
-  @apply mb-8;
-  h1 {
-    @apply mt-2 mb-1;
-  }
-}
-
+/* Title mark shared by the term & overview heroes — the accent # glyph */
 .taxonomy-title-mark {
   @apply text-accent;
 }
 
+/* Hero — chapter-style opener shared by the taxonomy overview and term
+   pages: an oversized display title, then data-y meta. */
+.taxonomy-hero {
+  @apply mb-10;
+  h1 {
+    @apply mt-2 mb-1;
+    font-size: clamp(2rem, 6vw, 3.25rem);
+  }
+}
+
+/* Heading row (overview page) — display title left, toolbar right on wide
+   screens; stacked on narrow ones. Baselines align so the mono meta sits
+   on the same line as the title. */
+.taxonomy-heading {
+  @apply flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2;
+  h1 {
+    @apply mt-0;
+  }
+}
+
 .taxonomy-meta {
-  @apply mt-1 font-sans;
+  @apply font-mono;
   font-size: var(--text-sm);
 }
 
-/* ── Sibling term navigation on term pages ── */
-.term-siblings {
-  @apply border-border mb-8 flex flex-wrap gap-2 border-b pb-5;
+/* ── Toolbar — totals and RSS, flush with the title row ── */
+.taxonomy-toolbar {
+  @apply flex items-center gap-4;
 }
 
-.tag-current {
-  @apply border-accent text-accent;
+.taxonomy-toolbar .taxonomy-meta {
+  @apply mt-0;
 }
 
-/* ── Terms overview grid ── */
-.terms-grid {
-  @apply grid grid-cols-[1fr] gap-4 sm:grid-cols-2;
+.taxonomy-rss {
+  @apply text-muted hover:text-accent inline-flex items-center;
+  svg {
+    @apply m-0 h-3.5 w-3.5;
+    color: currentColor;
+  }
 }
 
-.term-card {
-  @apply border-border hover:border-accent flex flex-col gap-2 rounded-lg border px-5 py-4 transition-colors duration-150 ease-out;
+/* ── Switch — sibling taxonomies, the current one underlined ── */
+.taxonomy-switch {
+  @apply mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-2;
 }
 
-.term-card-title {
-  @apply flex items-baseline gap-1.5 font-sans text-[1.0625rem] font-bold hover:underline;
-}
-
-.term-count {
-  @apply text-smudge font-mono font-normal;
+.taxonomy-switch a {
+  @apply text-muted border-b-2 border-transparent pb-0.5 font-sans transition-[color,border-color] duration-150 ease-out;
   font-size: var(--text-sm);
+  &:hover {
+    @apply text-accent;
+    border-bottom-color: color-mix(
+      in srgb,
+      var(--color-accent) 40%,
+      transparent
+    );
+  }
+  &.is-current {
+    @apply text-fg border-accent;
+  }
 }
 
-.term-card-posts {
-  @apply list-none;
-  li {
-    @apply border-border border-t py-1 first:border-t-0;
+.taxonomy-switch-count {
+  @apply text-muted font-mono;
+  font-size: var(--text-xs);
+}
+
+/* ── Current-term chip (term side pane cloud) — solid accent fill.
+   On-accent text: light on rust (light, 4.6:1), charcoal on bright rust
+   (dark, 5.0:1); the token inverts with the accent. */
+.tag.tag-current {
+  @apply border-accent bg-accent text-on-accent;
+  .tag-count {
+    @apply text-on-accent;
   }
-  a {
-    @apply text-ink hover:text-accent;
+  &:hover,
+  &:hover .tag-count {
+    @apply text-on-accent;
   }
 }
 
-@variant dark {
-  .term-card-posts a {
-    @apply text-cream;
+/* Side pane on term pages — a little headroom above the first block so the
+   card doesn't start flush at the top edge. */
+.side-pane-term {
+  @apply pt-4;
+}
+
+/* ── Terms overview — ranked index ──
+   A book-index-like list: one row per term, ranked by page count. Each row
+   reads "# rank · name (count) ······ latest date" — the dotted leader
+   pulls the eye across, the mono date closes the line in tabular figures.
+   Rank is presentational (aria-hidden in markup); the count carries the
+   real data for screen readers. */
+.term-index {
+  @apply list-none p-0;
+}
+
+.term-index-row {
+  @apply border-border flex items-baseline gap-2 border-b py-3 transition-colors duration-150 ease-out sm:gap-3;
+  &:hover {
+    .term-index-name {
+      @apply text-accent;
+    }
   }
+}
+
+.term-index-rank {
+  @apply text-accent text-right font-mono;
+  font-size: var(--text-sm);
+  min-width: 3.5ch;
+  font-variant-numeric: tabular-nums;
+}
+
+.term-index-name {
+  @apply text-fg font-sans font-bold wrap-anywhere;
+  font-size: 1.0625rem;
+}
+
+.term-index-count {
+  @apply text-muted font-mono;
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.term-index-date {
+  @apply text-muted ml-auto font-mono whitespace-nowrap;
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.term-index-empty {
+  @apply text-muted py-10 text-center;
 }

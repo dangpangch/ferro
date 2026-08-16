@@ -16,12 +16,12 @@
 .flat-list-item > small {
   @apply line-clamp-2 overflow-hidden;
   p {
-    @apply text-smudge mt-1 text-[0.9375rem] leading-[1.6];
+    @apply text-muted mt-1 text-[0.9375rem] leading-[1.6];
   }
 }
 
 .list-group-key {
-  @apply border-border text-smudge mt-6 mb-1 border-b pb-[0.4rem] text-right font-sans font-bold tracking-[0.05em] uppercase first:mt-0;
+  @apply border-border text-muted mt-6 mb-1 border-b pb-[0.4rem] text-right font-sans font-bold tracking-[0.05em] uppercase first:mt-0;
   font-size: var(--text-sm);
 }
 
@@ -33,7 +33,7 @@
 }
 
 .list-group-summary {
-  @apply text-smudge line-clamp-3 text-[0.9375rem] leading-[1.6];
+  @apply text-muted line-clamp-3 text-[0.9375rem] leading-[1.6];
 }
 
 /* ── Pagination ── */
@@ -46,13 +46,7 @@
       @apply underline;
     }
     &.active > a {
-      @apply text-ink no-underline;
+      @apply text-fg no-underline;
     }
-  }
-}
-
-@variant dark {
-  .pagination li.active > a {
-    @apply text-cream;
   }
 }

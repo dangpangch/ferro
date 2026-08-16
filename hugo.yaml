@@ -63,6 +63,10 @@ params:
         countTaxonomy: 3
       list:
         sidePaneSticky: false
+      term:
+        sidePaneSticky: false
+      taxonomy:
+        sidePaneSticky: false
       single:
         sidePaneSticky: true
         showDetails: true

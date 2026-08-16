@@ -7,40 +7,46 @@
 
 /* ── Design tokens ───────────────────────────── */
 @theme {
-  /* Typeface — CJK fallbacks keep the serif/sans editorial contrast alive
-     on Chinese pages, where Zira has no glyphs (system fonts take over). */
   --font-sans:
     "Zira Sans", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-serif: "Zira Serif", "Noto Serif SC", "Songti SC", "SimSun", serif;
   --font-mono: "Zira Mono", "Noto Sans Mono CJK SC", monospace;
 
-  /* Type scale — keyed to a literary reading rhythm */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1.125rem;
-  --text-lg: 1.25rem;
-  --text-xl: 1.5rem;
-  --text-2xl: 1.875rem;
-  --text-3xl: 2.25rem;
-  --text-4xl: 2.75rem;
-
-  /* Palette — the page grounds keep the 米白 (rice white) / 炭暖 (warm
-     charcoal) backgrounds, while every supporting colour returns to the
-     classic rust scheme: terracotta accent, warm-taupe secondary text
-     and hairlines, and the matching selection tints. */
-  --color-accent: #b8473e;
-  --color-accent-hover: #9a3a32;
-  --color-accent-bright: #d97757;
-  --color-ink: #1b1b1b;
-  --color-paper: #f5f0e3;
-  --color-smudge: #5c5044;
-  --color-charcoal: #262220;
-  --color-cream: #f0ede6;
-  --color-code-bg: #2b2826;
-  --color-code-text: #e8e4df;
-  --color-border: rgba(92, 80, 68, 0.22);
+  /* ── Palette — the only place raw color values live.
+     Naming rule: every mode-aware color is a -light/-dark pair; colors
+     shared by both modes (code blocks, code chip in dark) have no suffix. */
+  --color-bg-light: #f5f0e3; /* page background, light */
+  --color-bg-dark: #262220; /* page background, dark */
+  --color-fg-light: #1b1b1b; /* body text, light */
+  --color-fg-dark: #f0ede6; /* body text, dark */
+  --color-muted-light: #5c5044; /* secondary text, light */
+  --color-muted-dark: #c8bfae; /* secondary text, dark */
+  --color-accent-light: #b8473e;
+  --color-accent-hover-light: #9a3a32;
+  --color-accent-dark: #d97757;
+  --color-accent-hover-dark: #e8956f;
+  --color-border-light: #5c504438;
+  --color-border-dark: #f0ede62d;
   --color-selection-light: #e8c4bf;
   --color-selection-dark: #6b3535;
+  --color-code-bg: #2b2826; /* code blocks, both modes */
+  --color-code-text: #e8e4df; /* code blocks, both modes */
+  --color-code-chip-light: #f0ede6; /* inline code chip, light */
+
+  /* ── Semantic tokens — mode-neutral; components reference only these.
+     Light values resolve here; dark re-maps them in the block below. */
+  --color-bg: var(--color-bg-light);
+  --color-fg: var(--color-fg-light);
+  --color-muted: var(--color-muted-light);
+  --color-accent: var(--color-accent-light);
+  --color-accent-hover: var(--color-accent-hover-light);
+  --color-border: var(--color-border-light);
+  --color-selection: var(--color-selection-light);
+  --color-code-chip: var(--color-code-chip-light);
+  /* Text that sits on an accent fill (skip link, current-term chip):
+     light text on the dark rust in light mode, dark text on the bright
+     rust in dark mode. */
+  --color-on-accent: var(--color-fg-dark);
 
   /* Z-index scale */
   --z-header: 40;
@@ -56,11 +62,33 @@
   --leading-snug: 1.35;
 }
 
+/* ── Dark-mode token re-map ──
+   The single place that switches every semantic token to its dark value,
+   lifting secondary-text, link, and border contrast to WCAG AA on warm
+   charcoal. Unlayered so it beats both the @theme layer and base styles.
+
+   This targets :root directly instead of using the `dark` variant:
+   @variant composes rules as "selector inside a dark context"
+   (:scope:where([color-scheme=dark], ...) <selector>), so it can only
+   match elements *under* the one carrying the marker. :root carries the
+   marker (assets/js/_theme.js sets color-scheme on <html>), and is never
+   its own descendant — the variant form would never match. The attribute
+   selector below mirrors the variant's first alternative. */
+:root[color-scheme="dark"] {
+  --color-bg: var(--color-bg-dark);
+  --color-fg: var(--color-fg-dark);
+  --color-muted: var(--color-muted-dark);
+  --color-accent: var(--color-accent-dark);
+  --color-accent-hover: var(--color-accent-hover-dark);
+  --color-border: var(--color-border-dark);
+  --color-selection: var(--color-selection-dark);
+  --color-code-chip: var(--color-code-bg);
+  --color-on-accent: var(--color-bg-dark);
+}
+
 /* ── Custom utilities ────────────────────────── */
-/* Dimmed secondary text: 0.85 opacity keeps ≈ 3.7:1 on rice white and
-   ≈ 6.2:1 on warm charcoal — the old 0.75 opacity dropped below 3.5:1. */
 @utility dim {
-  @apply text-smudge opacity-85;
+  @apply text-muted opacity-85;
 }
 
 /* Shows the element below the side-pane breakpoint (see .side-pane) */
@@ -82,7 +110,7 @@
     -moz-osx-font-smoothing: grayscale;
     ::-moz-selection,
     ::selection {
-      background: var(--color-selection-light);
+      background: var(--color-selection);
     }
   }
 
@@ -98,19 +126,10 @@
     }
   }
 
-  @variant dark {
-    html {
-      ::-moz-selection,
-      ::selection {
-        background: var(--color-selection-dark);
-      }
-    }
-  }
-
   body {
     margin: 1.5rem;
-    background-color: var(--color-paper);
-    color: var(--color-ink);
+    background-color: var(--color-bg);
+    color: var(--color-fg);
     font-family: var(--font-serif);
     font-size: var(--text-base);
     font-weight: 400;
@@ -121,32 +140,6 @@
   @media (width <= 360px) {
     body {
       margin: 1rem;
-    }
-  }
-
-  @variant dark {
-    body {
-      background-color: var(--color-charcoal);
-      color: var(--color-cream);
-    }
-  }
-
-  /* ── Dark-mode token overrides ──
-     One place that lifts every secondary-text, link, and border usage to
-     WCAG AA contrast on warm charcoal: the utilities and components all
-     read these variables, so no per-component dark overrides are needed. */
-  @variant dark {
-    html {
-      /* Links & emphasis: the light-mode rust is too dim on charcoal
-         (3.3:1) — swap to the brighter rust-bright tone (5.6:1) with a
-         lighter hover. */
-      --color-accent: #d97757;
-      --color-accent-hover: #e8956f;
-      /* Secondary text: smudge is unreadable on charcoal (2.2:1) — a warm
-         grey-tan matching the gruvbox palette (7.8:1). */
-      --color-smudge: #b3ada4;
-      /* Hairlines need to stay visible on the dark ground. */
-      --color-border: rgba(240, 237, 230, 0.16);
     }
   }
 
@@ -194,16 +187,10 @@
   }
 
   a svg {
-    color: var(--color-ink);
+    color: var(--color-fg);
     height: 16px;
     width: 16px;
     margin: 5px 5px 0;
-  }
-
-  @variant dark {
-    a svg {
-      color: var(--color-cream);
-    }
   }
 
   /* ── Blockquote ── */
@@ -213,7 +200,7 @@
     border-left: 3px solid var(--color-accent);
     font-style: italic;
     p {
-      color: var(--color-smudge);
+      color: var(--color-muted);
       margin: 0;
     }
   }
@@ -271,15 +258,8 @@
     border-radius: 0.25rem;
     font-family: var(--font-mono);
     font-size: 0.875em;
-    color: var(--color-ink);
-    background-color: var(--color-cream);
-  }
-
-  @variant dark {
-    :not(pre) > code {
-      color: var(--color-code-text);
-      background-color: var(--color-code-bg);
-    }
+    color: var(--color-fg);
+    background-color: var(--color-code-chip);
   }
 
   /* ── Tables ── */
@@ -299,7 +279,7 @@
       font-size: 0.8125rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--color-smudge);
+      color: var(--color-muted);
     }
   }
 

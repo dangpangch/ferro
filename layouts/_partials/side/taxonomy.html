@@ -1,0 +1,38 @@
+{{- /* Taxonomy overview side pane — quick links to the site's other
+  taxonomies, the taxonomy RSS feed, then shared side content. */
+-}}
+
+{{- /* Other taxonomies (skips the current one and empty ones) */ -}}
+{{- $other := slice -}}
+{{- range $name, $terms := site.Taxonomies -}}
+  {{- if and (ne $name $.Data.Plural) (gt (len $terms) 0) -}}
+    {{- $other = $other | append (dict "name" $name "count" (len $terms)) -}}
+  {{- end -}}
+{{- end -}}
+{{- with $other -}}
+  <h3>{{- i18n "side_other_taxonomies" | default "Other taxonomies" -}}</h3>
+  <ul class="taxonomy-list">
+    {{- range sort . "count" "desc" -}}
+      <li>
+        <a class="tag" href="{{- absLangURL .name -}}">
+          {{- i18n (printf "taxonomies.%s" .name) | default (title .name) -}}
+          &nbsp;<span class="tag-count text-sm">{{- .count -}}</span>
+        </a>
+      </li>
+    {{- end -}}
+  </ul>
+{{- end -}}
+
+{{- /* Taxonomy RSS feed (e.g. /tags/index.xml) */ -}}
+{{- with .OutputFormats.Get "RSS" -}}
+  <ul class="side-social">
+    <li>
+      <a href="{{- .RelPermalink -}}">
+        {{- partial "icon.html" (dict "name" "rss") -}}
+        <span>{{- i18n "term_subscribe" | default "Subscribe" -}}</span>
+      </a>
+    </li>
+  </ul>
+{{- end -}}
+
+{{- partial "components/side_content.html" (dict "section" "taxonomy") -}}

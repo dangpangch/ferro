@@ -1,0 +1,48 @@
+{{- /* Term side pane — sibling terms cloud, per-term RSS link, then the
+  shared side content & socials. Rendered only when the global side pane is
+  enabled (see baseof.html). */
+-}}
+{{- $taxonomyName := .Data.Plural -}}
+{{- $current := . -}}
+
+{{- /* All sibling terms as a compact cloud, current one filled */ -}}
+{{- with index site.Taxonomies $taxonomyName -}}
+  {{- if gt (len .) 1 -}}
+    <h3>
+      {{- i18n (printf "taxonomies.%s" $taxonomyName) | default (title $taxonomyName) -}}
+    </h3>
+    <ul class="taxonomy-list">
+      {{- range sort . ".Count" "desc" -}}
+        <li>
+          <a
+            class="tag{{ if eq .Page.RelPermalink $current.RelPermalink }}
+              tag-current
+            {{ end }}"
+            href="{{- .Page.RelPermalink -}}"
+            {{- if eq .Page.RelPermalink $current.RelPermalink }}
+              aria-current="page"
+            {{ end -}}
+          >
+            #{{- .Page.Title | lower -}}&nbsp;<span class="tag-count text-sm"
+              >{{- .Count -}}</span
+            >
+          </a>
+        </li>
+      {{- end -}}
+    </ul>
+  {{- end -}}
+{{- end -}}
+
+{{- /* Per-term RSS feed (e.g. /tags/red/index.xml) */ -}}
+{{- with .OutputFormats.Get "RSS" -}}
+  <ul class="side-social">
+    <li>
+      <a href="{{- .RelPermalink -}}">
+        {{- partial "icon.html" (dict "name" "rss") -}}
+        <span>{{- i18n "term_subscribe" | default "Subscribe" -}}</span>
+      </a>
+    </li>
+  </ul>
+{{- end -}}
+
+{{- partial "components/side_content.html" (dict "section" "term") -}}

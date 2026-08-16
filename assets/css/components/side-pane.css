@@ -4,7 +4,7 @@
 }
 
 .side-pane h3 {
-  @apply text-smudge mt-5 mb-2 tracking-[0.06em] uppercase;
+  @apply text-muted mt-5 mb-2 tracking-[0.06em] uppercase;
   font-size: var(--text-sm);
   &:first-child {
     @apply mt-0;

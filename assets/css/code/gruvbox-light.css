@@ -309,12 +309,12 @@
 }
 
 /* Contrast fix: the generated comment color #928374 is only ~3.2:1 on the
-   gruvbox-light background. The theme's smudge (6.9:1) keeps the muted
+   gruvbox-light background. The theme's muted (6.9:1) keeps the muted
    look while meeting WCAG AA for normal text. */
 .chroma .c,
 .chroma .c1,
 .chroma .ch,
 .chroma .cm,
 .chroma .cs {
-  color: var(--color-smudge);
+  color: var(--color-muted);
 }

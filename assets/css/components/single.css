@@ -12,7 +12,7 @@
     @apply mt-2 mb-1 md:text-4xl;
   }
   time {
-    @apply text-smudge font-sans;
+    @apply text-muted font-sans;
     font-size: var(--text-sm);
   }
   .term-container {
@@ -47,7 +47,7 @@ section.page-section {
   }
   /* h6 doubles as an editorial label, matching the table-head style */
   h6 {
-    @apply text-smudge mt-6 mb-2 font-sans font-bold uppercase;
+    @apply text-muted mt-6 mb-2 font-sans font-bold uppercase;
     font-size: var(--text-xs);
     letter-spacing: 0.05em;
   }
@@ -83,19 +83,13 @@ pre.chroma::before {
   position: absolute;
   top: 0.625rem;
   left: 1.25rem;
-  color: var(--color-smudge);
+  color: var(--color-muted);
   font-family: var(--font-sans);
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   opacity: 0.7;
-}
-
-@variant dark {
-  pre.chroma::before {
-    color: var(--color-cream);
-  }
 }
 
 .code-copy {
@@ -106,7 +100,7 @@ pre.chroma::before {
   border: 1px solid var(--color-border);
   border-radius: 0.25rem;
   background: transparent;
-  color: var(--color-smudge);
+  color: var(--color-muted);
   font-family: var(--font-sans);
   font-size: 0.6875rem;
   line-height: 1.4;
@@ -127,16 +121,5 @@ pre.chroma::before {
   .code-copy {
     min-height: 44px;
     min-width: 44px;
-  }
-}
-
-@variant dark {
-  .code-copy {
-    color: var(--color-cream);
-    &:hover,
-    &.is-copied {
-      color: var(--color-accent);
-      border-color: var(--color-accent);
-    }
   }
 }

@@ -8,13 +8,7 @@
 }
 
 .main-header {
-  @apply border-border bg-paper/80 sticky top-0 z-(--z-header) mb-12 border-b pb-5 backdrop-blur-md;
-}
-
-@variant dark {
-  .main-header {
-    @apply bg-charcoal/80;
-  }
+  @apply border-border bg-bg/80 sticky top-0 z-(--z-header) mb-12 border-b pb-5 backdrop-blur-md;
 }
 
 #main-content {

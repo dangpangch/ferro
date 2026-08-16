@@ -1,48 +1,38 @@
 {{- /* Term page — lists every page assigned to one term, e.g. /tags/red/ */ -}}
 {{- define "main" -}}
+  {{- $terms := index site.Taxonomies .Data.Plural -}}
   {{- partial "components/breadcrumbs.html" . -}}
-  <div class="taxonomy-header">
+
+  {{- /* Hero — shared with the taxonomy overview page */ -}}
+  <header class="taxonomy-hero">
     <h1>
       <span class="taxonomy-title-mark" aria-hidden="true">#</span
       >{{- .Title -}}
     </h1>
     <p class="taxonomy-meta dim">
       {{- i18n "taxonomy_post_count" (len .Pages) -}}
+      {{- with index (.Pages.ByDate.Reverse) 0 -}}
+        <span aria-hidden="true">&nbsp;·&nbsp;</span
+        >{{- i18n "term_latest" -}}&nbsp;{{- .Date | time.Format (or site.Params.dateFormat ":date_medium") -}}
+      {{- end -}}
+      {{- with $terms -}}
+        <span aria-hidden="true">&nbsp;·&nbsp;</span
+        >{{- i18n "term_sibling_count" (len .) -}}
+      {{- end -}}
     </p>
-  </div>
+  </header>
 
   {{- with .Content -}}
     <section class="page-section">{{- . -}}</section>
   {{- end -}}
 
-  {{- /* Jump between sibling terms of the same taxonomy */ -}}
-  {{- $taxonomyName := .Data.Plural -}}
-  {{- $current := . -}}
-  {{- with index site.Taxonomies $taxonomyName -}}
-    {{- if gt (len .) 1 -}}
-      <nav
-        class="term-siblings"
-        aria-label="{{- i18n (printf "taxonomies.%s" $taxonomyName) | default (title $taxonomyName) -}}"
-      >
-        {{- range sort . ".Count" "desc" -}}
-          <a
-            class="tag{{ if eq .Page.RelPermalink $current.RelPermalink }}
-              tag-current
-            {{ end }}"
-            href="{{- .Page.RelPermalink -}}"
-            {{- if eq .Page.RelPermalink $current.RelPermalink }}
-              aria-current="page"
-            {{ end -}}
-          >
-            <span aria-hidden="true">#</span>{{- .Page.Title | lower -}}<span
-              class="tag-count text-sm"
-              >&nbsp;{{- .Count -}}</span
-            >
-          </a>
-        {{- end -}}
-      </nav>
-    {{- end -}}
-  {{- end -}}
-
   {{- partial "components/grouped_list.html" . -}}
+{{- end -}}
+
+{{- define "side" -}}
+  <aside
+    class="side-pane side-pane-term{{ cond site.Params.hugopress.side.term.sidePaneSticky " side-sticky" "" }}"
+  >
+    {{- partial "side/term.html" . -}}
+  </aside>
 {{- end -}}

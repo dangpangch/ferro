@@ -1,40 +1,107 @@
-{{- /* Taxonomy overview page — lists every term with its page count, e.g. /tags/ */ -}}
+{{- /* Taxonomy overview — ranked index of every term, e.g. /tags/. No side pane */ -}}
 {{- define "main" -}}
   {{- $taxonomyName := i18n (printf "taxonomies.%s" .Data.Plural) | default (title .Data.Plural) -}}
+  {{- $taxonomyKey := .Data.Plural -}}
+  {{- $terms := .Data.Terms -}}
   {{- partial "components/breadcrumbs.html" . -}}
-  <div class="taxonomy-header">
-    <h1>{{- $taxonomyName -}}</h1>
-    <p class="taxonomy-meta dim">
-      {{- len .Data.Terms -}}&nbsp;{{- $taxonomyName | lower -}}
-    </p>
-  </div>
+
+  {{- /* Hero — shared with term pages */ -}}
+  <header class="taxonomy-hero">
+    <div class="taxonomy-heading">
+      <h1>
+        <span class="taxonomy-title-mark" aria-hidden="true">#</span
+        >{{- $taxonomyName -}}
+      </h1>
+
+      {{- /* Toolbar — totals and RSS feed */ -}}
+      <div class="taxonomy-toolbar">
+        <p class="taxonomy-meta dim">
+          {{- len $terms -}}&nbsp;{{- $taxonomyName | lower -}}
+          {{- $total := 0 -}}
+          {{- range $terms -}}
+            {{- $total = add $total .Count -}}
+          {{- end -}}
+          <span aria-hidden="true">&nbsp;·&nbsp;</span
+          >{{- i18n "taxonomy_post_count" $total -}}
+        </p>
+        {{- with .OutputFormats.Get "RSS" -}}
+          <a
+            class="taxonomy-rss"
+            href="{{- .RelPermalink -}}"
+            aria-label="{{- i18n "term_subscribe" | default "Subscribe" -}}"
+          >
+            {{- partial "icon.html" (dict "name" "rss" "size" 14) -}}
+          </a>
+        {{- end -}}
+      </div>
+    </div>
+
+    {{- /* Switch — every non-empty taxonomy; the current one underlined */ -}}
+    {{- $switch := slice -}}
+    {{- range $name, $tax := site.Taxonomies -}}
+      {{- if gt (len $tax) 0 -}}
+        {{- $switch = $switch | append (dict "name" $name "count" (len $tax)) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- with $switch -}}
+      <nav
+        class="taxonomy-switch"
+        aria-label="{{- i18n "taxonomy_switch_label" | default "Taxonomies" -}}"
+      >
+        {{- range sort . "name" -}}
+          <a
+            href="{{- absLangURL .name -}}"
+            {{- if eq .name $taxonomyKey }}
+              class="is-current" aria-current="page"
+            {{- end -}}
+          >
+            {{- i18n (printf "taxonomies.%s" .name) | default (title .name) -}}
+            <span class="taxonomy-switch-count">({{- .count -}})</span>
+          </a>
+        {{- end -}}
+      </nav>
+    {{- end -}}
+  </header>
 
   {{- with .Content -}}
     <section class="page-section">{{- . -}}</section>
   {{- end -}}
 
-  {{- if .Data.Terms -}}
-    <div class="terms-grid">
-      {{- range .Data.Terms.ByCount -}}
-        <div class="term-card">
-          <a class="term-card-title" href="{{- .Page.RelPermalink -}}">
-            <span aria-hidden="true">#</span>{{- .Page.Title -}}
-            <span
-              class="term-count"
-              aria-label="{{- i18n "taxonomy_post_count" .Count -}}"
-              >{{- .Count -}}</span
-            >
-          </a>
-          {{- $latest := .Page.Pages.ByDate.Reverse | first 3 -}}
-          {{- with $latest -}}
-            <ul class="term-card-posts">
-              {{- range . -}}
-                <li><a href="{{- .RelPermalink -}}">{{- .LinkTitle -}}</a></li>
-              {{- end -}}
-            </ul>
+  {{- /* Ranked index — one row per term, ordered by page count */ -}}
+  {{- with $terms -}}
+    <ul class="term-index">
+      {{- range $i, $item := .ByCount -}}
+        {{- $latestDate := "" -}}
+        {{- with $item.Page.Pages -}}
+          {{- with index (.ByDate.Reverse) 0 -}}
+            {{- if not .Date.IsZero -}}
+              {{- $latestDate = .Date -}}
+            {{- end -}}
           {{- end -}}
-        </div>
+        {{- end -}}
+        <li>
+          <a class="term-index-row" href="{{- $item.Page.RelPermalink -}}">
+            <span class="term-index-rank" aria-hidden="true"
+              ># {{ add $i 1 -}}</span
+            >
+            <span class="term-index-name">{{- $item.Page.Title -}}</span>
+            <span
+              class="term-index-count"
+              aria-label="{{- i18n "taxonomy_post_count" $item.Count -}}"
+              >({{- $item.Count -}})</span
+            >
+            {{- with $latestDate -}}
+              <time
+                class="term-index-date"
+                datetime="{{- .Format "2006-01-02" -}}"
+                >{{- .Format "2006-01-02" -}}</time
+              >
+            {{- end -}}
+          </a>
+        </li>
       {{- end -}}
-    </div>
+    </ul>
+  {{- else -}}
+    <p class="term-index-empty dim">{{- i18n "taxonomy_empty" -}}</p>
   {{- end -}}
 {{- end -}}

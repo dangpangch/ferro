@@ -2,7 +2,7 @@
 
 /* Trigger bar (button) */
 .search-bar {
-  @apply bg-border text-smudge hover:text-ink focus-visible:outline-accent mb-4 flex w-full cursor-pointer items-center gap-2 rounded-lg border-none px-3 py-2 text-left font-sans outline-2 outline-offset-2 outline-transparent transition-[outline-color,color] duration-150 ease-out;
+  @apply bg-border text-muted hover:text-fg focus-visible:outline-accent mb-4 flex w-full cursor-pointer items-center gap-2 rounded-lg border-none px-3 py-2 text-left font-sans outline-2 outline-offset-2 outline-transparent transition-[outline-color,color] duration-150 ease-out;
   font-size: var(--text-sm);
   svg {
     @apply m-0 opacity-50;
@@ -11,12 +11,6 @@
 
 .search-bar-placeholder {
   @apply opacity-80;
-}
-
-@variant dark {
-  .search-bar:hover {
-    @apply text-cream;
-  }
 }
 
 /* ── Panel overlay ── */
@@ -41,13 +35,14 @@
 }
 
 .search-panel-dialog {
-  @apply border-border bg-paper relative flex max-h-[70vh] w-[min(560px,100%)] flex-col overflow-hidden rounded-lg border shadow-[0_4px_12px_rgba(0,0,0,0.06)];
+  @apply border-border bg-bg relative flex max-h-[70vh] w-[min(560px,100%)] flex-col overflow-hidden rounded-lg border shadow-[0_4px_12px_rgba(0,0,0,0.06)];
   animation: search-dialog-in 200ms var(--ease-out);
 }
 
 @variant dark {
+  /* Shadow deepens on dark; the surface switches via semantic tokens. */
   .search-panel-dialog {
-    @apply bg-charcoal shadow-[0_4px_12px_rgba(0,0,0,0.3)];
+    @apply shadow-[0_4px_12px_rgba(0,0,0,0.3)];
   }
 }
 
@@ -73,11 +68,11 @@
 }
 
 .search-text {
-  @apply text-ink dark:text-cream min-w-0 flex-1 border-none bg-transparent font-sans outline-none;
+  @apply text-fg min-w-0 flex-1 border-none bg-transparent font-sans outline-none;
   font-size: var(--text-base);
   appearance: none;
   &::placeholder {
-    @apply text-smudge;
+    @apply text-muted;
   }
   /* Hide the native webkit search decorations; the panel owns its chrome */
   &::-webkit-search-cancel-button,
@@ -87,7 +82,7 @@
 }
 
 .search-panel-close {
-  @apply text-smudge inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-md border-none bg-transparent;
+  @apply text-muted inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-md border-none bg-transparent;
   svg {
     @apply m-0;
   }
@@ -99,7 +94,7 @@
 }
 
 .search-loading {
-  @apply text-smudge my-4 font-sans;
+  @apply text-muted my-4 font-sans;
   font-size: var(--text-sm);
 }
 
@@ -116,7 +111,7 @@
 }
 
 .search-result-title {
-  @apply text-ink dark:text-cream block font-sans text-[1.0625rem] font-bold;
+  @apply text-fg block font-sans text-[1.0625rem] font-bold;
 }
 
 .search-result-head {
@@ -124,17 +119,17 @@
 }
 
 .search-result-date {
-  @apply text-smudge shrink-0 font-sans whitespace-nowrap;
+  @apply text-muted shrink-0 font-sans whitespace-nowrap;
   font-size: var(--text-xs);
 }
 
 .search-result-summary {
-  @apply text-smudge mt-1 line-clamp-2 text-[0.9375rem] leading-[1.6];
+  @apply text-muted mt-1 line-clamp-2 text-[0.9375rem] leading-[1.6];
 }
 
 /* Query term highlight — matches the theme's selection color */
 .search-result mark {
-  @apply bg-selection-light dark:bg-selection-dark rounded-[2px] px-px text-inherit;
+  @apply bg-selection rounded-[2px] px-px text-inherit;
 }
 
 .search-result.is-active .search-result-title {
@@ -143,7 +138,7 @@
 
 /* ── Empty state ── */
 .search-empty {
-  @apply text-smudge py-4 text-[0.9375rem];
+  @apply text-muted py-4 text-[0.9375rem];
 }
 
 /* Dead-end recovery hint shown under "no results" */
@@ -155,7 +150,7 @@
 .search-panel-footer {
   @apply border-border flex items-center justify-between gap-4 border-t px-4 py-2;
   p {
-    @apply text-smudge font-mono;
+    @apply text-muted font-mono;
     font-size: var(--text-xs);
   }
 }

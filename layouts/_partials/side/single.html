@@ -1,6 +1,11 @@
 {{ partial "components/side_content.html" (dict "section" "single") }}
 
-{{- partial "components/social_links.html" . -}}
+{{- /* Social links belong to the home side pane; plain pages keep the
+  side pane to details, TOC and related. */
+-}}
+{{- if ne .Kind "page" -}}
+  {{- partial "components/social_links.html" . -}}
+{{- end -}}
 
 {{- if site.Params.hugopress.side.single.showDetails -}}
   <div class="side-details">

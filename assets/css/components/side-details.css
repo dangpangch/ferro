@@ -10,7 +10,7 @@
 }
 
 .side-details {
-  @apply border-border text-smudge grid gap-1 border-b py-3;
+  @apply border-border text-muted grid gap-1 border-b py-3;
   font-size: var(--text-xs);
 }
 

@@ -50,9 +50,23 @@ taxonomies:
   topics: Topics
   series: Series
 
+# Taxonomy overview page (e.g. /tags/)
+taxonomy_empty: No terms yet
+side_other_taxonomies: Other taxonomies
+
+# Taxonomy overview — switch between taxonomies
+taxonomy_switch_label: Taxonomies
+
 taxonomy_post_count:
   one: "{{ .Count }} post"
   other: "{{ .Count }} posts"
+
+# Term pages
+term_latest: Latest update
+term_subscribe: Subscribe
+term_sibling_count:
+  one: "{{ .Count }} term"
+  other: "{{ .Count }} terms"
 
 # Pagination
 pagination: Pagination

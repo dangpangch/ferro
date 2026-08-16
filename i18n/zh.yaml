@@ -50,9 +50,23 @@ taxonomies:
   topics: 主题
   series: 系列
 
+# Taxonomy overview page (e.g. /tags/)
+taxonomy_empty: 暂无内容
+side_other_taxonomies: 其他分类
+
+# Taxonomy overview — switch between taxonomies
+taxonomy_switch_label: 分类
+
 taxonomy_post_count:
   one: "{{ .Count }} 篇文章"
   other: "{{ .Count }} 篇文章"
+
+# Term pages
+term_latest: 最近更新
+term_subscribe: 订阅
+term_sibling_count:
+  one: "{{ .Count }} 个同类标签"
+  other: "{{ .Count }} 个同类标签"
 
 # Pagination
 pagination: 分页

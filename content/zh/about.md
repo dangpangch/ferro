@@ -2,6 +2,8 @@
 title: "关于"
 date: "2025-03-24T23:00:00-03:00"
 type: "blank"
+hugopress:
+  sidePane: false
 ---
 
 # 关于

@@ -13,7 +13,7 @@
   }
 
   a {
-    @apply text-ink flex h-full items-center gap-2.5 no-underline transition-colors duration-150 ease-out;
+    @apply text-fg flex h-full items-center gap-2.5 no-underline transition-colors duration-150 ease-out;
     &:hover {
       @apply text-accent;
     }
@@ -31,12 +31,9 @@
 }
 
 @variant dark {
-  .side-social a {
-    @apply text-cream;
-    /* The dark palette resolves the accent to a bright tone; hover
-       lightens one step further, matching the global a:hover behavior. */
-    &:hover {
-      @apply text-accent-hover;
-    }
+  /* The dark palette resolves the accent to a bright tone; hover
+     lightens one step further, matching the global a:hover behavior. */
+  .side-social a:hover {
+    @apply text-accent-hover;
   }
 }

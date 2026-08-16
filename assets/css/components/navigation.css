@@ -1,17 +1,9 @@
 /* ── Skip link ── */
 .skip-link {
-  @apply bg-accent text-paper absolute -top-full left-2 z-(--z-overlay) rounded-sm px-4 py-2 font-sans font-bold no-underline;
+  @apply bg-accent text-on-accent absolute -top-full left-2 z-(--z-overlay) rounded-sm px-4 py-2 font-sans font-bold no-underline;
   font-size: var(--text-sm);
   &:focus {
     top: 0.5rem;
-  }
-}
-
-@variant dark {
-  /* In dark mode the accent resolves to bright rust, so 米白 text would
-     drop to 2.7:1 — flip the text to ink (5.5:1) instead. */
-  .skip-link {
-    @apply text-ink;
   }
 }
 
@@ -21,18 +13,18 @@
 }
 
 .nav-left a {
-  @apply text-ink dark:text-cream;
+  @apply text-fg;
 }
 
 .nav-right {
-  @apply float-right flex h-12 items-center gap-2;
+  @apply float-right flex h-12 items-center gap-1;
 }
 
 /* Theme toggle, mobile menu & global search touch targets */
 .nav-icon-button,
 #theme-switcher,
 #nav-dropdown-button {
-  @apply hover:bg-border inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-md;
+  @apply hover:bg-border inline-flex min-h-8 min-w-8 cursor-pointer items-center justify-center rounded-md;
   svg {
     @apply m-0;
   }
@@ -41,19 +33,13 @@
 /* Language switcher — the header's only text-bearing control, so it names
    the language it switches to rather than showing a cryptic code */
 .lang-switch {
-  @apply text-smudge hover:bg-border inline-flex min-h-11 cursor-pointer items-center justify-center gap-1.5 rounded-md px-2.5 font-sans whitespace-nowrap no-underline transition-colors duration-150 ease-out;
+  @apply text-muted hover:bg-border inline-flex min-h-8 cursor-pointer items-center justify-center gap-1.5 rounded-md px-2.5 font-sans whitespace-nowrap no-underline transition-colors duration-150 ease-out;
   font-size: var(--text-sm);
   svg {
     @apply m-0 size-4;
   }
   &:hover {
-    @apply text-ink;
-  }
-}
-
-@variant dark {
-  .lang-switch:hover {
-    @apply text-cream;
+    @apply text-fg;
   }
 }
 
@@ -85,12 +71,12 @@
 
 /* ── Submenu dropdown ── */
 .nav-submenu {
-  @apply border-border bg-paper invisible absolute top-full left-1/2 z-(--z-dropdown) min-w-[140px] -translate-x-1/2 translate-y-1 list-none rounded-lg border py-1.5 opacity-0 shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-[opacity,visibility,translate] duration-150 ease-out;
+  @apply border-border bg-bg invisible absolute top-full left-1/2 z-(--z-dropdown) min-w-[140px] -translate-x-1/2 translate-y-1 list-none rounded-lg border py-1.5 opacity-0 shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-[opacity,visibility,translate] duration-150 ease-out;
   li {
     @apply m-0;
   }
   a {
-    @apply text-ink hover:text-accent block px-4 py-[0.35rem] text-sm leading-[1.4] whitespace-nowrap no-underline transition-colors duration-150 ease-out;
+    @apply text-fg hover:text-accent block px-4 py-[0.35rem] text-sm leading-[1.4] whitespace-nowrap no-underline transition-colors duration-150 ease-out;
     &[aria-current="page"] {
       @apply text-accent font-bold;
     }
@@ -105,14 +91,10 @@
 }
 
 @variant dark {
+  /* Only the shadow deepens in dark — the surface (bg-bg) and link color
+     (text-fg) switch automatically via the semantic tokens. */
   .nav-submenu {
-    @apply bg-charcoal shadow-[0_4px_12px_rgba(0,0,0,0.3)];
-    a {
-      @apply text-cream;
-      &[aria-current="page"] {
-        @apply text-accent;
-      }
-    }
+    @apply shadow-[0_4px_12px_rgba(0,0,0,0.3)];
   }
 }
 
@@ -145,7 +127,7 @@
 }
 
 #nav-dropdown-menu {
-  @apply border-border bg-paper relative top-[34px] left-[-44px] z-(--z-dropdown) w-fit rounded-lg border px-4 py-1 text-center font-sans shadow-[0_4px_12px_rgba(0,0,0,0.06)];
+  @apply border-border bg-bg relative top-[34px] left-[-44px] z-(--z-dropdown) w-fit rounded-lg border px-4 py-1 text-center font-sans shadow-[0_4px_12px_rgba(0,0,0,0.06)];
   font-size: var(--text-sm);
 }
 
@@ -165,8 +147,9 @@
 }
 
 @variant dark {
+  /* Shadow deepens on dark; the surface switches via semantic tokens. */
   #nav-dropdown-menu {
-    @apply bg-charcoal shadow-[0_4px_12px_rgba(0,0,0,0.3)];
+    @apply shadow-[0_4px_12px_rgba(0,0,0,0.3)];
   }
 }
 

@@ -1,6 +1,6 @@
 /* ── Footer ── */
 .footer {
-  @apply text-smudge mx-auto w-fit text-center;
+  @apply text-muted mx-auto w-fit text-center;
 }
 
 .footer-copyright {
