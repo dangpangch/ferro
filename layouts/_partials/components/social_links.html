@@ -1,10 +1,10 @@
 {{- /*
   Side pane social links.
-  Reads entries from data/hugopress/socials.yaml.
+  Reads entries from data/ferro/socials.yaml.
   Renders nothing when the data file is missing or empty.
   */
 -}}
-{{- $data := hugo.Data.hugopress -}}
+{{- $data := hugo.Data.ferro -}}
 {{- $socials := "" -}}
 {{- if and $data (isset $data "socials") -}}
   {{- $socials = index $data "socials" -}}

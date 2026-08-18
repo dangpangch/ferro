@@ -3,7 +3,7 @@ title: "Internationalization"
 date: "2025-03-24T23:00:00-03:00"
 ---
 
-HugoPress supports internationalization (i18n) translation tables for localizing its interface strings. The theme ships with English and Simplified Chinese tables (`i18n/en.yaml` and `i18n/zh.yaml`); missing keys fall back to the default language automatically, and you can add your own translations in the `i18n/<lang>.yaml` directory of your site.
+Ferro supports internationalization (i18n) translation tables for localizing its interface strings. The theme ships with English and Simplified Chinese tables (`i18n/en.yaml` and `i18n/zh.yaml`); missing keys fall back to the default language automatically, and you can add your own translations in the `i18n/<lang>.yaml` directory of your site.
 
 ```yaml
 # Root
@@ -40,4 +40,4 @@ side_attachments: Attachments
 side_related: Related
 ```
 
-> **Note:** Didn't find a value you're looking for? Check the [repository](https://github.com/dangpangch/hugopress) for the given file (which may be updated with it), or create a new feature request!
+> **Note:** Didn't find a value you're looking for? Check the [repository](https://github.com/dangpangch/ferro) for the given file (which may be updated with it), or create a new feature request!

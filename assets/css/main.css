@@ -7,16 +7,15 @@
 
 /* ── Design tokens ───────────────────────────── */
 @theme {
-  --font-sans:
-    "Zira Sans", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --font-serif: "Zira Serif", "Noto Serif SC", "Songti SC", "SimSun", serif;
-  --font-mono: "Zira Mono", "Noto Sans Mono CJK SC", monospace;
+  --font-sans: "Zira Sans", "Sarasa Gothic SC", sans-serif;
+  --font-serif: "Zira Serif", "Sarasa Gothic SC", serif;
+  --font-mono: "Zira Mono", "Sarasa Gothic SC", monospace;
 
   /* ── Palette — the only place raw color values live.
      Naming rule: every mode-aware color is a -light/-dark pair; colors
      shared by both modes (code blocks, code chip in dark) have no suffix. */
   --color-bg-light: #f5f0e3; /* page background, light */
-  --color-bg-dark: #262220; /* page background, dark */
+  --color-bg-dark: #292929; /* page background, dark */
   --color-fg-light: #1b1b1b; /* body text, light */
   --color-fg-dark: #f0ede6; /* body text, dark */
   --color-muted-light: #5c5044; /* secondary text, light */

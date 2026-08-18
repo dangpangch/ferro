@@ -1,7 +1,7 @@
 <a class="skip-link" href="#main-content"
   >{{- i18n "skip_to_content" | default "Skip to content" -}}</a
 >
-{{- $enableI18n := default true site.Params.hugopress.enablei18n -}}
+{{- $enableI18n := default true site.Params.ferro.enablei18n -}}
 {{- /* Relative link: renders "/" (or "/zh/") regardless of the configured
   baseURL or the hugo server port — absLangURL would follow the dev server's
   port and bake stale localhost links into public/. */

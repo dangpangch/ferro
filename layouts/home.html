@@ -10,13 +10,13 @@
     </div>
 
     {{- $featured := where $indexablePages "Params.featured" true -}}
-    {{- if (and $featured site.Params.hugopress.home.showFeatured) -}}
+    {{- if (and $featured site.Params.ferro.home.showFeatured) -}}
       {{- partial "home/micro_list.html" (dict "items" $featured "title" (i18n "featured_posts")) -}}
     {{- end -}}
 
-    {{- if and $indexablePages site.Params.hugopress.home.showRecent -}}
+    {{- if and $indexablePages site.Params.ferro.home.showRecent -}}
       {{- $recent := $indexablePages -}}
-      {{- if site.Params.hugopress.home.hideRecentWhenFeatured -}}
+      {{- if site.Params.ferro.home.hideRecentWhenFeatured -}}
         {{- $recent = where $indexablePages "Params.featured" "!=" true -}}
       {{- end -}}
       {{- partial "home/micro_list.html" (dict "items" $recent "title" (i18n "recent_posts")) -}}
@@ -26,7 +26,7 @@
 
 {{- define "side" -}}
   <aside
-    class="side-pane{{ cond site.Params.hugopress.side.home.sidePaneSticky " side-sticky" "" }}"
+    class="side-pane{{ cond site.Params.ferro.side.home.sidePaneSticky " side-sticky" "" }}"
   >
     {{- partial "side/home.html" . -}}
   </aside>

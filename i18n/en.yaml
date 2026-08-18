@@ -33,7 +33,7 @@ switch_language: Switch language
 toggle_theme: Toggle theme
 menu: Menu
 
-# Home greetings (overridable via data/hugopress/content.yaml → home.greetings / home.text)
+# Home greetings (overridable via data/ferro/content.yaml → home.greetings / home.text)
 home_greetings: A Hugo Theme for Bloggers!
 home_text: The definitive, configurable, customizable rice-white and warm-charcoal theme for web writers and readers.
 

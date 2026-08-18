@@ -36,7 +36,7 @@ cd my-blog
 3. 通过克隆 GIT 仓库来安装主题
 
 ```sh
-git clone https://github.com/dangpangch/hugopress themes/hugopress
+git clone https://github.com/dangpangch/ferro themes/ferro
 ```
 
 4. 创建一些包含所需内容的页面

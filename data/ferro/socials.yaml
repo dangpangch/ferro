@@ -6,7 +6,7 @@
 #            (optional; defaults to "link")
 #   handle - short display label, e.g. "@user" (optional; falls back to name)
 #
-# Override or extend these entries by defining data/hugopress/socials.yaml
+# Override or extend these entries by defining data/ferro/socials.yaml
 # in your own site (the site's data dir takes precedence over the theme's).
 - name: "GitHub"
   url: "https://github.com/dangpangch"

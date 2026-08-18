@@ -1,16 +1,16 @@
 {{- with .section }}
   {{- $section := . -}}
   {{- $side := "" -}}
-  {{- with site.Home.Params.hugopress.side -}}
+  {{- with site.Home.Params.ferro.side -}}
     {{- $side = . -}}
   {{- end -}}
   {{- if not $side -}}
-    {{- with (index hugo.Sites 0).Home.Params.hugopress.side -}}
+    {{- with (index hugo.Sites 0).Home.Params.ferro.side -}}
       {{- $side = . -}}
     {{- end -}}
   {{- end -}}
   {{- if not $side -}}
-    {{- with hugo.Data.hugopress.content.side -}}
+    {{- with hugo.Data.ferro.content.side -}}
       {{- $side = . -}}
     {{- end -}}
   {{- end -}}

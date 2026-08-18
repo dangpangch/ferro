@@ -1,4 +1,4 @@
-# HugoPress
+# Ferro
 
 🌐 **English** | [简体中文](README.zh-CN.md)
 
@@ -11,7 +11,7 @@ A Hugo blog theme forked from [Rusty Typewriter](https://github.com/math-queiroz
 - **Bilingual i18n**: translation tables in `i18n/en.yaml` and `i18n/zh.yaml`; the language switcher in the navbar jumps to the current page's counterpart in the other language
 - **Built-in search (FlexSearch)**: a separate index per language (`/searchindex.json` for English, `/zh/searchindex.json` for Chinese), with friendly empty-query and no-results states
 - Side pane, table of contents, related posts
-- Data-driven social links; side pane static content lives in the home page front matter (`hugopress.side`) and can be localized per language
+- Data-driven social links; side pane static content lives in the home page front matter (`ferro.side`) and can be localized per language
 - Taxonomies (tags, topics, series)
 
 ## Requirements
@@ -26,10 +26,10 @@ hugo new site my-blog
 cd my-blog
 
 # 2. Install the theme
-git clone https://github.com/dangpangch/hugopress themes/hugopress
+git clone https://github.com/dangpangch/ferro themes/ferro
 
 # 3. Enable the theme in hugo.yaml
-# theme: hugopress
+# theme: ferro
 
 # 4. Create a post
 hugo new content content/posts/first-post.md
@@ -60,17 +60,42 @@ How each layer is localized:
 
 - **Content**: each language has its own `contentDir`; files with the same path are automatically linked as translations, and the language switcher jumps between them
 - **UI strings**: translation tables in `i18n/<lang>.yaml`, rendered with `{{ T "key" }}`; missing keys fall back to the default language (`hugo --printI18nWarnings` lists gaps)
-- **Home greetings**: defaults come from i18n (`home_greetings` / `home_text`) and can be overridden in `data/hugopress/content.yaml`
-- **Side pane content**: defined in the home page front matter (`hugopress.side`) and translated per language; resolution order is current language → default language → data file
+- **Home greetings**: defaults come from i18n (`home_greetings` / `home_text`) and can be overridden in `data/ferro/content.yaml`; an ASCII-art banner from `data/ferro/content.yaml` (`home.asciiArt`) is rendered on the home page and can be toggled with `ferro.home.showASCIIArt`
+- **Side pane content**: defined in the home page front matter (`ferro.side`) and translated per language; resolution order is current language → default language → data file
 
-To turn i18n off entirely (single-language site), set `hugopress.enablei18n` to `false` — the
+To turn i18n off entirely (single-language site), set `ferro.enablei18n` to `false` — the
 language switcher is hidden and the logo always links to the `defaultContentLanguage` home:
 
 ```yaml
 params:
-  hugopress:
+  ferro:
     enablei18n: false
 ```
+
+## Colors & Theme
+
+Theme colors are CSS custom properties in `assets/css/main.css`, organized in
+two layers:
+
+- **Palette** (inside `@theme`): the only place raw color values live, as
+  `-light` / `-dark` pairs per role — `--color-bg-*` (page background),
+  `--color-fg-*` (body text), `--color-muted-*` (secondary text),
+  `--color-accent-*` (links & accents), `--color-border-*`,
+  `--color-selection-*`.
+- **Semantic tokens**: mode-neutral names (`--color-bg`, `--color-fg`,
+  `--color-muted`, `--color-accent`, `--color-border`, `--color-selection`)
+  that all components reference. A single `:root[color-scheme="dark"]` block
+  re-maps them to the dark palette when the navbar switcher (or the system
+  preference) enables dark mode.
+
+To restyle the theme:
+
+1. Edit the `-light` / `-dark` palette pairs in `assets/css/main.css`.
+2. Rebuild with `npm run build`.
+
+To add a new color role: add a palette pair, a semantic token, and its dark
+re-map, then use it as a utility (`text-<name>`, `bg-<name>`) or via
+`var(--color-<name>)`.
 
 ## Development
 

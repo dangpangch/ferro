@@ -1,9 +1,0 @@
-# Optional overrides for home-page content.
-#
-# Text defaults (greetings, text) come from the theme's i18n files
-# (keys: home_greetings, home_text) — define them here to override per site.
-# Structured side-pane content lives in the home page's front matter
-# (content/<lang>/_index.md, key: hugopress.side) so it can be translated
-# per language; define it here only as a global fallback.
-home:
-  image: 'images/rt_logo.jpg'

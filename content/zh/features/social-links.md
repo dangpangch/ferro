@@ -4,11 +4,11 @@ date: "2026-08-13T00:00:00+08:00"
 series: ["内容", "功能"]
 ---
 
-社交链接会渲染在首页和单篇页面的侧边栏底部。它们定义在 `data/hugopress/socials.yaml` 文件中，每个条目是一个列表项：
+社交链接会渲染在首页和单篇页面的侧边栏底部。它们定义在 `data/ferro/socials.yaml` 文件中，每个条目是一个列表项：
 
 ```yaml
 - name: "GitHub"
-  url: "https://github.com/dangpangch/hugopress"
+  url: "https://github.com/dangpangch/ferro"
   icon: "github"
   handle: "@dangpangch"
 
@@ -28,4 +28,4 @@ series: ["内容", "功能"]
 | `icon`   | `github`、`x_twitter`、`mastodon`、`bluesky`、`rss`、`email`、`linkedin`、`link` 之一 | 否（默认为 `link`） |
 | `handle` | 简短显示标签，例如 `@user`；省略时回退到 `name`  | 否                  |
 
-> 没有找到你需要的配置？请在[仓库](https://github.com/dangpangch/hugopress)中查看对应文件（其中可能已经更新），或者创建一个新的功能请求！
+> 没有找到你需要的配置？请在[仓库](https://github.com/dangpangch/ferro)中查看对应文件（其中可能已经更新），或者创建一个新的功能请求！

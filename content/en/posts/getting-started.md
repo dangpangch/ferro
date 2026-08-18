@@ -36,7 +36,7 @@ cd my-blog
 3. Install the theme by cloning the GIT repository
 
 ```sh
-git clone https://github.com/dangpangch/hugopress themes/hugopress
+git clone https://github.com/dangpangch/ferro themes/ferro
 ```
 
 4. Create some pages with the desired content

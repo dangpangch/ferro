@@ -3,7 +3,7 @@ title: "国际化"
 date: "2025-03-24T23:00:00-03:00"
 ---
 
-HugoPress 支持国际化 (i18n) 翻译表来本地化界面文案。本主题自带英文与简体中文翻译表（`i18n/en.yaml` 与 `i18n/zh.yaml`）；缺失的键会自动回退到默认语言，你也可以在站点的 `i18n/<lang>.yaml` 目录中添加自己的翻译。
+Ferro 支持国际化 (i18n) 翻译表来本地化界面文案。本主题自带英文与简体中文翻译表（`i18n/en.yaml` 与 `i18n/zh.yaml`）；缺失的键会自动回退到默认语言，你也可以在站点的 `i18n/<lang>.yaml` 目录中添加自己的翻译。
 
 ```yaml
 # Root
@@ -33,4 +33,4 @@ side_attachments: 附件
 side_related: 相关文章
 ```
 
-> **注意：** 没有找到你需要的文案？请在[仓库](https://github.com/dangpangch/hugopress)中查看对应文件（其中可能已经更新），或者创建一个新的功能请求！
+> **注意：** 没有找到你需要的文案？请在[仓库](https://github.com/dangpangch/ferro)中查看对应文件（其中可能已经更新），或者创建一个新的功能请求！

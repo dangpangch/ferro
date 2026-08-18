@@ -1,5 +1,5 @@
 baseURL: https://example.org/
-title: "}{ugoPress"
+title: "ferro"
 enableRobotsTXT: true
 defaultContentLanguage: en
 
@@ -42,13 +42,14 @@ params:
   favicon: /favicon.svg
   author:
     name: DangPang
-  hugopress:
+  ferro:
     enablei18n: true
     sidePane: true
     countPageItems: 7
     home:
       showBio: true
-      showAuthorImg: true
+      showAuthorImg: false
+      showASCIIArt: true
       sidePaneTags: true
       showFeatured: true
       showRecent: true
@@ -76,7 +77,7 @@ params:
         countRelated: 5
   links:
     hugo: https://gohugo.io/
-    theme: https://github.com/dangpangch/hugopress
+    theme: https://github.com/dangpangch/ferro
 
 related:
   includeNewer: true

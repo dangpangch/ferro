@@ -1,10 +1,20 @@
-{{- if site.Params.hugopress.home.showBio -}}
+{{- if site.Params.ferro.home.showBio -}}
   {{- $home := dict -}}
-  {{- with hugo.Data.hugopress.content.home -}}
+  {{- with hugo.Data.ferro.content.home -}}
     {{- $home = . -}}
   {{- end -}}
   <div class="centered-container">
-    {{- if site.Params.hugopress.home.showAuthorImg -}}
+    {{- if site.Params.ferro.home.showASCIIArt -}}
+      {{- with $home.asciiArt -}}
+        <pre
+          class="text-muted mx-auto mb-4 w-fit max-w-full overflow-x-auto text-center font-mono text-xs leading-tight"
+          role="img"
+          aria-label="{{- site.Params.author.name | default "Author" -}}"
+        >{{- . -}}</pre>
+      {{- end -}}
+    {{- end -}}
+
+    {{- if site.Params.ferro.home.showAuthorImg -}}
       <img
         class="border-border mx-auto block rounded-full border"
         width="70"

@@ -33,7 +33,7 @@ switch_language: 切换语言
 toggle_theme: 切换主题
 menu: 菜单
 
-# Home greetings (overridable via data/hugopress/content.yaml → home.greetings / home.text)
+# Home greetings (overridable via data/ferro/content.yaml → home.greetings / home.text)
 home_greetings: 为博主而生的 Hugo 主题！
 home_text: 一款为网络写作者与读者打造的经典、可配置、可定制的米白与炭暖色主题。
 

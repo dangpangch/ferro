@@ -7,7 +7,7 @@
   {{- partial "components/social_links.html" . -}}
 {{- end -}}
 
-{{- if site.Params.hugopress.side.single.showDetails -}}
+{{- if site.Params.ferro.side.single.showDetails -}}
   <div class="side-details">
     <span>{{- .WordCount }} {{ i18n "details_words" -}}</span>
     <span
@@ -37,12 +37,12 @@
 {{- end -}}
 
 {{- $hasToc := (ne .TableOfContents "<nav id=\"TableOfContents\"></nav>") -}}
-{{- if (and site.Params.hugopress.side.single.showTableOfContents $hasToc) -}}
+{{- if (and site.Params.ferro.side.single.showTableOfContents $hasToc) -}}
   <h3>{{- i18n "side_table_of_contents" -}}</h3>
   {{- .TableOfContents -}}
 {{- end -}}
 
-{{- if (and .Resources site.Params.hugopress.side.single.showAttachments) -}}
+{{- if (and .Resources site.Params.ferro.side.single.showAttachments) -}}
   <h3>{{- i18n "side_attachments" -}}</h3>
   <ul>
     {{- range .Resources -}}
@@ -51,8 +51,8 @@
   </ul>
 {{- end -}}
 
-{{- if site.Params.hugopress.side.single.showRelated -}}
-  {{- $related := .Site.RegularPages.Related . | first site.Params.hugopress.side.single.countRelated -}}
+{{- if site.Params.ferro.side.single.showRelated -}}
+  {{- $related := .Site.RegularPages.Related . | first site.Params.ferro.side.single.countRelated -}}
   {{- if $related -}}
     <h3>{{- i18n "side_related" -}}</h3>
     <ul>

@@ -14,25 +14,26 @@ weight: 2
 以下配置选项可以添加到站点的 Hugo 配置文件中。
 
 ```toml
-[hugopress]
- [params.hugopress]
+[ferro]
+ [params.ferro]
   sidePane = true
   countPageItems = 7
- [params.hugopress.home]
+ [params.ferro.home]
   showBio = true
   showAuthorImg = true
+  showASCIIArt = true
   sidePaneTags = true
   showFeatured = true
   showRecent = true
   hideRecentWhenFeatured = true
   countRecent = 5
- [params.hugopress.side.home]
+ [params.ferro.side.home]
   sidePaneSticky = false
   taxonomies = ['tags']
   countTaxonomy = 5
- [params.hugopress.side.list]
+ [params.ferro.side.list]
   sidePaneSticky = false
- [params.hugopress.side.single]
+ [params.ferro.side.single]
   sidePaneSticky = true
   showDetails = true
   showTableOfContents = true
@@ -47,7 +48,7 @@ weight: 2
 
 ```yaml
 ---
-hugopress:
+ferro:
   sidePane: false
   sidePaneSticky: false
 ---

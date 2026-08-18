@@ -1,7 +1,7 @@
 {{- /* Grouped by-year list of the current page's pages, shared by list.html and
-  term.html. Paginates with hugopress.countPageItems. Expects the page context. */
+  term.html. Paginates with ferro.countPageItems. Expects the page context. */
 -}}
-{{- $pages := .Paginate (.Pages.GroupByDate "2006") site.Params.hugopress.countPageItems -}}
+{{- $pages := .Paginate (.Pages.GroupByDate "2006") site.Params.ferro.countPageItems -}}
 {{- range $pages.PageGroups -}}
   <div class="list-group-key">{{- .Key -}}</div>
   {{- range .Pages -}}
