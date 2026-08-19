@@ -1,0 +1,37 @@
+{{- /* Section (list) page — chapter-style opener mirroring the taxonomy/term pages: breadcrumbs, oversized display title, meta with RSS, intro content, by-year archive */ -}}
+{{- define "main" -}}
+  {{- partial "components/breadcrumbs.html" . -}}
+
+  {{- /* Hero — chapter-style opener, mirrors term.html */ -}}
+  <header class="taxonomy-hero">
+    <h1 class="font-serif">{{- partial "title.html" . -}}</h1>
+    <div class="taxonomy-toolbar">
+      <p class="taxonomy-meta dim">
+        {{- i18n "section_post_count" (len .Pages) -}}
+        {{- with index (.Pages.ByDate.Reverse) 0 -}}
+          <span aria-hidden="true">&nbsp;·&nbsp;</span
+          >{{- i18n "term_latest" -}}&nbsp;{{- .Date | time.Format (or site.Params.dateFormat ":date_medium") -}}
+        {{- end -}}
+      </p>
+      {{- with .OutputFormats.Get "RSS" -}}
+        <a
+          class="taxonomy-rss"
+          href="{{- .RelPermalink -}}"
+          aria-label="{{- i18n "term_subscribe" | default "Subscribe" -}}"
+        >
+          {{- partial "icon.html" (dict "name" "rss" "size" 14) -}}
+        </a>
+      {{- end -}}
+    </div>
+  </header>
+
+  {{- with .Content -}}
+    <section class="page-section">{{- . -}}</section>
+  {{- end -}}
+
+  {{- if .Pages -}}
+    {{- partial "components/grouped_list.html" (dict "page" . "showYearCount" (default false site.Params.ferro.pages.showYearCount)) -}}
+  {{- else -}}
+    <p class="term-index-empty dim">{{- i18n "section_empty" -}}</p>
+  {{- end -}}
+{{- end -}}

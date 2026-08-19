@@ -25,6 +25,16 @@
   font-size: var(--text-sm);
 }
 
+/* Per-year post count on section archives — mono tabular figures echo the
+   term-index counts; digits-only so the key's uppercase transform is a no-op,
+   but reset anyway for safety. */
+.list-group-key-count {
+  @apply text-muted ml-2 font-mono;
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  text-transform: none;
+}
+
 .list-group-heading {
   @apply mt-3;
   a {

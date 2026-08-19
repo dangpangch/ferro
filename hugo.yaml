@@ -55,6 +55,8 @@ params:
       showRecent: true
       hideRecentWhenFeatured: true
       countRecent: 5
+    pages:
+      showYearCount: false
     side:
       home:
         sidePaneSticky: false

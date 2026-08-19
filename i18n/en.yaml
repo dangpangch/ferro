@@ -68,6 +68,12 @@ term_sibling_count:
   one: "{{ .Count }} term"
   other: "{{ .Count }} terms"
 
+# Section pages (e.g. /posts/)
+section_post_count:
+  one: "{{ .Count }} post"
+  other: "{{ .Count }} posts"
+section_empty: No posts yet
+
 # Pagination
 pagination: Pagination
 pagination_prev: ← Previous

@@ -27,6 +27,8 @@ The following configuration options can be added to your site's Hugo config file
   showRecent = true
   hideRecentWhenFeatured = true
   countRecent = 5
+ [params.ferro.pages]
+  showYearCount = false
  [params.ferro.side.home]
   sidePaneSticky = false
   taxonomies = ['tags']

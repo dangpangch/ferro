@@ -27,6 +27,8 @@ weight: 2
   showRecent = true
   hideRecentWhenFeatured = true
   countRecent = 5
+ [params.ferro.pages]
+  showYearCount = false
  [params.ferro.side.home]
   sidePaneSticky = false
   taxonomies = ['tags']

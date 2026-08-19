@@ -1,8 +1,0 @@
-{{- define "main" -}}
-  {{- $title := partial "title.html" . }}
-  <h1>{{- $title -}}</h1>
-  {{- with .Content -}}
-    <section class="page-section">{{- . -}}</section>
-  {{- end -}}
-  {{- partial "components/grouped_list.html" . -}}
-{{- end -}}

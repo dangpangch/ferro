@@ -68,6 +68,12 @@ term_sibling_count:
   one: "{{ .Count }} 个同类标签"
   other: "{{ .Count }} 个同类标签"
 
+# Section pages (e.g. /posts/)
+section_post_count:
+  one: "{{ .Count }} 篇文章"
+  other: "{{ .Count }} 篇文章"
+section_empty: 暂无文章
+
 # Pagination
 pagination: 分页
 pagination_prev: ← 上一页

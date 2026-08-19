@@ -1,9 +1,26 @@
 {{- /* Grouped by-year list of the current page's pages, shared by list.html and
-  term.html. Paginates with ferro.countPageItems. Expects the page context. */
+  term.html. Paginates with ferro.countPageItems. Expects the page context, or
+  a dict {page, showYearCount} — showYearCount appends a per-year post count
+  to the group key (used by section pages). */
 -}}
-{{- $pages := .Paginate (.Pages.GroupByDate "2006") site.Params.ferro.countPageItems -}}
+{{- $page := . -}}
+{{- $showYearCount := false -}}
+{{- if reflect.IsMap . -}}
+  {{- $page = .page -}}
+  {{- $showYearCount = default false .showYearCount -}}
+{{- end -}}
+{{- $pages := $page.Paginate ($page.Pages.GroupByDate "2006") site.Params.ferro.countPageItems -}}
 {{- range $pages.PageGroups -}}
-  <div class="list-group-key">{{- .Key -}}</div>
+  <div class="list-group-key">
+    {{- .Key -}}
+    {{- if $showYearCount -}}
+      <span
+        class="list-group-key-count"
+        aria-label="{{- i18n "taxonomy_post_count" (len .Pages) -}}"
+        >·&nbsp;{{- len .Pages -}}</span
+      >
+    {{- end -}}
+  </div>
   {{- range .Pages -}}
     <div class="list-group-heading">
       <a href="{{- .RelPermalink -}}">{{- partial "title.html" . -}}</a>
@@ -19,4 +36,4 @@
     </div>
   {{- end -}}
 {{- end -}}
-{{- partial "pagination.html" . -}}
+{{- partial "pagination.html" $page -}}
