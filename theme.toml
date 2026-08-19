@@ -3,12 +3,12 @@ license = "MIT"
 licenselink = "https://github.com/dangpangch/ferro/LICENSE"
 description = "A hugo theme"
 
-# homepage = "https://github.com/dangpangch/ferro"
+homepage = "https://github.com/dangpangch/ferro"
 # demosite = "https://ferro.netlify.app/demo"
 
 tags = ["responsive", "minimal", "blog"]
 features = ["blog", "themes", "search"]
 
 [author]
-name = "dangpangch"
+name = "dangpang"
 homepage = "https://github.com/dangpangch"

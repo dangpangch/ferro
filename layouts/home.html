@@ -1,9 +1,6 @@
 {{- define "main" -}}
   {{- partial "home/greetings.html" -}}
-
   {{- $indexablePages := where site.RegularPages "Params.indexable" "ne" false -}}
-
-
   <div class="mx-auto max-w-[95%]">
     <div class="show-md hidden">
       {{- partial "search_bar.html" . -}}

@@ -103,6 +103,14 @@ build:
 
 module:
   mounts:
+    - source: layouts
+      target: layouts
+    - source: static
+      target: static
+    - source: data
+      target: data
+    - source: i18n
+      target: i18n
     - source: assets
       target: assets
     - disableWatch: true
@@ -111,7 +119,15 @@ module:
   hugoVersion:
     extended: false
     min: 0.158.0
-
+security:
+  exec:
+    allow:
+      - ^(dart-)?sass$
+      - ^go$
+      - ^git$
+      - ^node$
+      - ^postcss$
+      - ^tailwindcss$
 # Syntax highlighting: class-based tokens (noClasses: false), colored by
 # assets/css/code/gruvbox-light.css (light) and gruvbox-dark.css (dark).
 markup:
