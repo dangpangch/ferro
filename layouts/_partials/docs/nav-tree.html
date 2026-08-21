@@ -1,0 +1,48 @@
+{{- /* Docs navigation tree body — shared by wide column and narrow details. Dict: root (docs section), page (current). Groups = child sections by weight; leaves = their pages; loose top-level pages as ungrouped tail */ -}}
+{{- $root := .root -}}
+{{- $page := .page -}}
+<ul class="docs-nav-list" role="list">
+  {{- range $root.Pages.ByWeight -}}
+    {{- if .IsSection -}}
+      <li class="docs-nav-group">
+        {{- /* Light the branch containing the current page; the landing lights none */ -}}
+        {{- $inBranch := or (.IsAncestor $page) (eq $page.RelPermalink .RelPermalink) -}}
+        {{- $headingClass := "docs-nav-heading" -}}
+        {{- if $inBranch -}}
+          {{- $headingClass = "docs-nav-heading is-current-branch" -}}
+        {{- end -}}
+        {{- $section := . -}}
+        {{- with .Title -}}
+          <a class="{{ $headingClass }}" href="{{- $section.RelPermalink -}}"
+            >{{- . -}}</a
+          >
+        {{- end -}}
+        <ul role="list">
+          {{- range .Pages.ByWeight -}}
+            <li>
+              <a
+                class="docs-nav-link"
+                href="{{- .RelPermalink -}}"
+                {{- if eq .RelPermalink $page.RelPermalink -}}
+                  aria-current="page"
+                {{- end -}}
+                >{{- .LinkTitle | default .Title -}}</a
+              >
+            </li>
+          {{- end -}}
+        </ul>
+      </li>
+    {{- else if .IsPage -}}
+      <li>
+        <a
+          class="docs-nav-link"
+          href="{{- .RelPermalink -}}"
+          {{- if eq .RelPermalink $page.RelPermalink -}}
+            aria-current="page"
+          {{- end -}}
+          >{{- .LinkTitle | default .Title -}}</a
+        >
+      </li>
+    {{- end -}}
+  {{- end -}}
+</ul>

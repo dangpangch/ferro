@@ -79,6 +79,12 @@ pagination: 分页
 pagination_prev: ← 上一页
 pagination_next: 下一页 →
 
+# Docs
+docs_nav: 文档导航
+docs_nav_toggle: 浏览文档
+doc_prev: 上一篇
+doc_next: 下一篇
+
 # SidePane for single pages
 details_words: 字
 details_read_time: 分钟阅读

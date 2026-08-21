@@ -1,0 +1,20 @@
+{{- /* Docs page — nav column, body, side pane, prev/next pager */ -}}
+{{- define "main" -}}
+  {{- partial "components/breadcrumbs.html" . -}}
+  <div class="single-header">
+    <h1>{{- partial "title.html" . -}}</h1>
+    {{- with .Description -}}
+      <p class="docs-lede dim">{{- . -}}</p>
+    {{- end -}}
+  </div>
+  <section class="page-section">
+    {{- .Content -}}
+  </section>
+  {{- partial "docs/pager.html" . -}}
+{{- end -}}
+
+{{- define "side" -}}
+  <aside class="side-pane side-sticky">
+    {{- partial "side/single.html" . -}}
+  </aside>
+{{- end -}}

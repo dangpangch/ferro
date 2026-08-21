@@ -1,0 +1,55 @@
+{{- /* Docs landing — chapter opener + chapter cards */ -}}
+{{- define "main" -}}
+  {{- partial "components/breadcrumbs.html" . -}}
+
+
+  <header class="taxonomy-hero">
+    <div class="taxonomy-heading">
+      <h1 class="font-serif">{{- partial "title.html" . -}}</h1>
+      <div class="taxonomy-toolbar">
+        <p class="taxonomy-meta dim">
+          {{- /* Root counts all descendants; chapters count their own */ -}}
+          {{- $isRoot := eq .RelPermalink .FirstSection.RelPermalink -}}
+          {{- $count := cond $isRoot (len (where site.RegularPages "Section" .Section)) (len .RegularPages) -}}
+          {{- i18n "section_post_count" $count -}}
+        </p>
+      </div>
+    </div>
+  </header>
+
+  {{- with .Content -}}
+    <section class="page-section">{{- . -}}</section>
+  {{- end -}}
+
+  {{- /* Cards: chapters first-class; sections show a page count, plain pages don't */ -}}
+  {{- if .Pages -}}
+    <ul class="docs-cards mt-4" role="list">
+      {{- range .Pages.ByWeight -}}
+        <li class="docs-card">
+          <a href="{{- .RelPermalink -}}">
+            <span class="docs-card-title font-serif"
+              >{{- partial "title.html" . -}}</span
+            >
+            {{- with .Description -}}
+              <span class="docs-card-desc dim">{{- . -}}</span>
+            {{- end -}}
+            {{- if .IsSection -}}
+              <span class="docs-card-count dim">
+                {{- i18n "section_post_count" (len .RegularPages) -}}
+              </span>
+            {{- end -}}
+          </a>
+        </li>
+      {{- end -}}
+    </ul>
+  {{- else -}}
+    <p class="term-index-empty dim">{{- i18n "section_empty" -}}</p>
+  {{- end -}}
+{{- end -}}
+
+{{- /* No TOC pane on the landing — keep an invisible spacer so the
+  article column sits exactly where it does on doc pages that have one */
+-}}
+{{- define "side" -}}
+  <div class="docs-side-spacer" aria-hidden="true"></div>
+{{- end -}}

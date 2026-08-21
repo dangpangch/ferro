@@ -1,0 +1,23 @@
+{{- /* Docs navigation — leading column on docs pages; tree renders twice from docs/nav-tree.html: always-open (wide) and native details (narrow), zero JS */ -}}
+{{- $root := .FirstSection -}}
+<aside class="docs-nav">
+  {{- /* Wide screens — the tree is permanently visible */ -}}
+  <nav
+    class="docs-nav-tree docs-nav-tree--wide"
+    aria-label="{{ i18n "docs_nav" }}"
+  >
+    {{- partial "docs/nav-tree.html" (dict "root" $root "page" .) -}}
+  </nav>
+
+  {{- /* Narrow screens — collapsed behind a disclosure control */ -}}
+  <details class="docs-nav-collapse">
+    <summary>
+      {{- partial "icon.html" (dict "name" "menu-2" "size" 16) -}}
+      <span>{{- i18n "docs_nav_toggle" -}}</span>
+      {{- partial "icon.html" (dict "name" "chevron-down" "size" 14 "class" "docs-nav-chevron") -}}
+    </summary>
+    <nav class="docs-nav-tree" aria-label="{{ i18n "docs_nav" }}">
+      {{- partial "docs/nav-tree.html" (dict "root" $root "page" .) -}}
+    </nav>
+  </details>
+</aside>

@@ -1,18 +1,20 @@
 export default {
-
   search: "search",
   sun: "sun",
   moon: "moon",
   menu: "menu-2",
   globe: "globe",
-  search_close: "x", 
+  search_close: "x",
+  arrow_left: "arrow-left",
+  arrow_right: "arrow-right",
+  chevron_down: "chevron-down",
 
   github: "brand-github",
-  x_twitter: "brand-x", 
+  x_twitter: "brand-x",
   mastodon: "brand-mastodon",
   bluesky: "brand-bluesky",
   rss: "rss",
-  email: "mail", 
+  email: "mail",
   linkedin: "brand-linkedin",
   link: "link",
 };

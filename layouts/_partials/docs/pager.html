@@ -1,0 +1,60 @@
+{{- /* Docs prev/next pager — reading order = weight across the whole docs tree (chapters then their pages); two hairline cards, accent on hover */ -}}
+{{- $root := .FirstSection -}}
+{{- $current := . -}}
+{{- $ordered := slice -}}
+{{- range $root.Pages.ByWeight -}}
+  {{- if .IsSection -}}
+    {{- range .Pages.ByWeight -}}
+      {{- $ordered = $ordered | append . -}}
+    {{- end -}}
+  {{- else if .IsPage -}}
+    {{- $ordered = $ordered | append . -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $index := 0 -}}
+{{- range $i, $p := $ordered -}}
+  {{- if eq $p.RelPermalink $current.RelPermalink -}}
+    {{- $index = $i -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $prev := "" -}}
+{{- $next := "" -}}
+{{- if gt $index 0 -}}{{- $prev = index $ordered (sub $index 1) -}}{{- end -}}
+{{- if lt $index (sub (len $ordered) 1) -}}
+  {{- $next = index $ordered (add $index 1) -}}
+{{- end -}}
+
+{{- if or $prev $next -}}
+  <nav class="docs-pager" aria-label="{{ i18n "pagination" }}">
+    {{- with $prev -}}
+      <a
+        class="docs-pager-link docs-pager-prev"
+        href="{{- .RelPermalink -}}"
+        rel="prev"
+      >
+        {{- partial "icon.html" (dict "name" "arrow-left" "size" 16) -}}
+        <span class="docs-pager-body">
+          <small class="dim">{{- i18n "doc_prev" -}}</small>
+          <span class="font-serif">{{- .Title -}}</span>
+        </span>
+      </a>
+    {{- else -}}
+      <span class="docs-pager-spacer" aria-hidden="true"></span>
+    {{- end -}}
+    {{- with $next -}}
+      <a
+        class="docs-pager-link docs-pager-next"
+        href="{{- .RelPermalink -}}"
+        rel="next"
+      >
+        <span class="docs-pager-body">
+          <small class="dim">{{- i18n "doc_next" -}}</small>
+          <span class="font-serif">{{- .Title -}}</span>
+        </span>
+        {{- partial "icon.html" (dict "name" "arrow-right" "size" 16) -}}
+      </a>
+    {{- end -}}
+  </nav>
+{{- end -}}

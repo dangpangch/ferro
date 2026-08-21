@@ -8,9 +8,18 @@
   </head>
   {{- partial "_dev/dev-tools.html" . -}}
   <body class="transition-none">
-    <div class="site-shell">
+    {{- /* Docs pages opt into a wide shell + leading nav column via "leading" */ -}}
+    {{- $shellClass := "site-shell" -}}
+    {{- if eq .Section "docs" -}}
+      {{- $shellClass = printf "%s %s" $shellClass "site-shell--docs" -}}
+    {{- end -}}
+    <div class="{{ $shellClass }}">
       <header class="main-header">{{- partial "header.html" . -}}</header>
       <div class="flex grow">
+        {{- /* Leading column (docs nav) — a direct conditional call, not a block: Hugo shares define blocks across the whole template set, so a "leading" define would leak onto every page */ -}}
+        {{- if eq .Section "docs" -}}
+          {{- partial "docs/nav.html" . -}}
+        {{- end -}}
         <div class="main-pane">
           <main id="main-content">{{- block "main" . -}}{{- end -}}</main>
           <footer class="main-footer">{{- partial "footer.html" . -}}</footer>

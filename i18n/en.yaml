@@ -79,6 +79,12 @@ pagination: Pagination
 pagination_prev: ← Previous
 pagination_next: Next →
 
+# Docs
+docs_nav: Documentation
+docs_nav_toggle: Browse docs
+doc_prev: Previous
+doc_next: Next
+
 # SidePane for single pages
 details_words: words
 details_read_time: minutes read
