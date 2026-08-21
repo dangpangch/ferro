@@ -1,6 +1,6 @@
 /* ── Breadcrumbs ── */
 .breadcrumbs {
-  @apply text-muted mb-4 list-none pl-0 font-sans;
+  @apply text-muted mb-4 list-none pl-0 font-serif;
   font-size: var(--text-sm);
   li {
     @apply inline-block;

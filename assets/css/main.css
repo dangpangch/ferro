@@ -1,4 +1,5 @@
-@import "./fonts.css";
+@import url("https://cdn.jsdmirror.com/npm/zira-font@latest/zira/fonts.css");
+@import url("https://fontsapi.zeoseven.com/161/main/result.css");
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
