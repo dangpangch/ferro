@@ -1,4 +1,5 @@
 // Code block copy buttons — injected into each .highlight wrapper.
+// Also powers the "copy page" button in the page header (data-copy-page).
 // The language label lives in CSS (pre.chroma::before + data-lang).
 (function () {
   "use strict";
@@ -39,6 +40,37 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     const words = labels();
+
+    // "Copy page" button in the page header — copies the article as Markdown.
+    // The raw markdown + title are embedded as JSON next to the button, so the
+    // copy is byte-faithful to the source file instead of reverse-engineering
+    // the rendered HTML.
+    const copyPage = document.querySelector("[data-copy-page]");
+    if (copyPage) {
+      const payloadEl = document.querySelector("[data-copy-page-content]");
+      copyPage.addEventListener("click", function () {
+        if (!payloadEl) return;
+        let payload;
+        try {
+          // Hugo's script-context escaping can double-encode the JSON; unwrap
+          // until we get an object.
+          payload = JSON.parse(payloadEl.textContent);
+          if (typeof payload === "string") {
+            payload = JSON.parse(payload);
+          }
+        } catch (e) {
+          return;
+        }
+        const md = "# " + payload.title + "\n\n" + payload.markdown;
+        copyText(md).then(function () {
+          copyPage.classList.add("is-copied");
+          setTimeout(function () {
+            copyPage.classList.remove("is-copied");
+          }, 1500);
+        });
+      });
+    }
+
     document.querySelectorAll(".highlight").forEach(function (wrap) {
       const btn = document.createElement("button");
       btn.type = "button";

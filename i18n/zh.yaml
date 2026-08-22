@@ -42,6 +42,7 @@ see_all: 查看全部...
 
 # Page
 breadcrumb_home: 首页
+copy_page: 复制页面
 
 # Taxonomies
 # Display names shown on taxonomy overview and term pages

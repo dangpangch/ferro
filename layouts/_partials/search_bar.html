@@ -1,11 +1,11 @@
 {{- /* Opens the global search panel (see search_panel.html) */ -}}
 <button
-  class="search-bar search-bar-button"
+  class="search-bar-button bg-border text-muted hover:text-fg focus-visible:outline-accent mb-4 flex w-full cursor-pointer items-center gap-2 rounded-lg border-none px-3 py-2 text-left font-sans text-sm outline-2 outline-offset-2 outline-transparent transition-[outline-color,color] duration-150 ease-out"
   type="button"
   aria-haspopup="dialog"
   aria-expanded="false"
   aria-controls="search-panel"
 >
-  {{- partial "icon.html" (dict "name" "search") -}}
-  <span class="search-bar-placeholder">{{- i18n "search_placeholder" -}}</span>
+  {{- partial "icon.html" (dict "name" "search" "class" "m-0 opacity-50") -}}
+  <span class="opacity-80">{{- i18n "search_placeholder" -}}</span>
 </button>

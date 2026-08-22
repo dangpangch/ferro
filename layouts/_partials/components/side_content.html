@@ -18,7 +18,7 @@
   {{- with $side -}}
     {{- with index . $section -}}
       {{- range . -}}
-        <div class="side-content">
+        <div class="border-border border-b py-3 last:border-b-0">
           <h3>{{- .title -}}</h3>
           {{- if .imagePath -}}
             {{- if .imageHref -}}
@@ -28,20 +28,20 @@
                 rel="noopener noreferrer"
               >
                 <img
-                  class="side-content-image"
+                  class="mb-2 h-auto max-w-full rounded-sm"
                   src="{{- absURL .imagePath -}}"
                   width="{{- default "80%" .imageWidth -}}"
                 />
               </a>
             {{- else -}}
               <img
-                class="side-content-image"
+                class="mb-2 h-auto max-w-full rounded-sm"
                 src="{{- absURL .imagePath -}}"
                 width="{{- default "80%" .imageWidth -}}"
               />
             {{- end -}}
           {{- end -}}
-          <p>{{- markdownify .content -}}</p>
+          <p class="mt-1">{{- markdownify .content -}}</p>
         </div>
       {{- end -}}
     {{- end -}}

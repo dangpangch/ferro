@@ -2,16 +2,11 @@
   @import "./layout.css";
   @import "./side-pane.css";
   @import "./navigation.css";
-  @import "./footer.css";
-  @import "./home.css";
   @import "./list.css";
   @import "./single.css";
-  @import "./docs.css";
   @import "./tags.css";
   @import "./taxonomy.css";
-  @import "./breadcrumbs.css";
   @import "./search.css";
-  @import "./side-details.css";
   @import "./social-links.css";
   @import "./toc.css";
 }

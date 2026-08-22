@@ -1,13 +1,22 @@
 {{- /* https://discourse.gohugo.io/t/generating-breadcrumbs-for-hugo/42059 */ -}}
 {{- $ancestors := .Ancestors.Reverse -}}
-<ol class="breadcrumbs" itemscope itemtype="https://schema.org/BreadcrumbList">
+<ol
+  class="text-muted mb-4 list-none pl-0 font-serif text-sm"
+  itemscope
+  itemtype="https://schema.org/BreadcrumbList"
+>
   {{- range $index, $value := $ancestors -}}
     <li
+      class="inline-block"
       itemprop="itemListElement"
       itemscope
       itemtype="https://schema.org/ListItem"
     >
-      <a itemprop="item" href="{{ .Permalink }}">
+      <a
+        itemprop="item"
+        class="text-muted hover:text-accent no-underline"
+        href="{{ .Permalink }}"
+      >
         {{- $sectionTitle := partial "title.html" . -}}
         <span itemprop="name"
           >{{- cond (eq $index 0) (i18n "breadcrumb_home") $sectionTitle -}}</span

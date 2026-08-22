@@ -2,7 +2,7 @@
   {{- partial "home/greetings.html" -}}
   {{- $indexablePages := where site.RegularPages "Params.indexable" "ne" false -}}
   <div class="mx-auto max-w-[95%]">
-    <div class="show-md hidden">
+    <div class="show-md">
       {{- partial "search_bar.html" . -}}
     </div>
 

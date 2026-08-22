@@ -1,12 +1,17 @@
 {{- $title := .title -}}
 {{- $items := .items -}}
 
+
 <h2 class="mt-8 mb-3 font-serif">{{- $title -}}</h2>
-<div class="flat-list">
+<div>
   {{- range first (default 5 site.Params.ferro.home.countRecent) $items -}}
-    <div class="flat-list-item">
-      <div>
-        <a href="{{- .RelPermalink -}}">{{- .LinkTitle -}}</a>
+    <div class="border-border border-t py-4 first:border-t-0">
+      <div class="grid md:grid-cols-[1fr_auto] md:gap-[1em]">
+        <a
+          class="font-sans font-bold wrap-anywhere hover:underline"
+          href="{{- .RelPermalink -}}"
+          >{{- .LinkTitle -}}</a
+        >
         <time
           class="dim float-right text-sm"
           datetime="{{- .Date | time.Format "2006-01-02T15:04:05-07:00" -}}"
@@ -14,7 +19,11 @@
           {{- .Date | time.Format (or site.Params.dateFormat ":date_medium") -}}
         </time>
       </div>
-      <small><p>{{- partial "components/summary.html" . -}}</p></small>
+      <small class="line-clamp-2 overflow-hidden"
+        ><p class="text-muted mt-1 text-[0.9375rem] leading-[1.6]">
+          {{- partial "components/summary.html" . -}}
+        </p></small
+      >
     </div>
   {{- end -}}
 </div>

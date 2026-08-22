@@ -12,27 +12,33 @@
 {{- end -}}
 {{- $paginator := $page.Paginate $page.Pages site.Params.ferro.countPageItems -}}
 {{- range $paginator.Pages.GroupByDate "2006" -}}
-  <div class="list-group-key">
+  <div
+    class="border-border text-muted mt-6 mb-1 border-b pb-[0.4rem] text-right font-sans text-sm font-bold tracking-wider uppercase first:mt-0"
+  >
     {{- .Key -}}
     {{- if $showYearCount -}}
       <span
-        class="list-group-key-count"
+        class="text-muted ml-2 font-mono text-xs normal-case tabular-nums"
         aria-label="{{- i18n "taxonomy_post_count" (len .Pages) -}}"
         >·&nbsp;{{- len .Pages -}}</span
       >
     {{- end -}}
   </div>
   {{- range .Pages -}}
-    <div class="list-group-heading">
-      <a href="{{- .RelPermalink -}}">{{- partial "title.html" . -}}</a>
+    <div class="mt-3 grid md:grid-cols-[1fr_auto] md:gap-[1em]">
+      <a
+        class="font-sans text-[1.0625rem] font-bold wrap-anywhere hover:underline"
+        href="{{- .RelPermalink -}}"
+        >{{- partial "title.html" . -}}</a
+      >
       <time
-        class="dim text float-right text-sm"
+        class="dim float-right text-sm"
         datetime="{{- .Date | time.Format "2006-01-02T15:04:05-07:00" -}}"
       >
         {{- .Date | time.Format (or site.Params.dateFormat ":date_medium") -}}
       </time>
     </div>
-    <div class="list-group-summary">
+    <div class="text-muted line-clamp-3 text-base leading-[1.6]">
       {{- partial "components/summary.html" . -}}
     </div>
   {{- end -}}

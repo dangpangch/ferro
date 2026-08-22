@@ -1,8 +1,0 @@
-/* ── Footer ── */
-.footer {
-  @apply text-muted mx-auto w-fit text-center;
-}
-
-.footer-copyright {
-  @apply border-border mt-3 border-t pt-3;
-}

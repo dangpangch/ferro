@@ -18,18 +18,20 @@
   {{- $homeURL = $defaultSite.Home.RelPermalink -}}
 {{- end -}}
 <div role="navigation" aria-label="Main">
-  <div class="nav-left font-serif">
-    <a href="{{ $homeURL }}">{{- site.Title -}}</a>
+  <div
+    class="inline-block font-serif text-[1.375rem] leading-12 font-bold tracking-[-0.01em] max-[360px]:text-[1.125rem] max-[360px]:leading-11"
+  >
+    <a class="text-fg" href="{{ $homeURL }}">{{- site.Title -}}</a>
   </div>
-  <div class="nav-right">
+  <div class="float-right flex h-12 items-center gap-1 max-[360px]:gap-1.5">
     <div class="absolute h-0 w-0">
-      <div id="nav-dropdown-menu" class="hidden">
+      <div id="nav-dropdown-menu" class="hidden md:hidden">
         {{- partial "menu.html" (dict "menuID" "main" "page" . "isDropdown" true) -}}
       </div>
     </div>
     <a
       id="nav-dropdown-button"
-      class="nav-icon-button hidden"
+      class="nav-icon-button hidden max-md:inline-flex"
       href="#"
       role="button"
       aria-expanded="false"

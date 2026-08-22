@@ -27,33 +27,54 @@
 {{- end -}}
 
 {{- if or $prev $next -}}
-  <nav class="docs-pager" aria-label="{{ i18n "pagination" }}">
+  <nav
+    class="border-border mt-12 grid grid-cols-1 gap-3 border-t pt-6 sm:grid-cols-2"
+    aria-label="{{ i18n "pagination" }}"
+  >
     {{- with $prev -}}
       <a
-        class="docs-pager-link docs-pager-prev"
+        class="group border-border hover:border-accent flex items-center gap-3 rounded-lg border px-4 py-3 no-underline transition-colors duration-150 ease-out"
         href="{{- .RelPermalink -}}"
         rel="prev"
       >
-        {{- partial "icon.html" (dict "name" "arrow-left" "size" 16) -}}
-        <span class="docs-pager-body">
-          <small class="dim">{{- i18n "doc_prev" -}}</small>
-          <span class="font-serif">{{- .Title -}}</span>
+        {{- partial "icon.html" (dict
+          "name" "arrow-left"
+          "size" 16
+          "class" "m-0 shrink-0 text-muted transition-colors duration-150 ease-out group-hover:text-accent"
+          )
+        -}}
+        <span class="flex flex-col gap-0.5">
+          <small
+            class="dim font-sans text-xs font-bold tracking-wider uppercase"
+          >
+            {{- i18n "doc_prev" -}}</small
+          >
+          <span class="font-serif text-base">{{- .Title -}}</span>
         </span>
       </a>
     {{- else -}}
-      <span class="docs-pager-spacer" aria-hidden="true"></span>
+      <span class="hidden sm:block" aria-hidden="true"></span>
     {{- end -}}
     {{- with $next -}}
       <a
-        class="docs-pager-link docs-pager-next"
+        class="group border-border hover:border-accent flex items-center gap-3 rounded-lg border px-4 py-3 no-underline transition-colors duration-150 ease-out sm:justify-end sm:text-right"
         href="{{- .RelPermalink -}}"
         rel="next"
       >
-        <span class="docs-pager-body">
-          <small class="dim">{{- i18n "doc_next" -}}</small>
-          <span class="font-serif">{{- .Title -}}</span>
+        <span class="flex flex-col gap-0.5">
+          <small
+            class="dim font-sans text-xs font-bold tracking-wider uppercase"
+          >
+            {{- i18n "doc_next" -}}</small
+          >
+          <span class="font-serif text-base">{{- .Title -}}</span>
         </span>
-        {{- partial "icon.html" (dict "name" "arrow-right" "size" 16) -}}
+        {{- partial "icon.html" (dict
+          "name" "arrow-right"
+          "size" 16
+          "class" "m-0 shrink-0 text-muted transition-colors duration-150 ease-out group-hover:text-accent"
+          )
+        -}}
       </a>
     {{- end -}}
   </nav>

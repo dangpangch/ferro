@@ -7,7 +7,7 @@
 
   {{- /* Hero — shared with term pages */ -}}
   <header class="taxonomy-hero">
-    <div class="taxonomy-heading">
+    <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
       <h1>
         <span class="taxonomy-title-mark" aria-hidden="true">#</span
         >{{- $taxonomyName -}}
@@ -45,18 +45,20 @@
     {{- end -}}
     {{- with $switch -}}
       <nav
-        class="taxonomy-switch"
+        class="mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-2"
         aria-label="{{- i18n "taxonomy_switch_label" | default "Taxonomies" -}}"
       >
         {{- range sort . "name" -}}
           <a
             href="{{- absLangURL .name -}}"
+            class="text-muted hover:text-accent hover:border-accent/40{{ if eq .name $taxonomyKey }}
+            {{ end }} border-b-2 border-transparent pb-0.5 font-sans text-sm transition-[color,border-color] duration-150 ease-out"
             {{- if eq .name $taxonomyKey }}
-              class="is-current" aria-current="page"
+              aria-current="page"
             {{- end -}}
           >
             {{- i18n (printf "taxonomies.%s" .name) | default (title .name) -}}
-            <span class="taxonomy-switch-count">({{- .count -}})</span>
+            <span class="text-muted font-mono text-xs">({{- .count -}})</span>
           </a>
         {{- end -}}
       </nav>
@@ -69,7 +71,7 @@
 
   {{- /* Ranked index — one row per term, ordered by page count */ -}}
   {{- with $terms -}}
-    <ul class="term-index">
+    <ul class="list-none p-0">
       {{- range $i, $item := .ByCount -}}
         {{- $latestDate := "" -}}
         {{- with $item.Page.Pages -}}
@@ -80,19 +82,27 @@
           {{- end -}}
         {{- end -}}
         <li>
-          <a class="term-index-row" href="{{- $item.Page.RelPermalink -}}">
-            <span class="term-index-rank" aria-hidden="true"
+          <a
+            class="group border-border flex items-baseline gap-2 border-b py-3 transition-colors duration-150 ease-out sm:gap-3"
+            href="{{- $item.Page.RelPermalink -}}"
+          >
+            <span
+              class="text-accent min-w-[3.5ch] text-right font-mono text-sm tabular-nums"
+              aria-hidden="true"
               ># {{ add $i 1 -}}</span
             >
-            <span class="term-index-name">{{- $item.Page.Title -}}</span>
             <span
-              class="term-index-count"
+              class="text-fg group-hover:text-accent font-sans text-[1.0625rem] font-bold wrap-anywhere"
+              >{{- $item.Page.Title -}}</span
+            >
+            <span
+              class="text-muted font-mono text-sm tabular-nums"
               aria-label="{{- i18n "taxonomy_post_count" $item.Count -}}"
               >({{- $item.Count -}})</span
             >
             {{- with $latestDate -}}
               <time
-                class="term-index-date"
+                class="text-muted ml-auto font-mono text-sm whitespace-nowrap tabular-nums"
                 datetime="{{- .Format "2006-01-02" -}}"
                 >{{- .Format "2006-01-02" -}}</time
               >

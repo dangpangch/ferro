@@ -7,7 +7,7 @@
     class="{{ if $isDropdown }}
       nav-dropdown-list
     {{ else }}
-      nav-menu
+      nav-menu max-md:hidden
     {{ end }}"
     role="list"
     aria-label="{{ if not $isDropdown }}{{ $menuID }}{{ end }}"
@@ -25,7 +25,9 @@
         {{- end }}
       {{- end }}
       <div
-        class="nav-item{{ if .HasChildren }}nav-item--has-children{{ end }}"
+        class="nav-item{{ if .HasChildren }}
+          nav-item--has-children
+        {{ end }}"
         role="listitem"
       >
         <a

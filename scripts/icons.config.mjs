@@ -8,6 +8,8 @@ export default {
   arrow_left: "arrow-left",
   arrow_right: "arrow-right",
   chevron_down: "chevron-down",
+  copy: "copy",
+  copy_check: "copy-check",
 
   github: "brand-github",
   x_twitter: "brand-x",

@@ -1,8 +1,5 @@
-/* ── Tags ── */
-.term-container {
-  @apply flex flex-wrap gap-2;
-}
-
+/* ── Tags ──
+   The term chip row wrapper is inline utilities in components/tags.html. */
 .tag {
   @apply border-border text-fg hover:border-accent hover:text-accent inline-flex cursor-pointer items-center rounded-full border px-3 py-[0.2rem] font-sans font-normal transition-[border-color,color] duration-150 ease-out;
   font-size: var(--text-xs);
