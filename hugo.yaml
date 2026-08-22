@@ -83,6 +83,7 @@ params:
         showAttachments: true
         showRelated: true
         countRelated: 5
+        copyPage: true
   links:
     hugo: https://gohugo.io/
     theme: https://github.com/dangpangch/ferro

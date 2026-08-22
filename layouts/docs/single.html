@@ -3,6 +3,9 @@
   {{- partial "components/breadcrumbs.html" . -}}
   <div class="mb-8 flex flex-wrap items-baseline justify-between">
     <h1 class="mt-2 mb-1 md:text-4xl">{{- partial "title.html" . -}}</h1>
+    <div class="flex items-center gap-3">
+      {{- partial "components/copy-page.html" . -}}
+    </div>
     {{- with .Description -}}
       <p
         class="dim mt-2 mb-0 basis-full font-serif text-lg leading-relaxed italic"
