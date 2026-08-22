@@ -1,19 +1,6 @@
 /* ── Search ── */
 
-/* Trigger bar (button) */
-.search-bar {
-  @apply bg-border text-muted hover:text-fg focus-visible:outline-accent mb-4 flex w-full cursor-pointer items-center gap-2 rounded-lg border-none px-3 py-2 text-left font-sans outline-2 outline-offset-2 outline-transparent transition-[outline-color,color] duration-150 ease-out;
-  font-size: var(--text-sm);
-  svg {
-    @apply m-0 opacity-50;
-  }
-}
-
-.search-bar-placeholder {
-  @apply opacity-80;
-}
-
-/* ── Panel overlay ── */
+/* Panel overlay */
 .search-panel {
   @apply fixed inset-0 z-(--z-overlay) flex items-start justify-center px-4 pt-[12vh] pb-4;
 }
@@ -49,12 +36,10 @@
 /* ── Input row ── */
 .search-panel-input {
   @apply border-border relative flex items-center gap-2 border-b px-4 pt-2;
-  svg {
-    @apply m-0 opacity-50;
-  }
 }
 
-/* Accent underline — the panel's single motion signature */
+/* svg opacity comes from the icon's utility classes in markup */
+
 .search-panel-input::after {
   content: "";
   @apply bg-accent absolute right-4 -bottom-px left-4 h-px;
@@ -65,42 +50,6 @@
 
 .search-panel-input:focus-within::after {
   transform: scaleX(1);
-}
-
-.search-text {
-  @apply text-fg min-w-0 flex-1 border-none bg-transparent font-sans outline-none;
-  font-size: var(--text-base);
-  appearance: none;
-  &::placeholder {
-    @apply text-muted;
-  }
-  /* Hide the native webkit search decorations; the panel owns its chrome */
-  &::-webkit-search-cancel-button,
-  &::-webkit-search-decoration {
-    appearance: none;
-  }
-}
-
-.search-panel-close {
-  @apply text-muted inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-md border-none bg-transparent;
-  svg {
-    @apply m-0;
-  }
-}
-
-/* ── Body ── */
-.search-panel-body {
-  @apply overflow-y-auto px-4;
-}
-
-.search-loading {
-  @apply text-muted my-4 font-sans;
-  font-size: var(--text-sm);
-}
-
-/* ── Results ── */
-.search-results {
-  @apply list-none;
 }
 
 .search-result {
@@ -136,33 +85,11 @@
   @apply text-accent underline;
 }
 
-/* ── Empty state ── */
-.search-empty {
-  @apply text-muted py-4 text-[0.9375rem];
-}
-
-/* Dead-end recovery hint shown under "no results" */
+/* ── Empty state ──
+   The .search-empty container's base styling lives in the partial markup;
+   JS-created recovery hint stays here. */
 .search-empty-hint {
   @apply mt-1 block text-xs opacity-75;
-}
-
-/* ── Footer ── */
-.search-panel-footer {
-  @apply border-border flex items-center justify-between gap-4 border-t px-4 py-2;
-  p {
-    @apply text-muted font-mono;
-    font-size: var(--text-xs);
-  }
-}
-
-.search-keys {
-  @apply whitespace-nowrap;
-}
-
-@media (width <= 480px) {
-  .search-keys {
-    display: none;
-  }
 }
 
 /* Body scroll lock while the panel is open */

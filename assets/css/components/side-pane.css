@@ -1,6 +1,6 @@
 /* ── Side pane ── */
 .side-pane {
-  @apply border-border h-fit w-[220px] overflow-hidden rounded-lg border px-4 pt-0 pb-5 text-sm leading-normal;
+  @apply border-border h-fit w-[220px] overflow-hidden rounded-lg border px-4 pb-5 text-sm leading-normal;
 }
 
 .side-pane h3 {

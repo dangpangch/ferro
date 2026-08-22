@@ -5,7 +5,7 @@
 
   {{- /* Hero — shared with the taxonomy overview page */ -}}
   <header class="taxonomy-hero">
-    <h1>
+    <h1 class="mt-2 mb-1">
       <span class="taxonomy-title-mark" aria-hidden="true">#</span
       >{{- .Title -}}
     </h1>
@@ -31,7 +31,7 @@
 
 {{- define "side" -}}
   <aside
-    class="side-pane side-pane-term{{ cond site.Params.ferro.side.term.sidePaneSticky " side-sticky" "" }}"
+    class="side-pane pt-4{{ cond site.Params.ferro.side.term.sidePaneSticky " side-sticky" "" }}"
   >
     {{- partial "side/term.html" . -}}
   </aside>

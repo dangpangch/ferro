@@ -1,10 +1,14 @@
 {{- /* Docs page — nav column, body, side pane, prev/next pager */ -}}
 {{- define "main" -}}
   {{- partial "components/breadcrumbs.html" . -}}
-  <div class="single-header">
-    <h1>{{- partial "title.html" . -}}</h1>
+  <div class="mb-8 flex flex-wrap items-baseline justify-between">
+    <h1 class="mt-2 mb-1 md:text-4xl">{{- partial "title.html" . -}}</h1>
     {{- with .Description -}}
-      <p class="docs-lede dim">{{- . -}}</p>
+      <p
+        class="dim mt-2 mb-0 basis-full font-serif text-lg leading-relaxed italic"
+      >
+        {{- . -}}
+      </p>
     {{- end -}}
   </div>
   <section class="page-section">

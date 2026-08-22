@@ -1,25 +1,4 @@
 /* ── Single page ── */
-.single-header {
-  @apply mb-8;
-  /* h1 left / time right on one baseline row; tags wrap to their own line */
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  h1 {
-    /* Article titles step up a size on wide screens, keeping the
-       hierarchy distinct from list-page headings. */
-    @apply mt-2 mb-1 md:text-4xl;
-  }
-  time {
-    @apply text-muted font-sans;
-    font-size: var(--text-sm);
-  }
-  .term-container {
-    flex-basis: 100%;
-  }
-}
-
 section.page-section {
   @apply text-base leading-relaxed;
   a {

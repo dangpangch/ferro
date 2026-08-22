@@ -4,7 +4,7 @@
 
 
   <header class="taxonomy-hero">
-    <div class="taxonomy-heading">
+    <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
       <h1 class="font-serif">{{- partial "title.html" . -}}</h1>
       <div class="taxonomy-toolbar">
         <p class="taxonomy-meta dim">
@@ -23,18 +23,24 @@
 
   {{- /* Cards: chapters first-class; sections show a page count, plain pages don't */ -}}
   {{- if .Pages -}}
-    <ul class="docs-cards mt-4" role="list">
+    <ul
+      class="mt-4 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2"
+      role="list"
+    >
       {{- range .Pages.ByWeight -}}
-        <li class="docs-card">
-          <a href="{{- .RelPermalink -}}">
-            <span class="docs-card-title font-serif"
+        <li class="group">
+          <a
+            class="border-border hover:border-accent flex h-full flex-col gap-1.5 rounded-lg border p-4 no-underline transition-colors duration-150 ease-out"
+            href="{{- .RelPermalink -}}"
+          >
+            <span class="group-hover:text-accent text-fg font-serif text-xl"
               >{{- partial "title.html" . -}}</span
             >
             {{- with .Description -}}
-              <span class="docs-card-desc dim">{{- . -}}</span>
+              <span class="dim text-sm leading-relaxed">{{- . -}}</span>
             {{- end -}}
             {{- if .IsSection -}}
-              <span class="docs-card-count dim">
+              <span class="dim mt-auto pt-2 font-mono text-xs">
                 {{- i18n "section_post_count" (len .RegularPages) -}}
               </span>
             {{- end -}}
@@ -51,5 +57,5 @@
   article column sits exactly where it does on doc pages that have one */
 -}}
 {{- define "side" -}}
-  <div class="docs-side-spacer" aria-hidden="true"></div>
+  <div class="h-fit w-55 max-[1100px]:hidden" aria-hidden="true"></div>
 {{- end -}}

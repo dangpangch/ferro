@@ -1,11 +1,13 @@
 {{- define "main" -}}
   {{- partial "components/breadcrumbs.html" . -}}
-  <div class="single-header">
-    <h1>{{- partial "title.html" . -}}</h1>
+  <div class="mb-8 flex flex-wrap items-baseline justify-between">
+    <h1 class="mt-2 mb-1 md:text-4xl">{{- partial "title.html" . -}}</h1>
     {{- $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" -}}
     {{- $dateHuman := .Date | time.Format ":date_long" -}}
-    <time class="dim" datetime="{{- $dateMachine -}}">{{- $dateHuman -}}</time>
-    {{- partial "components/tags.html" . -}}
+    <time class="dim font-sans text-sm" datetime="{{- $dateMachine -}}"
+      >{{- $dateHuman -}}</time
+    >
+    <div class="w-full">{{- partial "components/tags.html" . -}}</div>
   </div>
   <section class="page-section">
     {{- .Content -}}

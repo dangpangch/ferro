@@ -1,28 +1,18 @@
 /* ── Taxonomy pages ── */
 
-/* Title mark shared by the term & overview heroes — the accent # glyph */
-.taxonomy-title-mark {
-  @apply text-accent;
-}
-
-/* Hero — chapter-style opener shared by the taxonomy overview and term
-   pages: an oversized display title, then data-y meta. */
+/* Hero — chapter-style opener shared by the taxonomy overview, term,
+   section and docs-landing pages. The component owns the shell margin and
+   display size only; heading spacing lives in each template's markup. */
 .taxonomy-hero {
   @apply mb-10;
   h1 {
-    @apply mt-2 mb-1;
     font-size: clamp(2rem, 6vw, 3.25rem);
   }
 }
 
-/* Heading row (overview page) — display title left, toolbar right on wide
-   screens; stacked on narrow ones. Baselines align so the mono meta sits
-   on the same line as the title. */
-.taxonomy-heading {
-  @apply flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2;
-  h1 {
-    @apply mt-0;
-  }
+/* Title mark shared by the term & overview heroes — the accent # glyph */
+.taxonomy-title-mark {
+  @apply text-accent;
 }
 
 .taxonomy-meta {
@@ -47,32 +37,6 @@
   }
 }
 
-/* ── Switch — sibling taxonomies, the current one underlined ── */
-.taxonomy-switch {
-  @apply mt-4 flex flex-wrap items-baseline gap-x-5 gap-y-2;
-}
-
-.taxonomy-switch a {
-  @apply text-muted border-b-2 border-transparent pb-0.5 font-sans transition-[color,border-color] duration-150 ease-out;
-  font-size: var(--text-sm);
-  &:hover {
-    @apply text-accent;
-    border-bottom-color: color-mix(
-      in srgb,
-      var(--color-accent) 40%,
-      transparent
-    );
-  }
-  &.is-current {
-    @apply text-fg border-accent;
-  }
-}
-
-.taxonomy-switch-count {
-  @apply text-muted font-mono;
-  font-size: var(--text-xs);
-}
-
 /* ── Current-term chip (term side pane cloud) — solid accent fill.
    On-accent text: light on rust (light, 4.6:1), charcoal on bright rust
    (dark, 5.0:1); the token inverts with the accent. */
@@ -87,55 +51,8 @@
   }
 }
 
-/* Side pane on term pages — a little headroom above the first block so the
-   card doesn't start flush at the top edge. */
-.side-pane-term {
-  @apply pt-4;
-}
-
-/* ── Terms overview — ranked index ──
-   A book-index-like list: one row per term, ranked by page count. Each row
-   reads "# rank · name (count) ······ latest date" — the dotted leader
-   pulls the eye across, the mono date closes the line in tabular figures.
-   Rank is presentational (aria-hidden in markup); the count carries the
-   real data for screen readers. */
-.term-index {
-  @apply list-none p-0;
-}
-
-.term-index-row {
-  @apply border-border flex items-baseline gap-2 border-b py-3 transition-colors duration-150 ease-out sm:gap-3;
-  &:hover {
-    .term-index-name {
-      @apply text-accent;
-    }
-  }
-}
-
-.term-index-rank {
-  @apply text-accent text-right font-mono;
-  font-size: var(--text-sm);
-  min-width: 3.5ch;
-  font-variant-numeric: tabular-nums;
-}
-
-.term-index-name {
-  @apply text-fg font-sans font-bold wrap-anywhere;
-  font-size: 1.0625rem;
-}
-
-.term-index-count {
-  @apply text-muted font-mono;
-  font-size: var(--text-sm);
-  font-variant-numeric: tabular-nums;
-}
-
-.term-index-date {
-  @apply text-muted ml-auto font-mono whitespace-nowrap;
-  font-size: var(--text-sm);
-  font-variant-numeric: tabular-nums;
-}
-
+/* ── Terms overview empty state — shared by section, taxonomy and docs
+   landing pages. */
 .term-index-empty {
   @apply text-muted py-10 text-center;
 }

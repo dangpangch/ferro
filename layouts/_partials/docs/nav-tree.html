@@ -1,27 +1,29 @@
 {{- /* Docs navigation tree body — shared by wide column and narrow details. Dict: root (docs section), page (current). Groups = child sections by weight; leaves = their pages; loose top-level pages as ungrouped tail */ -}}
 {{- $root := .root -}}
 {{- $page := .page -}}
-<ul class="docs-nav-list" role="list">
+<ul class="list-none p-0" role="list">
   {{- range $root.Pages.ByWeight -}}
     {{- if .IsSection -}}
-      <li class="docs-nav-group">
+      <li class="mb-4">
         {{- /* Light the branch containing the current page; the landing lights none */ -}}
         {{- $inBranch := or (.IsAncestor $page) (eq $page.RelPermalink .RelPermalink) -}}
-        {{- $headingClass := "docs-nav-heading" -}}
+        {{- $headingColor := "text-muted hover:text-fg" -}}
         {{- if $inBranch -}}
-          {{- $headingClass = "docs-nav-heading is-current-branch" -}}
+          {{- $headingColor = "text-accent hover:text-fg" -}}
         {{- end -}}
         {{- $section := . -}}
         {{- with .Title -}}
-          <a class="{{ $headingClass }}" href="{{- $section.RelPermalink -}}"
+          <a
+            class="{{ $headingColor }} mb-1 block font-sans text-xs font-bold tracking-wider uppercase no-underline transition-colors duration-150 ease-out"
+            href="{{- $section.RelPermalink -}}"
             >{{- . -}}</a
           >
         {{- end -}}
-        <ul role="list">
+        <ul class="list-none p-0" role="list">
           {{- range .Pages.ByWeight -}}
             <li>
               <a
-                class="docs-nav-link"
+                class="text-muted before:bg-border hover:text-accent aria-[current=page]:text-accent aria-[current=page]:before:bg-accent relative block rounded-sm py-1 pl-3 text-sm leading-snug no-underline transition-colors duration-150 ease-out before:absolute before:top-0 before:bottom-0 before:left-0 before:w-0.5 before:rounded-full before:content-[''] aria-[current=page]:font-bold"
                 href="{{- .RelPermalink -}}"
                 {{- if eq .RelPermalink $page.RelPermalink -}}
                   aria-current="page"
@@ -35,7 +37,7 @@
     {{- else if .IsPage -}}
       <li>
         <a
-          class="docs-nav-link"
+          class="text-muted before:bg-border hover:text-accent aria-[current=page]:text-accent aria-[current=page]:before:bg-accent relative block rounded-sm py-1 pl-3 text-sm leading-snug no-underline transition-colors duration-150 ease-out before:absolute before:top-0 before:bottom-0 before:left-0 before:w-0.5 before:rounded-full before:content-[''] aria-[current=page]:font-bold"
           href="{{- .RelPermalink -}}"
           {{- if eq .RelPermalink $page.RelPermalink -}}
             aria-current="page"
