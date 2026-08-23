@@ -1,10 +1,6 @@
-{{- /* Code block render hook (Hugo ≥ 0.129).
-  Keeps Hugo's default Chroma output with class-based tokens; colors are
-  provided by assets/css/code/gruvbox-light.css and gruvbox-dark.css.
-  Falls back to plain text for unknown or missing languages.
-  The language is exposed as data-lang on <pre> so CSS can render the
-  language label (see single.css, pre.chroma::before). */
--}}
+{{- /* Code block render hook: keeps Chroma class-based output, colors come
+  from assets/css/code/gruvbox-*.css; unknown languages render as text.
+  data-lang on <pre> feeds the CSS language label (single.css). */ -}}
 {{- $opts := dict -}}
 {{- if not (transform.CanHighlight .Type) -}}
   {{- $opts = dict "type" "text" -}}
@@ -13,5 +9,16 @@
 {{- $wrapped := $result.Wrapped -}}
 {{- if .Type -}}
   {{- $wrapped = $wrapped | replaceRE "<pre" (printf "<pre data-lang=%q" .Type) -}}
+{{- end -}}
+{{- /* Fence attributes {group= tab=} land in .Attributes (not .Options) and
+  are mirrored as data-group/data-tab for assets/js/_code-group.js. */ -}}
+{{- with .Attributes.group -}}
+  {{- $attrs := printf " data-group=%q" . -}}
+  {{- with $.Attributes.tab -}}
+    {{- $attrs = printf "%s data-tab=%q" $attrs . -}}
+  {{- end -}}
+  {{- $wrapped = replaceRE "(<div class=\"highlight\")" (printf "${1}%s" $attrs) $wrapped -}}
+  {{- /* Drop the raw group=/tab= echoed by Hugo onto the div. */ -}}
+  {{- $wrapped = replaceRE ` (?:group|tab)="[^"]*"` "" $wrapped -}}
 {{- end -}}
 {{- $wrapped | safeHTML -}}

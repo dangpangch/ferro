@@ -24,7 +24,7 @@ Headings are larger text intended for section titles, and they vary in size from
 
 ## Paragraphs
 
-Paragraphs are containers for standard page content. Its font is defined and configurable via CSS as mentioned in [customization](/features/customization) post.
+Paragraphs are containers for standard page content. Its font is defined and configurable via CSS as mentioned in [customization](/posts/customization) post.
 
 ## Lists
 

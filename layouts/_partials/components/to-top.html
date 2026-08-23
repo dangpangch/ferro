@@ -1,0 +1,7 @@
+{{- /* Back-to-top control — place at the end of the side pane.
+  State/behavior in assets/js/_to-top.js, styles in components/to-top.css. */
+-}}
+<button class="to-top" type="button">
+  {{- partial "icon.html" (dict "name" "arrow-up") -}}
+  <span>{{- i18n "scroll_top" -}}</span>
+</button>

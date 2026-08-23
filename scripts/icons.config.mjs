@@ -7,6 +7,7 @@ export default {
   search_close: "x",
   arrow_left: "arrow-left",
   arrow_right: "arrow-right",
+  arrow_up: "arrow-up",
   chevron_down: "chevron-down",
   copy: "copy",
   copy_check: "copy-check",

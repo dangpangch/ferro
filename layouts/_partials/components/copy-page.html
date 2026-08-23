@@ -13,7 +13,7 @@
     data-copy-page
     aria-label="{{ i18n "copy_page" }}"
     title="{{ i18n "copy_page" }}"
-    class="text-muted hover:text-fg hover:border-border inline-flex cursor-pointer items-center gap-1 rounded-sm border border-transparent p-1.5 font-sans text-sm transition-colors duration-150 ease-out [&.is-copied_.icon-check]:block [&.is-copied_.icon-copy]:hidden"
+    class="text-muted hover:text-fg inline-flex cursor-pointer items-center gap-1 rounded-sm border border-border p-1.5 font-sans text-sm transition-colors duration-150 ease-out [&.is-copied_.icon-check]:block [&.is-copied_.icon-copy]:hidden"
   >
     {{- partial "icon.html" (dict "name" "copy" "size" 16 "class" "icon-copy") -}}
     {{- partial "icon.html" (dict "name" "copy-check" "size" 16 "class" "icon-check hidden") -}}

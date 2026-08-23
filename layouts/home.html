@@ -26,5 +26,6 @@
     class="side-pane{{ cond site.Params.ferro.side.home.sidePaneSticky " side-sticky" "" }}"
   >
     {{- partial "side/home.html" . -}}
+    {{- partial "components/to-top.html" . -}}
   </aside>
 {{- end -}}
