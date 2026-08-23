@@ -13,12 +13,12 @@ This page outlines the configuration options for the theme. There are plenty of 
 
 The following configuration options can be added to your site's Hugo config file.
 
-```toml
-[ferro]
- [params.ferro]
+````toml {group="global-config" tab="TOML"}
+[params.ferro]
   sidePane = true
   countPageItems = 7
- [params.ferro.home]
+
+[params.ferro.home]
   showBio = true
   showAuthorImg = true
   showASCIIArt = true
@@ -27,22 +27,100 @@ The following configuration options can be added to your site's Hugo config file
   showRecent = true
   hideRecentWhenFeatured = true
   countRecent = 5
- [params.ferro.pages]
+
+[params.ferro.pages]
   showYearCount = false
- [params.ferro.side.home]
+
+[params.ferro.side.home]
   sidePaneSticky = false
   taxonomies = ['tags']
   countTaxonomy = 5
- [params.ferro.side.list]
+
+[params.ferro.side.list]
   sidePaneSticky = false
- [params.ferro.side.single]
+
+[params.ferro.side.single]
   sidePaneSticky = true
   showDetails = true
   showTableOfContents = true
   showAttachments = true
   showRelated = true
   countRelated = 5
-```
+````
+
+````yaml {group="global-config" tab="YAML"}
+params:
+  ferro:
+    sidePane: true
+    countPageItems: 7
+    home:
+      showBio: true
+      showAuthorImg: true
+      showASCIIArt: true
+      sidePaneTags: true
+      showFeatured: true
+      showRecent: true
+      hideRecentWhenFeatured: true
+      countRecent: 5
+    pages:
+      showYearCount: false
+    side:
+      home:
+        sidePaneSticky: false
+        taxonomies: [tags]
+        countTaxonomy: 5
+      list:
+        sidePaneSticky: false
+      single:
+        sidePaneSticky: true
+        showDetails: true
+        showTableOfContents: true
+        showAttachments: true
+        showRelated: true
+        countRelated: 5
+````
+
+````json {group="global-config" tab="JSON"}
+{
+  "params": {
+    "ferro": {
+      "sidePane": true,
+      "countPageItems": 7,
+      "home": {
+        "showBio": true,
+        "showAuthorImg": true,
+        "showASCIIArt": true,
+        "sidePaneTags": true,
+        "showFeatured": true,
+        "showRecent": true,
+        "hideRecentWhenFeatured": true,
+        "countRecent": 5
+      },
+      "pages": {
+        "showYearCount": false
+      },
+      "side": {
+        "home": {
+          "sidePaneSticky": false,
+          "taxonomies": ["tags"],
+          "countTaxonomy": 5
+        },
+        "list": {
+          "sidePaneSticky": false
+        },
+        "single": {
+          "sidePaneSticky": true,
+          "showDetails": true,
+          "showTableOfContents": true,
+          "showAttachments": true,
+          "showRelated": true,
+          "countRelated": 5
+        }
+      }
+    }
+  }
+}
+````
 
 ## Page Config
 

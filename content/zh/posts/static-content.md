@@ -8,7 +8,7 @@ series: ["内容", "功能"]
 
 ## 首页问候语
 
-首页的问候语与描述默认来自主题的 [i18n 翻译表]({{< ref "/features/internationalization" >}})（`home_greetings` 与 `home_text` 键），因此会自动跟随站点当前语言。
+首页的问候语与描述默认来自主题的 [i18n 翻译表]({{< ref "/posts/internationalization" >}})（`home_greetings` 与 `home_text` 键），因此会自动跟随站点当前语言。
 
 如需覆盖，可以在 `data/ferro/content.yaml` 中定义这些值——data 中的值总是优先于 i18n 默认值：
 

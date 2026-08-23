@@ -8,6 +8,10 @@
     @apply my-1;
   }
   a {
-    @apply text-muted hover:text-accent no-underline;
+    @apply text-muted no-underline;
+    &:hover,
+    &.is-active {
+      @apply text-accent;
+    }
   }
 }

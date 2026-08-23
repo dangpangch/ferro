@@ -10,10 +10,7 @@ ferro:
         imageHref: 'https://github.com/dangpangch/ferro'
         imageWidth: '100%'
       - title: 'Side Pane Features'
-        content: 'There are lots of features regarding the side pane, check [the docs]({{< ref "features/static-content" >}}) for info.'
-    single:
-      - title: 'Static Content'
-        content: 'Single pages (a.k.a. blog posts) can also have static content like so!'
+        content: 'There are lots of features regarding the side pane, check [the docs]({{< ref "posts/static-content" >}}) for info.'
 ---
 
 Welcome to the ferro theme demo. This is a Hugo static site generator theme focused on simplicity, configurability, and reading experience. The side pane showcases the theme's features — browse the posts and feature pages from the navigation bar.

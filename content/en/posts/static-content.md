@@ -8,7 +8,7 @@ Some of the site's static content — the home greetings and the side pane conte
 
 ## Home greetings
 
-The home page greeting and description default to the theme's [i18n translation tables]({{< ref "/features/internationalization" >}}) (`home_greetings` and `home_text` keys), so they follow the site's current language automatically.
+The home page greeting and description default to the theme's [i18n translation tables]({{< ref "/posts/internationalization" >}}) (`home_greetings` and `home_text` keys), so they follow the site's current language automatically.
 
 To override them, define the values in `data/ferro/content.yaml` — data values always win over the i18n defaults:
 

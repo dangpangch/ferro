@@ -30,6 +30,8 @@
   --color-selection-dark: #6b3535;
   --color-code-bg: #2b2826; /* code blocks, both modes */
   --color-code-text: #e8e4df; /* code blocks, both modes */
+  --color-code-canvas-light: #ece5d1; /* chroma canvas, light */
+  --color-code-canvas-dark: #282828; /* chroma canvas, dark */
   --color-code-chip-light: #f0ede6; /* inline code chip, light */
 
   /* ── Semantic tokens — mode-neutral; components reference only these.
@@ -41,6 +43,7 @@
   --color-accent-hover: var(--color-accent-hover-light);
   --color-border: var(--color-border-light);
   --color-selection: var(--color-selection-light);
+  --color-code-canvas: var(--color-code-canvas-light);
   --color-code-chip: var(--color-code-chip-light);
   /* Text that sits on an accent fill (skip link, current-term chip):
      light text on the dark rust in light mode, dark text on the bright
@@ -81,6 +84,7 @@
   --color-accent-hover: var(--color-accent-hover-dark);
   --color-border: var(--color-border-dark);
   --color-selection: var(--color-selection-dark);
+  --color-code-canvas: var(--color-code-canvas-dark);
   --color-code-chip: var(--color-code-bg);
   --color-on-accent: var(--color-bg-dark);
 }
@@ -212,6 +216,7 @@
     overflow-x: auto;
     margin: 1.5rem 0;
     padding: 1rem 1.25rem;
+    border: 1px solid var(--color-border);
     border-radius: 0.375rem;
     font-family: var(--font-mono);
     font-size: 0.875rem;
@@ -299,3 +304,9 @@
    gruvbox (dark mode, scoped to [color-scheme="dark"]) */
 @import "./code/gruvbox-light.css";
 @import "./code/gruvbox-dark.css";
+
+/* Override the canvases hardcoded in the generated gruvbox files. */
+.bg,
+.chroma {
+  background-color: var(--color-code-canvas);
+}

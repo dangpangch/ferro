@@ -1,7 +1,6 @@
 {{- $title := .title -}}
 {{- $items := .items -}}
 
-
 <h2 class="mt-8 mb-3 font-serif">{{- $title -}}</h2>
 <div>
   {{- range first (default 5 site.Params.ferro.home.countRecent) $items -}}
@@ -20,10 +19,11 @@
         </time>
       </div>
       <small class="line-clamp-2 overflow-hidden"
-        ><p class="text-muted mt-1 text-[0.9375rem] leading-[1.6]">
+        >
+        <p class="text-muted mt-1 text-[0.9375rem] leading-[1.6]">
           {{- partial "components/summary.html" . -}}
-        </p></small
-      >
+        </p>
+      </small>
     </div>
   {{- end -}}
 </div>
