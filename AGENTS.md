@@ -11,6 +11,14 @@ Hugo blog theme **ferro** with **Tailwind CSS v4** (CSS-first configuration).
 - Class detection: `@source "hugo_stats.json"` **plus** v4 auto-detection (plain-text scan of `layouts/`) — note that dev-only markup under `_partials/_dev/` therefore leaks its utilities into production CSS unless excluded
 - Dark mode: `[color-scheme]` attribute on `<html>`; semantic tokens re-mapped in `:root[color-scheme="dark"]`
 
+## Hugo Template Changes — Mandatory Skill Review
+
+Any change under `layouts/` (templates, partials, render hooks, shortcodes) must be reviewed and validated with the **`hugo-template-dev`** skill before it is considered done. A passing `hugo` build only proves template syntax; runtime errors (nil field access, wrong method signatures, unsupported resource types, …) only surface when pages actually render. Follow the skill's protocol: start `hugo server`, fetch the affected pages, and confirm zero errors — for render hooks, exercise every branch with real content (e.g. bundle raster images, SVGs, pinned dimensions).
+
+## Code Simplicity — No Over-Engineering
+
+When a one-liner satisfies the requirement, ship the one-liner. Do not add abstractions, configuration options, extra branches, or speculative generality that no current requirement asks for. Complexity must be justified by a concrete, present need — not by what might be needed later.
+
 ## Styling Placement — Decision Rules
 
 Default to **inline utilities in markup**. Escalate only per Tailwind's official duplication ladder (`styling-with-utility-classes` → *Managing duplication*):
