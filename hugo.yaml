@@ -142,6 +142,14 @@ markup:
     codeFences: true
     noClasses: false
     style: gruvbox
+  goldmark:
+    parser:
+      # Standalone images stay block-level: lets the image hook emit <figure>
+      # and apply {width=...} attributes to the image, not a wrapping <p>.
+      wrapStandAloneImageWithinParagraph: false
+      attribute:
+        block: true
+        title: true
 
 # Search index output format
 outputFormats:

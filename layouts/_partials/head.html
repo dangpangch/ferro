@@ -17,6 +17,18 @@
   type="image/svg+xml"
 />
 
+{{/* Font CSS via link + preconnect, not CSS @import, so fonts fetch in parallel with the bundle. */}}
+<link rel="preconnect" href="https://cdn.jsdmirror.com" crossorigin />
+<link rel="preconnect" href="https://fontsapi.zeoseven.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdmirror.com/npm/zira-font@latest/zira/fonts.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://fontsapi.zeoseven.com/161/main/result.css"
+/>
+
 {{ with (templates.Defer (dict "key" "global")) }}
   {{ partial "head/css.html" . }}
 {{ end }}

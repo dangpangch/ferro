@@ -1,8 +1,7 @@
-@import url("https://cdn.jsdmirror.com/npm/zira-font@latest/zira/fonts.css");
-@import url("https://fontsapi.zeoseven.com/161/main/result.css");
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
+@source not "layouts/_partials/_dev";
 
 @custom-variant dark (&:where([color-scheme="dark"], [color-scheme="dark"] *));
 
@@ -206,33 +205,23 @@
   }
 
   /* ── Code ── */
-  /* Plain (unhighlighted) code blocks keep the theme's own colors. */
-  pre:has(code):not(.chroma) {
+  /* Shared layout for all pre blocks; colors come from the variants below
+     (plain blocks) or from ./code/gruvbox-light.css / -dark.css (chroma). */
+  pre {
     display: grid;
     overflow-x: auto;
     margin: 1.5rem 0;
     padding: 1rem 1.25rem;
-    border: 1px solid var(--color-border);
     border-radius: 0.375rem;
-    color: var(--color-code-text);
-    background-color: var(--color-code-bg);
     font-family: var(--font-mono);
     font-size: 0.875rem;
     line-height: 1.6;
   }
 
-  /* Chroma-highlighted blocks: layout from the theme, colors from
-     ./code/gruvbox-light.css and ./code/gruvbox-dark.css */
-  pre.chroma {
-    display: grid;
-    overflow-x: auto;
-    margin: 1.5rem 0;
-    padding: 1rem 1.25rem;
-    border: 1px solid var(--color-border);
-    border-radius: 0.375rem;
-    font-family: var(--font-mono);
-    font-size: 0.875rem;
-    line-height: 1.6;
+  /* Plain (unhighlighted) code blocks keep the theme's own colors. */
+  pre:has(code):not(.chroma) {
+    color: var(--color-code-text);
+    background-color: var(--color-code-bg);
   }
 
   /* Slim scrollbars on code blocks */
