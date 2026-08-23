@@ -1,14 +1,64 @@
-{{- /* Image render hook — adds lazy loading + async decoding to every
-  markdown image, and forwards explicit {width=} / {height=} attributes so
-  authors can reserve space and prevent layout shift. Styling (border,
-  radius) stays in CSS under #main-content img. */
+{{- /* Image render hook — webp srcset (480/800/1200/1600w) for page-bundle
+  images, passthrough for everything else. Explicit {width=} / {height=}
+  skips resizing; optional title becomes a <figcaption>. */
 -}}
-<img
-  src="{{- .Destination | safeURL -}}"
-  alt="{{- .Text -}}"
-  {{- with .Title }}title="{{- . -}}"{{- end }}
-  {{- with .Attributes.width }}width="{{- . -}}"{{- end }}
-  {{- with .Attributes.height }}height="{{- . -}}"{{- end }}
-  loading="lazy"
-  decoding="async"
-/>
+{{- $u := urls.Parse .Destination -}}
+{{- $bundleImg := "" -}}
+{{- if and (not $u.Scheme) (not $u.Host) -}}
+  {{- with .Page.Resources.GetMatch (path.Clean .Destination) -}}
+    {{ $bundleImg = . }}
+  {{- end -}}
+{{- end -}}
+{{- $pinSize := or .Attributes.width .Attributes.height -}}
+
+{{- /* SVG etc. cannot be resized — fall through to plain <img>. */ -}}
+{{- $processable := false -}}
+{{- if $bundleImg -}}
+  {{- $processable = reflect.IsImageResourceProcessable $bundleImg -}}
+{{- end -}}
+
+{{- if and $bundleImg (not $pinSize) $processable -}}
+  {{- $imgText := .Text -}}{{- $imgTitle := .Title -}}
+  {{- with $bundleImg -}}
+    {{- $img := . -}}
+    {{- $widths := slice 480 800 1200 1600 -}}
+    {{- $srcset := slice -}}
+    {{- $fallback := . -}}
+    {{- range $w := $widths -}}
+      {{- if gt $img.Width $w -}}
+        {{- $r := $img.Resize (printf "%dx webp q80" $w) -}}
+        {{- $srcset = $srcset | append (printf "%s %dw" $r.RelPermalink $w) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if gt $img.Width 1600 -}}
+      {{- $fallback = $img.Resize "1600x webp q80" -}}
+    {{- end -}}
+    {{- if and (le $img.Width 1600) (gt $img.Height 1600) -}}
+      {{- $fallback = $img.Fit "1600x1600 webp q80" -}}
+    {{- end -}}
+    <figure>
+      <img
+        src="{{- $fallback.RelPermalink -}}"
+        alt="{{- $imgText -}}"
+        {{- with $srcset }}
+          srcset="{{ delimit . ", " }}" sizes="(min-width: 42rem) 42rem, 100vw"
+        {{- end }}
+        width="{{- $fallback.Width -}}"
+        height="{{- $fallback.Height -}}"
+        loading="lazy"
+        decoding="async"
+      />
+      {{- with $imgTitle }}<figcaption>{{ . }}</figcaption>{{- end }}
+    </figure>
+  {{- end -}}
+{{- else -}}
+  <img
+    src="{{- .Destination | safeURL -}}"
+    alt="{{- .Text -}}"
+    {{- with .Title }}title="{{- . -}}"{{- end }}
+    {{- with .Attributes.width }}width="{{- . -}}"{{- end }}
+    {{- with .Attributes.height }}height="{{- . -}}"{{- end }}
+    loading="lazy"
+    decoding="async"
+  />
+{{- end -}}

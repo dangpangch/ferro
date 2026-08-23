@@ -1,5 +1,5 @@
 User-agent: *
-Sitemap: {{ site.Home.Sitemap.Filename }}
+Sitemap: {{ site.BaseURL }}sitemap.xml
 {{- range where site.RegularPages "Params.indexable" "eq" false }}
 	Disallow: {{ .RelPermalink }}
 {{- end }}
