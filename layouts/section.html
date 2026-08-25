@@ -30,7 +30,7 @@
   {{- end -}}
 
   {{- if .Pages -}}
-    {{- partial "components/grouped_list.html" (dict "page" . "showYearCount" (default false site.Params.ferro.pages.showYearCount)) -}}
+    {{- partial "components/grouped_list.html" (dict "page" . "showYearCount" (default false site.Params.ferro.page.showYearCount)) -}}
   {{- else -}}
     <p class="term-index-empty dim">{{- i18n "section_empty" -}}</p>
   {{- end -}}

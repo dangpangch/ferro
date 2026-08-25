@@ -28,7 +28,8 @@ The following configuration options can be added to your site's Hugo config file
   hideRecentWhenFeatured = true
   countRecent = 5
 
-[params.ferro.pages]
+[params.ferro.page]
+  copyPage = true
   showYearCount = false
 
 [params.ferro.side.home]
@@ -62,7 +63,8 @@ params:
       showRecent: true
       hideRecentWhenFeatured: true
       countRecent: 5
-    pages:
+    page:
+      copyPage: true
       showYearCount: false
     side:
       home:
@@ -96,7 +98,8 @@ params:
         "hideRecentWhenFeatured": true,
         "countRecent": 5
       },
-      "pages": {
+      "page": {
+        "copyPage": true,
         "showYearCount": false
       },
       "side": {
