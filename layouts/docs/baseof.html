@@ -1,0 +1,41 @@
+{{- /* Docs shell — wider layout with a leading nav column. Selected by
+  Hugo's section-scoped baseof lookup for pages under the docs section;
+  docs/single.html and docs/list.html fill the blocks below. */ -}}
+<!doctype html>
+<html
+  lang="{{ site.Language.Locale }}"
+  dir="{{ or site.Language.Direction `ltr` }}"
+>
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  {{- partial "_dev/dev-tools.html" . -}}
+  <body class="transition-none">
+    <div
+      class="border-border border-x w-300 mx-auto flex min-h-[calc(100dvh-3rem)] max-w-[calc(100vw-3rem)] flex-col"
+    >
+      <header
+        class="border-border bg-bg/80 sticky top-0 z-(--z-header) mb-12 border-b pb-5 backdrop-blur-md"
+      >
+        {{- partial "header.html" . -}}
+      </header>
+      <div class="max-lg:flex-col flex grow">
+        {{- partial "docs/nav.html" . -}}
+        <div class="mx-auto flex w-full max-w-170 flex-col overflow-auto px-2">
+          <main id="main-content" class="grow">
+            {{- block "main" . -}}{{- end -}}
+          </main>
+        </div>
+        {{- if (and (default true .Params.ferro.sidePane)
+          site.Params.ferro.sidePane)
+        -}}
+          {{- block "side" . -}}{{- end -}}
+        {{- end -}}
+      </div>
+      <footer class="border-border text-muted mt-16 border-t pt-5 text-xs">
+        {{- partial "footer.html" . -}}
+      </footer>
+      {{- partial "search_panel.html" . -}}
+    </div>
+  </body>
+</html>
