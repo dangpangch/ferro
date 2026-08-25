@@ -1,29 +1,46 @@
-{{- define "main" -}}
+{{- define "above" -}}
   {{- partial "home/greetings.html" -}}
+{{- end -}}
+
+{{- define "main" -}}
   {{- $indexablePages := where site.RegularPages "Params.indexable" "ne" false -}}
   <div class="mx-auto max-w-[95%]">
     <div class="show-md">
       {{- partial "search_bar.html" . -}}
     </div>
 
-    {{- $featured := where $indexablePages "Params.featured" true -}}
-    {{- if (and $featured site.Params.ferro.home.showFeatured) -}}
-      {{- partial "home/micro_list.html" (dict "items" $featured "title" (i18n "featured_posts")) -}}
-    {{- end -}}
+    {{- $tabs := slice -}}
 
     {{- if and $indexablePages site.Params.ferro.home.showRecent -}}
       {{- $recent := $indexablePages -}}
       {{- if site.Params.ferro.home.hideRecentWhenFeatured -}}
         {{- $recent = where $indexablePages "Params.featured" "!=" true -}}
       {{- end -}}
-      {{- partial "home/micro_list.html" (dict "items" $recent "title" (i18n "recent_posts")) -}}
+      {{- $tabs = $tabs | append (dict
+        "id" "recent"
+        "title" (printf "%s (%d)" (i18n "recent_posts") (len $recent))
+        "items" $recent)
+      -}}
+    {{- end -}}
+
+    {{- $featured := where $indexablePages "Params.featured" true -}}
+    {{- if (and $featured site.Params.ferro.home.showFeatured) -}}
+      {{- $tabs = $tabs | append (dict
+        "id" "featured"
+        "title" (printf "%s (%d)" (i18n "featured_posts") (len $featured))
+        "items" $featured)
+      -}}
+    {{- end -}}
+
+    {{- with $tabs -}}
+      {{- partial "home/post_tabs.html" (dict "tabs" .) -}}
     {{- end -}}
   </div>
 {{- end -}}
 
 {{- define "side" -}}
   <aside
-    class="side-pane{{ cond site.Params.ferro.side.home.sidePaneSticky " side-sticky" "" }}"
+    class="side-pane{{ cond site.Params.ferro.side.home.sidePaneSticky " side-sticky" "" }} border-border border"
   >
     {{- partial "side/home.html" . -}}
     {{- partial "components/to-top.html" . -}}

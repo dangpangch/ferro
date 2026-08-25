@@ -1,29 +1,33 @@
 {{- $title := .title -}}
 {{- $items := .items -}}
 
-<h2 class="mt-8 mb-3 font-serif">{{- $title -}}</h2>
+{{- /* Section label in the table-header register: small sans caps over a
+  hairline, so the post rows carry the visual weight instead. */
+-}}
+<h2
+  class="text-muted border-border mt-10 mb-0 border-b pb-2 font-sans text-sm font-bold tracking-wider uppercase"
+>
+  {{- $title -}}
+</h2>
 <div>
-  {{- range first (default 5 site.Params.ferro.home.countRecent) $items -}}
-    <div class="border-border border-t py-4 first:border-t-0">
-      <div class="grid md:grid-cols-[1fr_auto] md:gap-[1em]">
+  {{- range first (default 5 site.Params.ferro.home.countPosts) $items -}}
+    <div class="group border-border border-t py-4 first:border-t-0">
+      <div class="grid grid-cols-[1fr_auto] items-baseline gap-x-[1em]">
         <a
-          class="font-sans font-bold wrap-anywhere hover:underline"
+          class="text-fg group-hover:text-accent font-sans font-bold wrap-anywhere transition-colors duration-150 ease-out hover:underline"
           href="{{- .RelPermalink -}}"
           >{{- .LinkTitle -}}</a
         >
         <time
-          class="dim float-right text-sm"
+          class="dim text-sm whitespace-nowrap tabular-nums"
           datetime="{{- .Date | time.Format "2006-01-02T15:04:05-07:00" -}}"
         >
           {{- .Date | time.Format (or site.Params.dateFormat ":date_medium") -}}
         </time>
       </div>
-      <small class="line-clamp-2 overflow-hidden"
-        >
-        <p class="text-muted mt-1 text-[0.9375rem] leading-[1.6]">
-          {{- partial "components/summary.html" . -}}
-        </p>
-      </small>
+      <p class="text-muted mt-1 line-clamp-2 text-[0.9375rem] leading-[1.6]">
+        {{- partial "components/summary.html" . -}}
+      </p>
     </div>
   {{- end -}}
 </div>

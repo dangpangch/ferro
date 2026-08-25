@@ -1,0 +1,36 @@
+{{- /* Tabbed post list for the home page: one tab per group (featured,
+  recent), each panel holding the shared post rows. Tabs are wired up by
+  assets/js/_post-tabs.js; without JS every panel stays visible. */
+-}}
+{{- $tabs := .tabs -}}
+
+
+<div class="post-tabs" data-component="post-tabs">
+  <div class="post-tabs-bar border-border border-b" role="tablist">
+    {{- range $i, $tab := $tabs -}}
+      <button
+        class="post-tabs-tab"
+        type="button"
+        role="tab"
+        id="post-tab-{{ $tab.id }}"
+        aria-controls="post-panel-{{ $tab.id }}"
+        aria-selected="{{ cond (eq $i 0) "true" "false" }}"
+        tabindex="{{ cond (eq $i 0) "0" "-1" }}"
+      >
+        {{- $tab.title -}}
+      </button>
+    {{- end -}}
+  </div>
+
+  {{- range $i, $tab := $tabs -}}
+    <div
+      class="post-tabs-panel"
+      role="tabpanel"
+      id="post-panel-{{ $tab.id }}"
+      aria-labelledby="post-tab-{{ $tab.id }}"
+      {{ if ne $i 0 }}hidden{{ end }}
+    >
+      {{- partial "home/post_rows.html" (dict "items" $tab.items) -}}
+    </div>
+  {{- end -}}
+</div>

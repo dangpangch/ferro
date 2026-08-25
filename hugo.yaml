@@ -54,7 +54,7 @@ params:
       showFeatured: true
       showRecent: true
       hideRecentWhenFeatured: true
-      countRecent: 5
+      countPosts: 8
     page:
       # Single-page features (not side-pane related)
       copyPage: true
