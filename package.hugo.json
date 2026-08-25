@@ -1,0 +1,10 @@
+{
+  "name": "ferro",
+  "private": true,
+  "description": "Node.js dependencies required when ferro is used as a Hugo module (consumed by 'hugo mod npm pack' in sites importing this theme)",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "@tailwindcss/typography": "^0.5.20",
+    "tailwindcss": "^4.3.3"
+  }
+}

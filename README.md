@@ -38,6 +38,31 @@ hugo new content content/posts/first-post.md
 hugo server -D
 ```
 
+### Use as a Hugo module (recommended)
+
+```sh
+hugo mod init github.com/<you>/my-blog
+```
+
+Then import the theme in `hugo.yaml`:
+
+```yaml
+module:
+  imports:
+    - path: github.com/dangpangch/ferro
+```
+
+Fetch the module and its Node dependencies, then preview:
+
+```sh
+hugo mod tidy
+hugo mod npm pack   # consolidates the Tailwind CSS CLI declared in package.hugo.json
+npm install
+hugo server
+```
+
+Requires Hugo ≥ 0.159.0. See the [ferro-starter-template](https://github.com/dangpangch/ferro-starter-template) for a ready-made site.
+
 ## Multilingual
 
 The theme ships with English (`/`) and Simplified Chinese (`/zh/`) configured via `languages`:
