@@ -1,10 +1,8 @@
-<div class="text-muted mx-auto w-fit text-center">
-  <div class="border-border border-t pt-3">
-    <div class="dim">© {{ now.Year }} {{ .Site.Params.author.name }}</div>
-    <div>
+<div class="text-center">
+  <div class="dim">© {{ now.Year }} {{ .Site.Params.author.name }}</div>
+  <div>
       {{- $ThemeAnchor := .Site.Params.links.theme | printf "<a href=\"%s\" target=\"_blank\">Ferro</a>" -}}
       {{- $HugoAnchor := .Site.Params.links.hugo | printf "<a href=\"%s\" target=\"_blank\">Hugo</a>" -}}
       {{- i18n "footer" (dict "ThemeAnchor" $ThemeAnchor "HugoAnchor" $HugoAnchor) | safeHTML -}}
     </div>
-  </div>
 </div>

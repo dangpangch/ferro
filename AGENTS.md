@@ -13,7 +13,36 @@ Hugo blog theme **ferro** with **Tailwind CSS v4** (CSS-first configuration).
 
 ## Hugo Template Changes — Mandatory Skill Review
 
-Any change under `layouts/` (templates, partials, render hooks, shortcodes) must be reviewed and validated with the **`hugo-template-dev`** skill before it is considered done. A passing `hugo` build only proves template syntax; runtime errors (nil field access, wrong method signatures, unsupported resource types, …) only surface when pages actually render. Follow the skill's protocol: start `hugo server`, fetch the affected pages, and confirm zero errors — for render hooks, exercise every branch with real content (e.g. bundle raster images, SVGs, pinned dimensions).
+Any change under `layouts/` (templates, partials, render hooks, shortcodes) must be reviewed and validated with the **`hugo-template-dev`** skill before it is considered done.
+
+**Why:** a passing `hugo` build only proves template syntax; runtime errors (nil field access, wrong method signatures, unsupported resource types, …) only surface when pages actually render.
+
+### How to use the skill correctly
+
+1. **Load it first, before editing anything under `layouts/`** — use the `skill` tool with name `hugo-template-dev`, don't rely on memory of its contents.
+2. **Apply its data-access patterns while writing templates**, not just at test time:
+   - Hyphenated or variable keys require `index`: `{{ index .Site.Data "my-key" $k }}` — dot notation fails on non-identifier keys.
+   - Guard nested access with `with` / `isset`; remember `{{ if $data }}` passes for empty maps `{}` — check specific keys instead.
+   - Never type-assert blindly on `interface{}` values from data/scratch files.
+3. **Keep separation of concerns**: templates bind structure/data; behavior goes in JS assets (no inline `<script>` in templates except critical-path init); pass data to JS via `data-*` attributes.
+4. **Runtime-test every change** per the skill's protocol (adapted to this repo):
+   ```bash
+   rm -f /tmp/hugo-ferro.log
+   npx hugo server --port 1315 >/tmp/hugo-ferro.log 2>&1 &
+   sleep 5
+   grep -Ei "(error|fail)" /tmp/hugo-ferro.log | head -20
+   curl -s -o /dev/null -w "%{http_code}" http://localhost:1315/PATH/TO/PAGE/
+   pkill -f "hugo server --port 1315"
+   ```
+   Fetch every affected page template (home, single, list, taxonomy, 404…) and confirm HTTP 200 + zero errors in the log. For render hooks, exercise every branch with real content (e.g. bundle raster images, SVGs, pinned dimensions).
+5. **Never declare done on `hugo --quiet` alone** — it only checks syntax.
+
+## Git Commits — Ask First
+
+Never run `git commit` (or any commit-creating command) without presenting the
+proposed commit message and file list to the user and receiving explicit
+approval first. Staging (`git add`) alone is fine only when the user has asked
+for changes to be committed.
 
 ## Code Simplicity — No Over-Engineering
 

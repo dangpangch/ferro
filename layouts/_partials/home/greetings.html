@@ -3,11 +3,11 @@
   {{- with hugo.Data.ferro.content.home -}}
     {{- $home = . -}}
   {{- end -}}
-  <div class="mx-auto mt-10 mb-16 w-fit text-center">
+  <div class="mt-8 mb-12 pb-10 text-center">
     {{- if site.Params.ferro.home.showASCIIArt -}}
       {{- with $home.asciiArt -}}
         <pre
-          class="text-muted mx-auto mb-4 w-fit max-w-full overflow-x-auto text-center font-mono text-xs leading-tight border-0"
+          class="text-muted mx-auto mb-4 w-fit max-w-full overflow-x-auto border-0 text-center font-mono text-xs leading-tight"
           role="img"
         >
           {{- . -}}

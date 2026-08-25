@@ -8,29 +8,20 @@
   </head>
   {{- partial "_dev/dev-tools.html" . -}}
   <body class="transition-none">
-    {{- /* Docs pages opt into a wider shell + leading nav column */ -}}
-    {{- $isDocs := eq .Section "docs" -}}
-    {{- /* Both shell branches are complete literal strings for Tailwind detection. */ -}}
     <div
-      class="{{ cond $isDocs "w-300" "w-225" }} mx-auto flex min-h-[calc(100dvh-3rem)] max-w-[calc(100vw-3rem)] flex-col"
+      class="mx-auto flex min-h-[calc(100dvh-3rem)] w-225 max-w-[calc(100vw-3rem)] flex-col"
     >
       <header
         class="border-border bg-bg/80 sticky top-0 z-(--z-header) mb-12 border-b pb-5 backdrop-blur-md"
       >
         {{- partial "header.html" . -}}
       </header>
-      <div class="{{ if $isDocs }}max-lg:flex-col{{ end }} flex grow">
-        {{- /* Leading column (docs nav) — a direct conditional call, not a block: Hugo shares define blocks across the whole template set, so a "leading" define would leak onto every page */ -}}
-        {{- if $isDocs -}}
-          {{- partial "docs/nav.html" . -}}
-        {{- end -}}
+      {{- block "above" . -}}{{- end -}}
+      <div class="flex grow">
         <div class="mx-auto flex w-full max-w-170 flex-col overflow-auto px-2">
           <main id="main-content" class="grow">
             {{- block "main" . -}}{{- end -}}
           </main>
-          <footer class="mx-auto mt-16 pt-6 text-xs">
-            {{- partial "footer.html" . -}}
-          </footer>
         </div>
         {{- if (and (default true .Params.ferro.sidePane)
           site.Params.ferro.sidePane)
@@ -38,6 +29,9 @@
           {{- block "side" . -}}{{- end -}}
         {{- end -}}
       </div>
+      <footer class="text-muted border-border mt-16 border-t pt-5 text-xs">
+        {{- partial "footer.html" . -}}
+      </footer>
       {{- partial "search_panel.html" . -}}
     </div>
   </body>
