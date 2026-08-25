@@ -28,6 +28,7 @@
   rel="stylesheet"
   href="https://fontsapi.zeoseven.com/161/main/result.css"
 />
+{{- partial "head/meta.html" . -}}
 
 {{ with (templates.Defer (dict "key" "global")) }}
   {{ partial "head/css.html" . }}

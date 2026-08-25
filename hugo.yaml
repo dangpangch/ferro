@@ -40,6 +40,11 @@ languages:
 params:
   summaryLength: 70
   favicon: /favicon.svg
+  # SEO / social-sharing defaults (see layouts/_partials/head/meta.html)
+  meta:
+    description: ""
+    # ogImage: /images/og-default.png
+    # twitter: "@yourhandle"
   author:
     name: DangPang
   ferro:
