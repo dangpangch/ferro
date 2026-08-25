@@ -7,3 +7,4 @@ resources/
 .agents/
 netlify.toml
 skills-lock.json
+/starter-template/

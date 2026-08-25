@@ -38,6 +38,31 @@ hugo new content content/posts/first-post.md
 hugo server -D
 ```
 
+### 以 Hugo module 方式使用(推荐)
+
+```sh
+hugo mod init github.com/<you>/my-blog
+```
+
+然后在 `hugo.yaml` 中引入主题:
+
+```yaml
+module:
+  imports:
+    - path: github.com/dangpangch/ferro
+```
+
+拉取模块及其 Node 依赖,然后预览:
+
+```sh
+hugo mod tidy
+hugo mod npm pack   # 汇总 package.hugo.json 中声明的 Tailwind CSS CLI 依赖
+npm install
+hugo server
+```
+
+需要 Hugo ≥ 0.159.0。可直接使用 [ferro-starter-template](https://github.com/dangpangch/ferro-starter-template) 快速建站。
+
 ## 多语言
 
 主题默认配置英文（`/`）与简体中文（`/zh/`），通过 `languages` 配置：
