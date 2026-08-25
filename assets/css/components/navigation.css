@@ -76,7 +76,9 @@
 
 .nav-item--has-children {
   position: relative;
-  &:hover .nav-submenu {
+  /* :focus-within keeps submenus reachable by keyboard, not hover-only */
+  &:hover .nav-submenu,
+  &:focus-within .nav-submenu {
     @apply visible translate-y-0 opacity-100;
   }
 }
@@ -117,8 +119,11 @@
   @apply flex;
 }
 
+/* Anchored to the header controls row (its position: relative lives in
+   header.html) — right-aligned under the buttons instead of magic-number
+   offsets from a zero-size wrapper. */
 #nav-dropdown-menu {
-  @apply border-border bg-bg relative top-[34px] left-[-44px] z-(--z-dropdown) w-fit rounded-lg border px-4 py-1 text-center font-sans shadow-[0_4px_12px_rgba(0,0,0,0.06)];
+  @apply border-border bg-bg absolute top-full right-0 z-(--z-dropdown) mt-2 w-fit rounded-lg border px-4 py-1 text-center font-sans shadow-[0_4px_12px_rgba(0,0,0,0.06)];
   font-size: var(--text-sm);
 }
 

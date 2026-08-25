@@ -42,32 +42,28 @@
     const words = labels();
 
     // "Copy page" button in the page header — copies the article as Markdown.
-    // The raw markdown + title are embedded as JSON next to the button, so the
-    // copy is byte-faithful to the source file instead of reverse-engineering
-    // the rendered HTML.
+    // The markdown lives at data-copy-page-url (CopyPage output format) and is
+    // fetched on click, so it isn't inlined into every page's HTML.
     const copyPage = document.querySelector("[data-copy-page]");
     if (copyPage) {
-      const payloadEl = document.querySelector("[data-copy-page-content]");
+      const url = copyPage.getAttribute("data-copy-page-url");
       copyPage.addEventListener("click", function () {
-        if (!payloadEl) return;
-        let payload;
-        try {
-          // Hugo's script-context escaping can double-encode the JSON; unwrap
-          // until we get an object.
-          payload = JSON.parse(payloadEl.textContent);
-          if (typeof payload === "string") {
-            payload = JSON.parse(payload);
-          }
-        } catch (e) {
-          return;
-        }
-        const md = "# " + payload.title + "\n\n" + payload.markdown;
-        copyText(md).then(function () {
-          copyPage.classList.add("is-copied");
-          setTimeout(function () {
-            copyPage.classList.remove("is-copied");
-          }, 1500);
-        });
+        if (!url) return;
+        fetch(url)
+          .then(function (res) {
+            if (!res.ok) throw new Error("HTTP " + res.status);
+            return res.text();
+          })
+          .then(function (md) {
+            return copyText(md);
+          })
+          .then(function () {
+            copyPage.classList.add("is-copied");
+            setTimeout(function () {
+              copyPage.classList.remove("is-copied");
+            }, 1500);
+          })
+          .catch(function () {});
       });
     }
 

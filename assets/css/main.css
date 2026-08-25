@@ -51,7 +51,7 @@
   --color-on-accent: var(--color-fg-dark);
 
   /* Z-index scale */
-  --z-header: 40;
+  --z-header: 20;
   --z-dropdown: 50;
   --z-overlay: 100;
 
@@ -89,6 +89,12 @@
   --color-on-accent: var(--color-bg-dark);
 }
 
+/* ── Page frame ────────────────────────────────
+   Body margin forms the warm frame around the shell. */
+:root {
+  --page-inset: 1.5rem;
+}
+
 /* ── Custom utilities ────────────────────────── */
 @utility dim {
   @apply text-muted opacity-85;
@@ -108,6 +114,7 @@
     scroll-behavior: smooth;
     /* Sticky header clearance for in-page anchor jumps (TOC links) */
     scroll-padding-top: 5rem;
+    overflow-x: clip;
     touch-action: manipulation;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -130,7 +137,7 @@
   }
 
   body {
-    margin: 1.5rem;
+    margin: var(--page-inset);
     background-color: var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-serif);
@@ -141,8 +148,8 @@
 
   /* Very narrow screens: reclaim the margin so the header controls fit. */
   @media (width <= 360px) {
-    body {
-      margin: 1rem;
+    :root {
+      --page-inset: 1rem;
     }
   }
 

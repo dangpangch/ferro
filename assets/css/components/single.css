@@ -121,7 +121,9 @@ pre.chroma::before {
 .code-group-pane {
   @apply m-0 hidden;
   & pre {
-    @apply m-0 rounded-b-md;
+    /* Base styles round every pre; square the top so the pane meets the
+       tab bar flush — only the bottom keeps the theme radius. */
+    @apply m-0 rounded-t-none rounded-b-md;
   }
   &.is-active {
     @apply grid;

@@ -54,7 +54,10 @@ params:
       showFeatured: true
       showRecent: true
       hideRecentWhenFeatured: true
-      countRecent: 5
+      countPosts: 8
+    page:
+      # Single-page features (not side-pane related)
+      copyPage: true
     pages:
       showYearCount: false
     side:
@@ -77,7 +80,6 @@ params:
         showAttachments: true
         showRelated: true
         countRelated: 5
-        copyPage: true
   links:
     hugo: https://gohugo.io/
     theme: https://github.com/dangpangch/ferro
@@ -152,14 +154,27 @@ outputFormats:
     baseName: searchindex
     isPlainText: true
     notAlternative: true
+  # Markdown source fetched by the "copy page" button on click, so the raw
+  # content is not inlined as JSON into every page (see page.copypage.md).
+  CopyPage:
+    mediaType: text/markdown
+    baseName: index
+    isPlainText: true
+    notAlternative: true
 
 mediaTypes:
   application/json:
     suffixes:
       - json
+  text/markdown:
+    suffixes:
+      - md
 
 outputs:
   home:
     - HTML
     - RSS
     - SearchIndex
+  page:
+    - HTML
+    - CopyPage

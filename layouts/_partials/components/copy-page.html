@@ -1,22 +1,22 @@
 {{- /* "Copy page" button — copies the article as Markdown (raw source).
-  Reads params.ferro.side.single.copyPage; embeds title + .RawContent as JSON
-  so the copy is byte-faithful to the source file. */
+  Reads params.ferro.page.copyPage; the markdown itself is fetched on
+  click from the page's CopyPage output format (hugo.yaml outputs.page,
+  template page.copypage.md), keeping .RawContent out of every HTML page.
+  Requires the CopyPage format — no button without it. */
 -}}
-{{- if site.Params.ferro.side.single.copyPage -}}
-  {{- $payload := dict "title" .Title "markdown" .RawContent | jsonify | safeHTML -}}
-  <script
-    type="application/json"
-    data-copy-page-content
-  >{{ $payload }}</script>
-  <button
-    type="button"
-    data-copy-page
-    aria-label="{{ i18n "copy_page" }}"
-    title="{{ i18n "copy_page" }}"
-    class="text-muted hover:text-fg inline-flex cursor-pointer items-center gap-1 rounded-sm border border-border p-1.5 font-sans text-sm transition-colors duration-150 ease-out [&.is-copied_.icon-check]:block [&.is-copied_.icon-copy]:hidden"
-  >
-    {{- partial "icon.html" (dict "name" "copy" "size" 16 "class" "icon-copy") -}}
-    {{- partial "icon.html" (dict "name" "copy-check" "size" 16 "class" "icon-check hidden") -}}
-    <span>{{ i18n "copy_page" }}</span>
-  </button>
+{{- if site.Params.ferro.page.copyPage -}}
+  {{- with .OutputFormats.Get "CopyPage" -}}
+    <button
+      type="button"
+      data-copy-page
+      data-copy-page-url="{{ .RelPermalink }}"
+      aria-label="{{ i18n "copy_page" }}"
+      title="{{ i18n "copy_page" }}"
+      class="text-muted hover:text-fg border-border inline-flex cursor-pointer items-center gap-1 rounded-sm border p-1.5 font-sans text-sm transition-colors duration-150 ease-out [&.is-copied_.icon-check]:block [&.is-copied_.icon-copy]:hidden"
+    >
+      {{- partial "icon.html" (dict "name" "copy" "size" 16 "class" "icon-copy") -}}
+      {{- partial "icon.html" (dict "name" "copy-check" "size" 16 "class" "icon-check hidden") -}}
+      <span>{{ i18n "copy_page" }}</span>
+    </button>
+  {{- end -}}
 {{- end -}}
