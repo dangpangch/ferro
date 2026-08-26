@@ -28,7 +28,7 @@
           </main>
         </div>
         {{- if (and (default true .Params.ferro.sidePane)
-          site.Params.ferro.sidePane)
+          (default true site.Params.ferro.sidePane))
         -}}
           {{- block "side" . -}}{{- end -}}
         {{- end -}}

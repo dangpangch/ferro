@@ -51,7 +51,7 @@
 {{- end -}}
 
 {{- if site.Params.ferro.side.single.showRelated -}}
-  {{- $related := .Site.RegularPages.Related . | first site.Params.ferro.side.single.countRelated -}}
+  {{- $related := .Site.RegularPages.Related . | first (default 5 site.Params.ferro.side.single.countRelated) -}}
   {{- if $related -}}
     <h3>{{- i18n "side_related" -}}</h3>
     <ul>

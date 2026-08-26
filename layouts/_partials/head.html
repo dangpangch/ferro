@@ -9,7 +9,7 @@
     }}
   {{ end }}
 </title>
-{{ $faviconPath := default site.Params.favicon "/favicon.svg" }}
+{{ $faviconPath := default "/favicon.svg" site.Params.favicon }}
 <link
   rel="icon"
   href="{{ $faviconPath | relURL }}"
