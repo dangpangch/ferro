@@ -10,7 +10,7 @@
   {{- $page = .page -}}
   {{- $showYearCount = default false .showYearCount -}}
 {{- end -}}
-{{- $paginator := $page.Paginate $page.Pages site.Params.ferro.countPageItems -}}
+{{- $paginator := $page.Paginate $page.Pages (default 7 site.Params.ferro.countPageItems) -}}
 {{- range $paginator.Pages.GroupByDate "2006" -}}
   <div
     class="border-border text-muted mt-6 mb-1 border-b pb-[0.4rem] text-right font-sans text-sm font-bold tracking-wider uppercase first:mt-0"

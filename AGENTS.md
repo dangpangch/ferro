@@ -48,6 +48,17 @@ for changes to be committed.
 
 When a one-liner satisfies the requirement, ship the one-liner. Do not add abstractions, configuration options, extra branches, or speculative generality that no current requirement asks for. Complexity must be justified by a concrete, present need — not by what might be needed later.
 
+## Comments
+
+Comments carry **why**, never restate **what**. Follow the repo's existing patterns:
+
+1. **Purpose blocks on significant partials** — partials that are special, important, or referenced from more than one place open with a short `{{/* ... */}}` stating what they render and the context/dict keys they expect (see `_partials/head/meta.html`, `_partials/home/post_rows.html`). Trivial, self-explanatory, or single-caller fragments may skip it.
+2. **Comment decisions at the definition site** — non-obvious logic, workarounds, Hugo quirks and derived magic numbers get an inline `{{/* ... */}}` where they live (e.g. the sticky `top-24` header-offset math in `baseof.html`, the date-desc sort rationale in `home.html`).
+3. **Config files explain themselves** — any non-default or surprising-looking setting in `hugo.yaml` carries a one-line reason (e.g. goldmark `wrapStandAloneImageWithinParagraph`, the `cachebusters` entries).
+4. **No commented-out code, no debug leftovers** — dead code lives in git history; temporary `printf "%#v"` template dumps and `console.log` calls never survive into a commit.
+5. **Keep comments true** — update or delete a comment in the same change that alters the code it describes; a stale comment is worse than none. Write comments in English (repo convention).
+6. **Keep comments short** — a line or two is the norm; no essay-style explanatory blocks. If a comment needs paragraphs, the code it describes usually needs refactoring first.
+
 ## Styling Placement — Decision Rules
 
 Default to **inline utilities in markup**. Escalate only per Tailwind's official duplication ladder (`styling-with-utility-classes` → *Managing duplication*):

@@ -1,3 +1,6 @@
+{{- /* Document <head>: charset/viewport, title, favicon, font CSS, then SEO
+  tags via head/meta.html, deferred CSS via head/css.html and JS via head/js. */
+-}}
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>
@@ -9,7 +12,7 @@
     }}
   {{ end }}
 </title>
-{{ $faviconPath := default site.Params.favicon "/favicon.svg" }}
+{{ $faviconPath := default "/favicon.svg" site.Params.favicon }}
 <link
   rel="icon"
   href="{{ $faviconPath | relURL }}"

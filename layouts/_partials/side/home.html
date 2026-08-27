@@ -7,7 +7,7 @@
     {{ $i18nTaxonomy := printf "taxonomies.%s" $filter }}
     <h3>{{- i18n $i18nTaxonomy | default $filter | title -}}</h3>
     <ul class="taxonomy-list">
-      {{- $limit := site.Params.ferro.side.home.countTaxonomy }}
+      {{- $limit := default 3 site.Params.ferro.side.home.countTaxonomy }}
       {{- $i := $limit -}}
 
       {{/* For some reason, using "range first N COLLECTION" doesn't work here */}}

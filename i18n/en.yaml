@@ -53,7 +53,6 @@ taxonomies:
 
 # Taxonomy overview page (e.g. /tags/)
 taxonomy_empty: No terms yet
-side_other_taxonomies: Other taxonomies
 
 # Taxonomy overview — switch between taxonomies
 taxonomy_switch_label: Taxonomies

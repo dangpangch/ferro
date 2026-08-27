@@ -4,8 +4,8 @@
   Open Graph, Twitter card, and RSS autodiscovery.
 
   Resolution rules:
-  - description: page .Description → .Summary (plain) → site param
-  `meta.description` → site tagline fallback.
+  - description: page .Description → .Summary (plain) → site tagline →
+  site param `meta.description` fallback.
   - og:image: page front matter `images` / `cover` → site param
   `meta.ogImage`. Values may be page-relative paths or resources;
   they are absolutized against the current language's baseURL.

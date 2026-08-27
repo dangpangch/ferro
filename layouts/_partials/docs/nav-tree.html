@@ -1,4 +1,4 @@
-{{- /* Docs navigation tree body — shared by wide column and narrow details. Dict: root (docs section), page (current). Groups = child sections by weight; leaves = their pages; loose top-level pages as ungrouped tail */ -}}
+{{- /* Docs navigation tree body — shared by wide column and narrow details. Dict: root (docs section), page (current). Groups = child sections by weight, collapsible via native details (title link navigates, chevron toggles, active branch auto-open); leaves = their pages; loose top-level pages as ungrouped tail */ -}}
 {{- $root := .root -}}
 {{- $page := .page -}}
 <ul class="list-none p-0" role="list">
@@ -12,27 +12,39 @@
           {{- $headingColor = "text-accent hover:text-fg" -}}
         {{- end -}}
         {{- $section := . -}}
-        {{- with .Title -}}
-          <a
-            class="{{ $headingColor }} mb-1 block font-sans text-xs font-bold tracking-wider uppercase no-underline transition-colors duration-150 ease-out"
-            href="{{- $section.RelPermalink -}}"
-            >{{- . -}}</a
+        <details class="group/tree" {{- if $inBranch }} open{{ end }}>
+          <summary
+            class="flex min-h-6 cursor-pointer list-none items-center [&::-webkit-details-marker]:hidden"
           >
-        {{- end -}}
-        <ul class="list-none p-0" role="list">
-          {{- range .Pages.ByWeight -}}
-            <li>
+            {{- with .Title -}}
               <a
-                class="text-muted before:bg-border hover:text-accent aria-[current=page]:text-accent aria-[current=page]:before:bg-accent relative block rounded-sm py-1 pl-3 text-sm leading-snug no-underline transition-colors duration-150 ease-out before:absolute before:top-0 before:bottom-0 before:left-0 before:w-0.5 before:rounded-full before:content-[''] aria-[current=page]:font-bold"
-                href="{{- .RelPermalink -}}"
-                {{- if eq .RelPermalink $page.RelPermalink -}}
-                  aria-current="page"
-                {{- end -}}
-                >{{- .LinkTitle | default .Title -}}</a
+                class="{{ $headingColor }} py-1 font-sans text-xs font-bold tracking-wider uppercase no-underline transition-colors duration-150 ease-out"
+                href="{{- $section.RelPermalink -}}"
+                >{{- . -}}</a
               >
-            </li>
-          {{- end -}}
-        </ul>
+            {{- end -}}
+            {{- partial "icon.html" (dict
+              "name" "chevron-down"
+              "size" 16
+              "class" "text-muted m-0 ml-auto transition-transform duration-150 ease-out group-open/tree:rotate-180"
+              )
+            -}}
+          </summary>
+          <ul class="mt-1 list-none p-0" role="list">
+            {{- range .Pages.ByWeight -}}
+              <li>
+                <a
+                  class="text-muted before:bg-border hover:text-accent aria-[current=page]:text-accent aria-[current=page]:before:bg-accent relative block rounded-sm py-1 pl-3 text-sm leading-snug no-underline transition-colors duration-150 ease-out before:absolute before:top-0 before:bottom-0 before:left-0 before:w-0.5 before:rounded-full before:content-[''] aria-[current=page]:font-bold"
+                  href="{{- .RelPermalink -}}"
+                  {{- if eq .RelPermalink $page.RelPermalink -}}
+                    aria-current="page"
+                  {{- end -}}
+                  >{{- .LinkTitle | default .Title -}}</a
+                >
+              </li>
+            {{- end -}}
+          </ul>
+        </details>
       </li>
     {{- else if .IsPage -}}
       <li>

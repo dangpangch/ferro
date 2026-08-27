@@ -3,6 +3,8 @@ title: "ferro"
 enableRobotsTXT: true
 defaultContentLanguage: en
 
+mainSections: [posts]
+
 languages:
   en:
     weight: 1
@@ -55,15 +57,12 @@ params:
       showBio: true
       showAuthorImg: false
       showASCIIArt: true
-      sidePaneTags: true
       showFeatured: true
       showRecent: true
       hideRecentWhenFeatured: true
       countPosts: 8
     page:
-      # Single-page features (not side-pane related)
       copyPage: true
-    pages:
       showYearCount: false
     side:
       home:
@@ -72,11 +71,7 @@ params:
           - tags
           - series
         countTaxonomy: 3
-      list:
-        sidePaneSticky: false
       term:
-        sidePaneSticky: false
-      taxonomy:
         sidePaneSticky: false
       single:
         sidePaneSticky: true
