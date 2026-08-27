@@ -1,6 +1,12 @@
 /* ── Side pane ── */
 .side-pane {
   @apply h-fit w-[220px] overflow-hidden rounded-lg px-4 pb-5 text-sm leading-normal;
+
+  /* Hide below the widescreen breakpoint (--breakpoint-widescreen in
+     main.css); docs/section.html mirrors this for its TOC spacer */
+  @variant max-widescreen {
+    display: none;
+  }
 }
 
 .side-pane h3 {
@@ -14,10 +20,4 @@
 .side-pane.side-sticky {
   /* top-24 clears the sticky header (nav 48px + pb-5 20px + border) */
   @apply sticky top-24;
-}
-
-@media (width <= 1100px) {
-  .side-pane {
-    display: none;
-  }
 }

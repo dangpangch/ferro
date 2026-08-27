@@ -9,7 +9,7 @@
   {{- partial "_dev/dev-tools.html" . -}}
   <body class="transition-none">
     <div
-      class="mx-auto flex min-h-[calc(100dvh-3rem)] w-225 max-w-[calc(100vw-3rem)] flex-col"
+      class="mx-auto flex min-h-dvh w-225 max-w-[calc(100vw-3rem)] flex-col"
     >
       <header
         class="border-border bg-bg/80 sticky top-0 z-(--z-header) mb-12 border-b pb-5 backdrop-blur-md"
@@ -18,7 +18,7 @@
       </header>
       {{- block "above" . -}}{{- end -}}
       <div class="flex grow">
-        <div class="mx-auto flex w-full max-w-170 flex-col overflow-auto px-2">
+        <div class="mx-auto flex w-full max-w-160 flex-col px-2">
           <main id="main-content" class="grow">
             {{- block "main" . -}}{{- end -}}
           </main>

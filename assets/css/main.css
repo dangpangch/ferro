@@ -2,6 +2,10 @@
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
 @source not "layouts/_partials/_dev";
+/* Dev scratch files: v4 auto-detection scans them and would turn class names
+   mentioned in plan text into real (dead) utilities in the CSS. */
+@source not "todo.md";
+@source not "todo.fonts.md";
 
 @custom-variant dark (&:where([color-scheme="dark"], [color-scheme="dark"] *));
 
@@ -62,6 +66,10 @@
   /* Line heights */
   --leading-relaxed: 1.75;
   --leading-snug: 1.35;
+
+  /* Breakpoints — below widescreen the side pane and TOC hide (see
+     .side-pane and .show-md); single source for the 1100px cutoff. */
+  --breakpoint-widescreen: 1100px;
 }
 
 /* ── Dark-mode token re-map ──
@@ -100,10 +108,11 @@
   @apply text-muted opacity-85;
 }
 
-/* Shows the element below the side-pane breakpoint (see .side-pane) */
+/* Shows the element below the side-pane breakpoint (see .side-pane);
+   max-widescreen tracks the --breakpoint-widescreen theme token */
 @utility show-md {
   display: none;
-  @media (width <= 1100px) {
+  @variant max-widescreen {
     display: block !important;
   }
 }
