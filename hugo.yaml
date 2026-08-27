@@ -1,6 +1,7 @@
 baseURL: https://example.org/
 title: "ferro"
 enableRobotsTXT: true
+hasCJKLanguage: true
 defaultContentLanguage: en
 
 mainSections: [posts]
@@ -11,6 +12,9 @@ languages:
     locale: en-US
     label: English
     contentDir: content/en
+    params:
+      # Reading speed for the reading-time formula; English pages count words.
+      reading_speed: 212
     menus:
       main:
         - name: Posts
@@ -27,6 +31,10 @@ languages:
     locale: zh-CN
     label: 中文
     contentDir: content/zh
+    params:
+      # CJK pages count characters, so reading speed is chars per minute
+      # (matches Hugo's own CJK default of 500).
+      reading_speed: 500
     menus:
       main:
         - name: 文章

@@ -8,13 +8,15 @@
 {{- end -}}
 
 {{- if site.Params.ferro.side.single.showDetails -}}
+  {{- /* Official multilingual reading-time formula: WordCount divided by the
+    language's reading_speed (see hugo.yaml); zh pages count characters, en
+    pages count words. */
+-}}
+  {{- $readingSpeed := site.Params.reading_speed | default 212 -}}
+  {{- $readingTime := div (float .WordCount) $readingSpeed | math.Ceil -}}
   <div class="border-border text-muted grid gap-1 border-b py-3 text-xs">
     <span>{{- .WordCount }} {{ i18n "details_words" -}}</span>
-    <span
-      >{{- div (len .RawContent) 1096 }} -
-      {{ div (len .RawContent) 860 }}
-      {{ i18n "details_read_time" -}}</span
-    >
+    <span>{{- $readingTime }} {{ i18n "details_read_time" -}}</span>
     {{- range $k, $v := site.Taxonomies -}}
       {{- if (and (ne $k "tags") (index page.Params $k)) -}}
         <div class="mt-1 leading-[1.4]">
