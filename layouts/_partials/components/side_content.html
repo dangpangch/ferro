@@ -1,3 +1,7 @@
+{{- /* Optional side-pane text/image blocks for a section. Expects dict
+  {section}; reads ferro.side.<section> from home front matter (per-language),
+  falling back to the default language, then data/ferro/content.yaml. */
+-}}
 {{- with .section }}
   {{- $section := . -}}
   {{- $side := "" -}}

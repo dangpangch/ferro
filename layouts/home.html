@@ -16,6 +16,7 @@
       {{- if site.Params.ferro.home.hideRecentWhenFeatured -}}
         {{- $recent = where $indexablePages "Params.featured" "!=" true -}}
       {{- end -}}
+      {{- $recent = $recent.ByDate.Reverse -}}
       {{- $tabs = $tabs | append (dict
         "id" "recent"
         "title" (printf "%s (%d)" (i18n "recent_posts") (len $recent))
@@ -23,7 +24,7 @@
       -}}
     {{- end -}}
 
-    {{- $featured := where $indexablePages "Params.featured" true -}}
+    {{- $featured := (where $indexablePages "Params.featured" true).ByDate.Reverse -}}
     {{- if (and $featured site.Params.ferro.home.showFeatured) -}}
       {{- $tabs = $tabs | append (dict
         "id" "featured"
