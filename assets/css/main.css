@@ -2,10 +2,6 @@
 @plugin "@tailwindcss/typography";
 @source "hugo_stats.json";
 @source not "layouts/_partials/_dev";
-/* Dev scratch files: v4 auto-detection scans them and would turn class names
-   mentioned in plan text into real (dead) utilities in the CSS. */
-@source not "todo.md";
-@source not "todo.fonts.md";
 
 @custom-variant dark (&:where([color-scheme="dark"], [color-scheme="dark"] *));
 

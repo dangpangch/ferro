@@ -44,6 +44,33 @@ proposed commit message and file list to the user and receiving explicit
 approval first. Staging (`git add`) alone is fine only when the user has asked
 for changes to be committed.
 
+## Commit Message Convention — Angular Style
+
+Follow the [Angular commit message convention](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#-commit-message-format):
+
+```
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+- **type** (required): `feat` | `fix` | `docs` | `style` | `refactor` | `perf` | `test` | `build` | `ci` | `chore` | `revert`
+- **scope** (optional): the area touched, e.g. `layouts`, `css`, `exampleSite`, `docs`, `ci`
+- **subject**: imperative mood, start lowercase, no trailing period, ≤ 72 chars
+- **body** (optional): *what* and *why*, wrapped at 72 chars
+- **footer** (optional): `BREAKING CHANGE: <description>` (or mark with `!` after type/scope), issue references like `Closes #123`
+
+Examples from this repo's history:
+
+```
+feat: CJK-aware word count and official per-language reading time
+refactor: unify widescreen breakpoint and tighten layout per 2026-08 review
+chore: bump Pages workflow actions to Node 24 runtimes
+feat(ci): manual GitHub Pages deploy for exampleSite
+```
+
 ## Code Simplicity — No Over-Engineering
 
 When a one-liner satisfies the requirement, ship the one-liner. Do not add abstractions, configuration options, extra branches, or speculative generality that no current requirement asks for. Complexity must be justified by a concrete, present need — not by what might be needed later.
