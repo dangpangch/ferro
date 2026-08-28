@@ -8,3 +8,4 @@ resources/
 netlify.toml
 skills-lock.json
 /starter-template/
+.todo/
