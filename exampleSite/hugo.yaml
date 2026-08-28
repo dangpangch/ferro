@@ -1,0 +1,185 @@
+# Demo site for the ferro theme (bilingual English / Simplified Chinese).
+# The theme is imported as a Hugo module from the parent directory
+# (see go.mod `replace`); its mounts, params, and defaults merge into this
+# config — anything set here wins.
+baseURL: https://example.org/
+title: "ferro"
+enableRobotsTXT: true
+hasCJKLanguage: true
+defaultContentLanguage: en
+
+mainSections: [posts]
+
+module:
+  imports:
+    - path: github.com/dangpangch/ferro
+  # Expose the site's own hugo_stats.json to the CSS pipeline (the theme's
+  # config mounts the theme-root file, which doesn't change with this site's
+  # content — without this, the cachebuster below never fires in dev).
+  mounts:
+    - disableWatch: true
+      source: hugo_stats.json
+      target: assets/notwatching/hugo_stats.json
+
+languages:
+  en:
+    weight: 1
+    locale: en-US
+    label: English
+    contentDir: content/en
+    params:
+      # Reading speed for the reading-time formula; English pages count words.
+      reading_speed: 212
+    menus:
+      main:
+        - name: Posts
+          pageRef: /posts
+          weight: 1
+        - name: Docs
+          pageRef: /docs
+          weight: 3
+        - name: About
+          pageRef: /about
+          weight: 4
+  zh:
+    weight: 2
+    locale: zh-CN
+    label: 中文
+    contentDir: content/zh
+    params:
+      # CJK pages count characters, so reading speed is chars per minute
+      # (matches Hugo's own CJK default of 500).
+      reading_speed: 500
+    menus:
+      main:
+        - name: 文章
+          pageRef: /posts
+          weight: 1
+        - name: 文档
+          pageRef: /docs
+          weight: 3
+        - name: 关于
+          pageRef: /about
+          weight: 4
+
+params:
+  summaryLength: 70
+  favicon: /favicon.svg
+  # SEO / social-sharing defaults (see layouts/_partials/head/meta.html)
+  meta:
+    description: ""
+    # ogImage: /images/og-default.png
+    # twitter: "@yourhandle"
+  author:
+    name: DangPang
+  ferro:
+    enablei18n: true
+    sidePane: true
+    countPageItems: 7
+    home:
+      showBio: true
+      showAuthorImg: false
+      showASCIIArt: true
+      showFeatured: true
+      showRecent: true
+      hideRecentWhenFeatured: true
+      countPosts: 8
+    page:
+      copyPage: true
+      showYearCount: false
+    side:
+      home:
+        sidePaneSticky: false
+        taxonomies:
+          - tags
+          - series
+        countTaxonomy: 3
+      term:
+        sidePaneSticky: false
+      single:
+        sidePaneSticky: true
+        showDetails: true
+        showTableOfContents: true
+        showAttachments: true
+        showRelated: true
+        countRelated: 5
+  links:
+    hugo: https://gohugo.io/
+    theme: https://github.com/dangpangch/ferro
+
+related:
+  includeNewer: true
+  indices:
+    - name: tags
+      weight: 100
+
+taxonomies:
+  tag: tags
+  topic: topics
+  series: series
+
+build:
+  buildStats:
+    enable: true
+  cachebusters:
+    - source: 'assets/notwatching/hugo_stats\.json'
+      target: css
+    - source: '(postcss|tailwind)\.config\.js'
+      target: css
+
+security:
+  exec:
+    allow:
+      - ^(dart-)?sass$
+      - ^go$
+      - ^git$
+      - ^node$
+      - ^postcss$
+      - ^tailwindcss$
+# Syntax highlighting: class-based tokens (noClasses: false), colored by
+# assets/css/code/gruvbox-light.css (light) and gruvbox-dark.css (dark).
+markup:
+  highlight:
+    codeFences: true
+    noClasses: false
+    style: gruvbox
+  goldmark:
+    parser:
+      # Standalone images stay block-level: lets the image hook emit <figure>
+      # and apply {width=...} attributes to the image, not a wrapping <p>.
+      wrapStandAloneImageWithinParagraph: false
+      attribute:
+        block: true
+        title: true
+
+# Search index output format
+outputFormats:
+  SearchIndex:
+    mediaType: application/json
+    baseName: searchindex
+    isPlainText: true
+    notAlternative: true
+  # Markdown source fetched by the "copy page" button on click, so the raw
+  # content is not inlined as JSON into every page (see page.copypage.md).
+  CopyPage:
+    mediaType: text/markdown
+    baseName: index
+    isPlainText: true
+    notAlternative: true
+
+mediaTypes:
+  application/json:
+    suffixes:
+      - json
+  text/markdown:
+    suffixes:
+      - md
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - SearchIndex
+  page:
+    - HTML
+    - CopyPage

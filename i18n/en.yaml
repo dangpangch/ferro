@@ -44,6 +44,9 @@ see_all: See all...
 breadcrumb_home: Home
 copy_page: Copy page
 
+# External links (render-link hook)
+ext_link_new_tab: Opens in new tab
+
 # Taxonomies
 # Display names shown on taxonomy overview and term pages
 taxonomies:

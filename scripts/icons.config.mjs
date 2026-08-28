@@ -11,6 +11,7 @@ export default {
   chevron_down: "chevron-down",
   copy: "copy",
   copy_check: "copy-check",
+  external_link: "external-link",
 
   github: "brand-github",
   x_twitter: "brand-x",
