@@ -34,7 +34,7 @@
   {{- if $external }} target="_blank" rel="noopener noreferrer"{{- end }}
   {{- with .Title }} title="{{ . }}"{{- end }}
   >{{- .Text -}}{{ if $external -}}
-    {{- partial "icon.html" (dict "name" "external-link" "size" 14 "class" "m-0 inline-block h-3.5 w-3.5 align-middle text-muted") -}}
+    {{- partial "icon.html" (dict "name" "external-link" "size" 16 "class" "ml-1 inline-block h-4 w-4 align-middle relative -top-0.5 text-accent") -}}
     <span class="sr-only">{{- i18n "ext_link_new_tab" -}}</span>
   {{- end }}</a
 >

@@ -26,3 +26,6 @@
 >
   <use href="{{ $sprite }}#tabler-{{ .name }}"></use>
 </svg>
+{{- /* Trailing newline chomped: the partial is often inlined inside underlined
+  links (render-link.html), where the stray space renders as a visible
+  underline segment after the icon. Flex call sites ignore whitespace. */ -}}
