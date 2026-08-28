@@ -1,0 +1,63 @@
+name: Deploy exampleSite to GitHub Pages
+
+# Manual trigger only: run from the Actions tab ("Run workflow").
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Hugo modules (the go.mod replace to ../) need the Go toolchain
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # package.json / packages/ are gitignored hugo mod npm pack output;
+      # regenerate them from the theme's package.hugo.json before installing
+      - name: Regenerate and install Node dependencies
+        working-directory: exampleSite
+        run: |
+          hugo mod npm pack
+          npm install
+
+      # hugo_stats.json is gitignored by design; the first pass generates it
+      # so the second pass can build the final CSS with the full class set
+      - name: Build (generate hugo_stats.json)
+        run: hugo --source exampleSite --baseURL https://dangpangch.github.io/ferro/
+
+      - name: Build
+        run: hugo --gc --minify --source exampleSite --baseURL https://dangpangch.github.io/ferro/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: exampleSite/public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
