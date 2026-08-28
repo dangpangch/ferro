@@ -1,0 +1,41 @@
+{{- /* Markdown link render hook. External http(s) links (host != site host)
+  open in a new tab with an external-link icon; internal links replicate the
+  embedded hook resolution (anchor -> page permalink, paths -> page / page
+  resource / global resource) so language prefixes keep working. */
+-}}
+{{- $u := urls.Parse .Destination -}}
+{{- $href := $u.String -}}
+{{- $external := false -}}
+{{- if strings.HasPrefix $u.String "#" -}}
+  {{- $href = printf "%s#%s" .PageInner.RelPermalink $u.Fragment -}}
+{{- else if and $href (not $u.IsAbs) -}}
+  {{- $path := strings.TrimPrefix "./" $u.Path -}}
+  {{- with or
+    ($.PageInner.GetPage $path)
+    ($.PageInner.Resources.Get $path)
+    (resources.Get $path)
+  -}}
+    {{- $href = .RelPermalink -}}
+    {{- with $u.RawQuery -}}
+      {{- $href = printf "%s?%s" $href . -}}
+    {{- end -}}
+    {{- with $u.Fragment -}}
+      {{- $href = printf "%s#%s" $href . -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- $external = and
+    (in (slice "http" "https") $u.Scheme)
+    (ne $u.Host (urls.Parse site.BaseURL).Host)
+  -}}
+{{- end -}}
+<a
+  href="{{ $href }}"
+  {{- if $external }} target="_blank" rel="noopener noreferrer"{{- end }}
+  {{- with .Title }} title="{{ . }}"{{- end }}
+  >{{- .Text -}}{{ if $external -}}
+    {{- partial "icon.html" (dict "name" "external-link" "size" 16 "class" "ml-1 inline-block h-4 w-4 align-middle relative -top-0.5 text-accent") -}}
+    <span class="sr-only">{{- i18n "ext_link_new_tab" -}}</span>
+  {{- end }}</a
+>
+{{- /* chomp */ -}}
