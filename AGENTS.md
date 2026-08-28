@@ -8,7 +8,7 @@ Hugo blog theme **ferro** with **Tailwind CSS v4** (CSS-first configuration).
 
 - Style entrypoint: `assets/css/main.css` (`@theme` tokens, base layer, custom utilities)
 - Component styles: `assets/css/components/*.css`, imported via `_components.css`
-- Class detection: `@source "hugo_stats.json"` **plus** v4 auto-detection (plain-text scan of `layouts/`) — note that dev-only markup under `_partials/_dev/` therefore leaks its utilities into production CSS unless excluded
+- Class detection: `@source "hugo_stats.json"` **plus** v4 auto-detection (plain-text scan of `layouts/`); dev-only markup under `_partials/_dev/` is kept out of production CSS via `@source not` (see `main.css`) and renders only behind `hugo.IsServer`
 - Dark mode: `[color-scheme]` attribute on `<html>`; semantic tokens re-mapped in `:root[color-scheme="dark"]`
 
 ## Hugo Template Changes — Mandatory Skill Review

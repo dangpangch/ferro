@@ -24,6 +24,8 @@
   --color-accent-hover-light: #9a3a32;
   --color-accent-dark: #d97757;
   --color-accent-hover-dark: #e8956f;
+  --color-on-accent-light: #ffffff; /* text on accent fill, light — white only variant passing AA 4.5:1 */
+  --color-on-accent-dark: #292929; /* text on accent fill, dark */
   --color-border-light: #5c504438;
   --color-border-dark: #f0ede62d;
   --color-selection-light: #e8c4bf;
@@ -46,9 +48,12 @@
   --color-code-canvas: var(--color-code-canvas-light);
   --color-code-chip: var(--color-code-chip-light);
   /* Text that sits on an accent fill (skip link, current-term chip):
-     light text on the dark rust in light mode, dark text on the bright
-     rust in dark mode. */
-  --color-on-accent: var(--color-fg-dark);
+     white on the dark rust in light mode, dark text on the bright rust
+     in dark mode — both pass AA 4.5:1 against their accent. */
+  --color-on-accent: var(--color-on-accent-light);
+
+  /* Narrow-phone tweaks (header.html); enables xs: / max-xs: variants */
+  --breakpoint-xs: 22.5rem;
 
   /* Z-index scale */
   --z-header: 20;
@@ -90,7 +95,7 @@
   --color-selection: var(--color-selection-dark);
   --color-code-canvas: var(--color-code-canvas-dark);
   --color-code-chip: var(--color-code-bg);
-  --color-on-accent: var(--color-bg-dark);
+  --color-on-accent: var(--color-on-accent-dark);
 }
 
 /* ── Page frame ────────────────────────────────

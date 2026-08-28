@@ -30,7 +30,8 @@
 }
 
 .taxonomy-rss {
-  @apply text-muted hover:text-accent inline-flex items-center;
+  /* min 24px hit area — WCAG 2.2 AA target size for an icon-only link */
+  @apply text-muted hover:text-accent inline-flex min-h-6 min-w-6 items-center justify-center;
   svg {
     @apply m-0 h-3.5 w-3.5;
     color: currentColor;
@@ -38,8 +39,8 @@
 }
 
 /* ── Current-term chip (term side pane cloud) — solid accent fill.
-   On-accent text: light on rust (light, 4.6:1), charcoal on bright rust
-   (dark, 5.0:1); the token inverts with the accent. */
+   On-accent text: white on rust (light, 5.2:1), charcoal on bright rust
+   (dark, 4.7:1); the token inverts with the accent. */
 .tag.tag-current {
   @apply border-accent bg-accent text-on-accent;
   .tag-count {
