@@ -9,10 +9,14 @@
 
 {{- if site.Params.ferro.side.single.showDetails -}}
   {{- /* Official multilingual reading-time formula: WordCount divided by the
-    language's reading_speed (see hugo.yaml); zh pages count characters, en
-    pages count words. */
+    reading speed; zh pages count characters, other languages count words.
+    Defaults live in code because a theme-side languages block does not
+    reliably propagate per-language params; override per language via
+    languages.<lang>.params.reading_speed. */
 -}}
-  {{- $readingSpeed := site.Params.reading_speed | default 212 -}}
+  {{- $fallbackSpeed := 212 -}}
+  {{- if strings.HasPrefix site.Language.Lang "zh" -}}{{- $fallbackSpeed = 500 -}}{{- end -}}
+  {{- $readingSpeed := site.Params.reading_speed | default $fallbackSpeed -}}
   {{- $readingTime := div (float .WordCount) $readingSpeed | math.Ceil -}}
   <div class="border-border text-muted grid gap-1 border-b py-3 text-xs">
     <span>{{- .WordCount }} {{ i18n "details_words" -}}</span>

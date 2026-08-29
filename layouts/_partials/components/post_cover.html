@@ -1,0 +1,41 @@
+{{- /* Cover thumbnail for list rows (see todo.post-img.md design). Expects a
+  page; renders nothing when the page has no "img" front matter, so lists
+  without covers keep their exact existing markup. Sources: page bundle
+  resource — processable images get a 480px webp thumbnail (3x DPR for the
+  ~112px column), non-processable ones (svg) pass through — or a site-static
+  path starting with "/". The wrapping link is aria-hidden + tabindex -1: it
+  duplicates the row title link, so it stays out of the tab order and off the
+  accessibility tree; alt="" marks the image decorative. */
+-}}
+{{- $img := .Params.img -}}
+{{- if $img -}}
+  {{- $src := "" -}}
+  {{- $w := 0 -}}
+  {{- $h := 0 -}}
+  {{- if not (strings.HasPrefix $img "/") -}}
+    {{- with .Resources.Get $img -}}
+      {{- if reflect.IsImageResourceProcessable . -}}
+        {{- $thumb := .Resize "480x webp q80" -}}
+        {{- $src = $thumb.RelPermalink -}}
+        {{- $w = $thumb.Width -}}
+        {{- $h = $thumb.Height -}}
+      {{- else -}}
+        {{- $src = .RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $src -}}{{- $src = $img | absURL -}}{{- end -}}
+  <a
+    class="border-border group/cover relative block aspect-[16/10] w-28 shrink-0 overflow-hidden rounded-md border"
+    href="{{- .RelPermalink -}}"
+    tabindex="-1"
+    aria-hidden="true"
+  ><img
+      src="{{ $src }}"
+      {{- with $w }} width="{{ $w }}" height="{{ $h }}"{{ end }}
+      class="absolute inset-0 h-full w-full object-cover m-0 border-0 rounded-none"
+      loading="lazy"
+      decoding="async"
+      alt=""
+    /></a>
+{{- end -}}

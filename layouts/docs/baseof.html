@@ -11,7 +11,9 @@
     {{ partial "head.html" . }}
   </head>
   {{- partial "_dev/dev-tools.html" . -}}
-  <body class="transition-none">
+  <body
+    class="transition-none{{ if site.Params.ferro.grain }} grain{{ end }}"
+  >
     <div
       class="mx-auto flex min-h-dvh w-300 max-w-[calc(100vw-3rem)] flex-col"
     >

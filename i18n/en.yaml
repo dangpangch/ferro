@@ -14,6 +14,7 @@ footer: Powered by {{ .ThemeAnchor }} theme for {{ .HugoAnchor }}
 # Home
 featured_posts: Featured Posts
 recent_posts: Recent Posts
+posts: Posts
 
 # Search
 js_required: It's necessary to enable Javascript

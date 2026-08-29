@@ -1,0 +1,9 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- "Fe" monogram; colors mirror dark-mode tokens in assets/css/main.css (bg/fg/accent) -->
+
+<rect width="256" height="256" rx="52" fill="#292929"/>
+<path d="M68 191L90 85Q94 61 114 62Q133 63 132 83" stroke="#f0ede6" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M40 117H106" stroke="#f0ede6" stroke-width="24" stroke-linecap="round"/>
+<path d="M132 149H216" stroke="#d97757" stroke-width="24" stroke-linecap="round"/>
+<path d="M216 149A42 42 0 1 0 203.7 178.7" stroke="#d97757" stroke-width="24" stroke-linecap="round"/>
+</svg>

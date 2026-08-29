@@ -3,7 +3,6 @@ title: "开始使用"
 date: "2025-03-24T23:00:00-03:00"
 tags: ["入门", "指南"]
 topics: ["文档"]
-featured: true
 weight: 1
 ---
 
@@ -71,6 +70,6 @@ hugo server -D
 
 最后，如果你需要下一步的方向：
 
-- 根据[样板配置文件]({{< ref "/posts/configuration" >}})调整 `hugo.toml` 配置文件；
+- 根据[样板配置文件]({{< ref "/docs/reference/configuration" >}})调整 `hugo.toml` 配置文件；
 - 通过 CSS 为你的主题站点定制样式；
 - 如果你喜欢这个主题，记得给主题仓库点个 Star，支持我的工作！

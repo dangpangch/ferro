@@ -8,7 +8,7 @@ Hugo blog theme **ferro** with **Tailwind CSS v4** (CSS-first configuration).
 
 - Style entrypoint: `assets/css/main.css` (`@theme` tokens, base layer, custom utilities)
 - Component styles: `assets/css/components/*.css`, imported via `_components.css`
-- Class detection: `@source "hugo_stats.json"` **plus** v4 auto-detection (plain-text scan of `layouts/`) — note that dev-only markup under `_partials/_dev/` therefore leaks its utilities into production CSS unless excluded
+- Class detection: `@source "hugo_stats.json"` **plus** v4 auto-detection (plain-text scan of `layouts/`); dev-only markup under `_partials/_dev/` is kept out of production CSS via `@source not` (see `main.css`) and renders only behind `hugo.IsServer`
 - Dark mode: `[color-scheme]` attribute on `<html>`; semantic tokens re-mapped in `:root[color-scheme="dark"]`
 
 ## Hugo Template Changes — Mandatory Skill Review
@@ -36,6 +36,18 @@ Any change under `layouts/` (templates, partials, render hooks, shortcodes) must
    ```
    Fetch every affected page template (home, single, list, taxonomy, 404…) and confirm HTTP 200 + zero errors in the log. For render hooks, exercise every branch with real content (e.g. bundle raster images, SVGs, pinned dimensions).
 5. **Never declare done on `hugo --quiet` alone** — it only checks syntax.
+
+## Theme Config Options — Registry Rule
+
+Every `params.ferro.*` option must be registered with its canonical default in
+the theme root `hugo.yaml` (`params.ferro` block — the single source of truth)
+and documented in `exampleSite/content/{en,zh}/posts/configuration.md`.
+Template reads may keep defensive `default` pipes, but their values must agree
+with the registry. Demo-tuned values belong only in
+`exampleSite/hugo.yaml`, never in the registry. Two exceptions live in code:
+`reading_speed` (a theme-side `languages` block does not propagate
+per-language params) and the home `tabs` fallback (structural logic, not a
+value).
 
 ## Git Commits — Ask First
 

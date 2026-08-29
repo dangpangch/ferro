@@ -14,6 +14,7 @@ footer: 由 {{ .HugoAnchor }} 驱动的 {{ .ThemeAnchor }} 主题
 # Home
 featured_posts: 精选文章
 recent_posts: 最新文章
+posts: 文章
 
 # Search
 js_required: 需要启用 JavaScript

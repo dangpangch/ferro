@@ -1,5 +1,7 @@
 ---
 title: "Internationalization"
+img: cover.svg
+featured: true
 date: "2026-08-23T00:00:00+08:00"
 ---
 

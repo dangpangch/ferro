@@ -64,7 +64,7 @@ languages:
 
 params:
   summaryLength: 70
-  favicon: /favicon.svg
+  favicon: /favicon-zira.svg
   # SEO / social-sharing defaults (see layouts/_partials/head/meta.html)
   meta:
     description: ""
@@ -75,6 +75,8 @@ params:
   ferro:
     enablei18n: true
     sidePane: true
+    # grain: true opts in to the paper-grain background texture (off by default)
+    grain: false
     countPageItems: 7
     home:
       showBio: true
@@ -84,6 +86,16 @@ params:
       showRecent: true
       hideRecentWhenFeatured: true
       countPosts: 8
+      # Custom tab list: mixes built-in entries ("recent" / "featured" /
+      # "posts" = all posts, newest first) with taxonomy-term filters.
+      # Omit tabs entirely to fall back to the legacy recent + featured pair;
+      # a list that resolves to nothing falls back to a single posts tab.
+      tabs:
+        - recent
+        - featured
+        - title: Documentation
+          taxonomy: topics
+          term: documentation
     page:
       copyPage: true
       showYearCount: false

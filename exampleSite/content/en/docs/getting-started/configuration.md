@@ -16,20 +16,27 @@ All theme options live under `params.ferro` in your site configuration.
 | `showASCIIArt` | `true` | ASCII art header |
 | `showFeatured` | `true` | featured posts section |
 | `showRecent` | `true` | recent posts list |
-| `countRecent` | `5` | number of recent posts |
+| `countPosts` | `5` | number of posts per group |
+| `tabs` | unset | custom home tab list (`recent` / `featured` / `posts`, or `{taxonomy, term}` filters) — see the [configuration reference]({{< ref "/docs/reference/configuration" >}}) |
 
 ## Side pane
 
 The side pane can be toggled globally with `sidePane`, per page with front matter, and its sticky behavior is configured per layout (`side.home`, `side.single`, …).
 
+## Background
+
+| Option | Default | Description |
+| --- | --- | --- |
+| `grain` | `false` | paper-grain texture overlay on the page background (opt-in) |
+
 ## Single pages
 
 | Option | Default | Description |
 | --- | --- | --- |
-| `showDetails` | `true` | date/reading meta block |
-| `showTableOfContents` | `true` | table of contents |
-| `showRelated` | `true` | related posts |
-| `copyPage` | `true` | copy page as Markdown button |
+| `showDetails` | `false` | date/reading meta block |
+| `showTableOfContents` | `false` | table of contents |
+| `showRelated` | `false` | related posts |
+| `copyPage` | `false` | copy page as Markdown button |
 
 ## Multilingual
 

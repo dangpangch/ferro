@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-label="Illustration of a magnifying glass over a dotted grid">
+  <rect width="960" height="600" fill="#f7f4f0"/>
+  <!-- faint dot grid, typewriter-platen feel -->
+  <g fill="#5c5044" opacity="0.25">
+    <circle cx="80" cy="80" r="3"/><circle cx="160" cy="80" r="3"/><circle cx="240" cy="80" r="3"/><circle cx="320" cy="80" r="3"/><circle cx="400" cy="80" r="3"/><circle cx="480" cy="80" r="3"/><circle cx="560" cy="80" r="3"/><circle cx="640" cy="80" r="3"/><circle cx="720" cy="80" r="3"/><circle cx="800" cy="80" r="3"/><circle cx="880" cy="80" r="3"/>
+    <circle cx="80" cy="160" r="3"/><circle cx="160" cy="160" r="3"/><circle cx="800" cy="160" r="3"/><circle cx="880" cy="160" r="3"/>
+    <circle cx="80" cy="440" r="3"/><circle cx="160" cy="440" r="3"/><circle cx="800" cy="440" r="3"/><circle cx="880" cy="440" r="3"/>
+    <circle cx="80" cy="520" r="3"/><circle cx="160" cy="520" r="3"/><circle cx="240" cy="520" r="3"/><circle cx="320" cy="520" r="3"/><circle cx="400" cy="520" r="3"/><circle cx="480" cy="520" r="3"/><circle cx="560" cy="520" r="3"/><circle cx="640" cy="520" r="3"/><circle cx="720" cy="520" r="3"/><circle cx="800" cy="520" r="3"/><circle cx="880" cy="520" r="3"/>
+  </g>
+  <!-- lens: rust glass, ink rim -->
+  <circle cx="430" cy="280" r="118" fill="#d97757" opacity="0.9"/>
+  <path d="M 348 232 A 100 100 0 0 1 430 180" fill="none" stroke="#f7f4f0" stroke-width="14" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="430" cy="280" r="130" fill="none" stroke="#1b1b1b" stroke-width="18"/>
+  <!-- handle -->
+  <line x1="527" y1="377" x2="660" y2="510" stroke="#1b1b1b" stroke-width="30" stroke-linecap="round"/>
+  <!-- typebar stripes + typewriter underscore cursor -->
+  <g fill="#1b1b1b">
+    <rect x="700" y="110" width="160" height="12"/>
+    <rect x="700" y="142" width="120" height="12"/>
+  </g>
+  <text x="120" y="540" font-family="'Courier New',monospace" font-size="52" font-weight="bold" fill="#5c5044">search_</text>
+</svg>

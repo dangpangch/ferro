@@ -9,27 +9,82 @@
       {{- partial "search_bar.html" . -}}
     </div>
 
-    {{- $tabs := slice -}}
-
-    {{- if and $indexablePages site.Params.ferro.home.showRecent -}}
-      {{- $recent := $indexablePages -}}
-      {{- if site.Params.ferro.home.hideRecentWhenFeatured -}}
-        {{- $recent = where $indexablePages "Params.featured" "!=" true -}}
-      {{- end -}}
-      {{- $recent = $recent.ByDate.Reverse -}}
-      {{- $tabs = $tabs | append (dict
-        "id" "recent"
-        "title" (printf "%s (%d)" (i18n "recent_posts") (len $recent))
-        "items" $recent)
-      -}}
+    {{- /* Tabs are driven by params.ferro.home.tabs when set: a list mixing
+      the built-in entries "recent" / "featured" / "posts" with custom
+      term-filter dicts {taxonomy, term, title?}. Unset falls back to the
+      legacy recent + featured pair (showRecent/showFeatured gate them
+      there); a configured list that resolves to nothing falls back to a
+      single all-posts tab. hideRecentWhenFeatured refines every recent
+      tab; countPosts still trims each tab's rows. */ -}}
+    {{- $tabDefs := site.Params.ferro.home.tabs -}}
+    {{- $legacy := false -}}
+    {{- if not $tabDefs -}}
+      {{- $legacy = true -}}
+      {{- $tabDefs = slice "recent" "featured" -}}
     {{- end -}}
 
-    {{- $featured := (where $indexablePages "Params.featured" true).ByDate.Reverse -}}
-    {{- if (and $featured site.Params.ferro.home.showFeatured) -}}
+    {{- $tabs := slice -}}
+    {{- range $tabDefs -}}
+      {{- if eq . "recent" -}}
+        {{- if and $indexablePages (or (not $legacy) site.Params.ferro.home.showRecent) -}}
+          {{- $recent := $indexablePages -}}
+          {{- if site.Params.ferro.home.hideRecentWhenFeatured -}}
+            {{- $recent = where $indexablePages "Params.featured" "!=" true -}}
+          {{- end -}}
+          {{- $recent = $recent.ByDate.Reverse -}}
+          {{- $tabs = $tabs | append (dict
+            "id" "recent"
+            "title" (printf "%s (%d)" (i18n "recent_posts") (len $recent))
+            "items" $recent)
+          -}}
+        {{- end -}}
+      {{- else if eq . "featured" -}}
+        {{- $featured := (where $indexablePages "Params.featured" true).ByDate.Reverse -}}
+        {{- if (and $featured (or (not $legacy) site.Params.ferro.home.showFeatured)) -}}
+          {{- $tabs = $tabs | append (dict
+            "id" "featured"
+            "title" (printf "%s (%d)" (i18n "featured_posts") (len $featured))
+            "items" $featured)
+          -}}
+        {{- end -}}
+      {{- else if eq . "posts" -}}
+        {{- if $indexablePages -}}
+          {{- $posts := $indexablePages.ByDate.Reverse -}}
+          {{- $tabs = $tabs | append (dict
+            "id" "posts"
+            "title" (printf "%s (%d)" (i18n "posts") (len $posts))
+            "items" $posts)
+          -}}
+        {{- end -}}
+      {{- else if reflect.IsMap . -}}
+        {{- $tax := .taxonomy -}}
+        {{- $term := .term -}}
+        {{- if and $tax $term -}}
+          {{- $items := (where $indexablePages (printf "Params.%s" $tax) "intersect" (slice $term)).ByDate.Reverse -}}
+          {{- if $items -}}
+            {{- $tabs = $tabs | append (dict
+              "id" (printf "term-%s-%s" $tax $term | urlize)
+              "title" (printf "%s (%d)" (default (humanize $term) .title) (len $items))
+              "items" $items)
+            -}}
+          {{- end -}}
+        {{- else -}}
+          {{- warnf "ferro.home.tabs: term entry needs taxonomy and term (%v)" . -}}
+        {{- end -}}
+      {{- else -}}
+        {{- warnf "ferro.home.tabs: unknown entry %v" . -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- /* Safety net: a configured list that resolved to nothing still
+      shows the full posts list. */ -}}
+    {{- if and $tabDefs (not $legacy) (not $tabs) $indexablePages -}}
+      {{- warnf "ferro.home.tabs resolved to no tabs; falling back to all posts" -}}
+      {{- $posts := $indexablePages.ByDate.Reverse -}}
       {{- $tabs = $tabs | append (dict
-        "id" "featured"
-        "title" (printf "%s (%d)" (i18n "featured_posts") (len $featured))
-        "items" $featured)
+        "id" "posts"
+        "title" (printf "%s (%d)" (i18n "posts") (len $posts))
+        "items" $posts)
       -}}
     {{- end -}}
 

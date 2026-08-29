@@ -1,5 +1,7 @@
 ---
 title: "Search"
+img: /images/cover-search.svg
+featured: true
 date: "2025-03-24T23:00:00-03:00"
 series: ["content", "features"]
 ---

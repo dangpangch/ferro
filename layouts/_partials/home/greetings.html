@@ -3,7 +3,7 @@
   {{- with hugo.Data.ferro.content.home -}}
     {{- $home = . -}}
   {{- end -}}
-  <div class="mt-8 mb-12 pb-10 text-center">
+  <div class="mt-8 mb-12 h-80 pb-10 text-center">
     {{- if site.Params.ferro.home.showASCIIArt -}}
       {{- with $home.asciiArt -}}
         <pre
@@ -21,7 +21,7 @@
         width="70"
         height="70"
         src="{{- absURL ($home.image | default "images/profile.jpg") -}}"
-        alt="{{- site.Params.author.name | default "Author" -}}"
+        alt="{{- with site.Params.author }}{{ .name | default "Author" }}{{ else }}Author{{ end -}}"
         loading="lazy"
       />
     {{- end -}}

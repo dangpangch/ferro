@@ -3,7 +3,6 @@ title: "配置"
 date: "2025-03-24T23:00:00-03:00"
 tags: ["指南"]
 topics: ["文档"]
-featured: true
 weight: 2
 ---
 
@@ -27,6 +26,11 @@ weight: 2
   showRecent = true
   hideRecentWhenFeatured = true
   countPosts = 8
+  # 自定义 tab 列表——省略则使用默认的「最新 + 精选」组合
+  [[params.ferro.home.tabs]]
+    title = 'Documentation' # 可选;默认为 term 的人性化名称
+    taxonomy = 'topics'
+    term = 'documentation'
 
 [params.ferro.page]
   copyPage = true
@@ -131,14 +135,16 @@ params:
 | ---- | -------- | ---- |
 | `ferro.enablei18n` | `true` | 在导航栏显示语言切换器(仅在配置了多种语言时有意义)。 |
 | `ferro.sidePane` | `true` | 默认渲染侧边栏,可通过页面 front matter 覆盖。 |
+| `ferro.grain` | `false` | 页面背景的纸张颗粒纹理,需显式开启。 |
 | `ferro.countPageItems` | `7` | 列表页(section/taxonomy)每页条目数(分页大小)。 |
-| `ferro.home.showBio` | `false` | 在首页显示问候/简介区块。 |
+| `ferro.home.showBio` | `true` | 在首页显示问候/简介区块。 |
 | `ferro.home.showAuthorImg` | `false` | 在简介区块中显示作者图片(图片来自 `data/ferro/content.yaml`)。 |
-| `ferro.home.showASCIIArt` | `false` | 显示 ASCII 字符画代替作者图片(内容来自 `data/ferro/content.yaml`)。 |
-| `ferro.home.showFeatured` | `false` | 在首页显示「精选」分组。 |
-| `ferro.home.showRecent` | `false` | 在首页显示最新文章分组。 |
+| `ferro.home.showASCIIArt` | `true` | 显示 ASCII 字符画代替作者图片(内容来自 `data/ferro/content.yaml`)。 |
+| `ferro.home.showFeatured` | `true` | 在首页显示「精选」分组。 |
+| `ferro.home.showRecent` | `true` | 在首页显示最新文章分组。 |
 | `ferro.home.hideRecentWhenFeatured` | `false` | 两组同时开启时,从最新列表中排除精选文章。 |
 | `ferro.home.countPosts` | `5` | 精选/最新分组列出的文章数量。 |
+| `ferro.home.tabs` | 未设置 | 自定义首页 tab 列表;条目为 `"recent"`、`"featured"`、`"posts"`(全部文章,按时间倒序)或 `{taxonomy, term, title?}`(按 taxonomy term 过滤;空 tab 跳过;解析后为空则回退为单个全部文章 tab)。未设置保持默认的「最新 + 精选」组合。可通过 `languages.<lang>.params` 按语言覆盖。 |
 | `ferro.page.copyPage` | `false` | 在单页显示「复制页面」按钮(获取原始 Markdown)。 |
 | `ferro.page.showYearCount` | `false` | 在 section 落地页显示按年份的文章计数。 |
 | `ferro.side.home.sidePaneSticky` | `false` | 首页侧边栏随滚动固定。 |
@@ -225,6 +231,7 @@ featured = true        # 进入首页「精选」分组
 indexable = false      # 从首页精选/最新列表中排除
 summary = "手动摘要文本" # 自定义摘要;缺省回退到自动生成
 cover = "cover.jpg"    # 社交卡片图候选(page bundle 资源)
+img = "cover.png"      # 列表封面缩略图(bundle 资源或 /static 路径)
 images = ["og.png"]    # 更多社交卡片图候选
 
 # 主题选项:隐藏本页侧边栏
@@ -240,10 +247,10 @@ ferro:
   sidePane: false
 
 # 主题在构建列表和社交卡片时使用的标记
-featured: true         # 进入首页「精选」分组
 indexable: false       # 从首页精选/最新列表中排除
 summary: 手动摘要文本   # 自定义摘要;缺省回退到自动生成
 cover: cover.jpg       # 社交卡片图候选(page bundle 资源)
+img: cover.png         # 列表封面缩略图(bundle 资源或 /static 路径)
 images:                # 更多社交卡片图候选
   - og.png
 ---
@@ -258,6 +265,7 @@ images:                # 更多社交卡片图候选
   "indexable": false,
   "summary": "手动摘要文本",
   "cover": "cover.jpg",
+  "img": "cover.png",
   "images": ["og.png"]
 }
 ````
@@ -266,7 +274,7 @@ images:                # 更多社交卡片图候选
 
 ## 站点配置要求
 
-除 `params` 外,主题依赖少量标准 Hugo 设置。具体功能见各自的文章([搜索]({{< ref "/posts/search" >}})、[国际化]({{< ref "/posts/internationalization" >}})、[社交链接]({{< ref "/posts/social-links" >}}));核心项如下:
+除 `params` 外,主题依赖少量标准 Hugo 设置。具体功能见各自的文章([搜索]({{< ref "/posts/search" >}})、[国际化]({{< ref "/posts/internationalization" >}})、[社交链接]({{< ref "/docs/features/social-links" >}}));核心项如下:
 
 ````toml {group="site-config" tab="TOML"}
 mainSections = ['posts'] # 首页各分组的内容来源

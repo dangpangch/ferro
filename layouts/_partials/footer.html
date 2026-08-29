@@ -1,5 +1,5 @@
 <div class="text-center">
-  <div class="dim">© {{ now.Year }} {{ .Site.Params.author.name }}</div>
+  <div class="dim">© {{ now.Year }} {{ with .Site.Params.author }}{{ .name }}{{ end }}</div>
   <div>
       {{- $ThemeAnchor := .Site.Params.links.theme | printf "<a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">Ferro</a>" -}}
       {{- $HugoAnchor := .Site.Params.links.hugo | printf "<a href=\"%s\" target=\"_blank\" rel=\"noopener noreferrer\">Hugo</a>" -}}
