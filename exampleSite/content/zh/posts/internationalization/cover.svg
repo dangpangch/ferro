@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-label="Illustration of the latin letter A and the CJK character wen in linked frames">
+  <rect width="960" height="600" fill="#f7f4f0"/>
+  <!-- latin frame -->
+  <rect x="140" y="170" width="260" height="260" fill="none" stroke="#1b1b1b" stroke-width="12"/>
+  <text x="270" y="368" font-family="Georgia,'Times New Roman',serif" font-size="170" font-weight="bold" fill="#1b1b1b" text-anchor="middle">A</text>
+  <!-- CJK frame: rust fill, paper glyph -->
+  <rect x="560" y="170" width="260" height="260" fill="#d97757"/>
+  <text x="690" y="362" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="160" font-weight="bold" fill="#f7f4f0" text-anchor="middle">文</text>
+  <!-- linking arrows -->
+  <g stroke="#5c5044" stroke-width="10" stroke-linecap="round" fill="none">
+    <path d="M 425 275 h 105 m 0 0 l -22 -18 m 22 18 l -22 18"/>
+    <path d="M 535 335 h -105 m 0 0 l 22 -18 m -22 18 l 22 18"/>
+  </g>
+  <!-- baseline underscore -->
+  <rect x="140" y="500" width="200" height="12" fill="#1b1b1b"/>
+  <rect x="620" y="500" width="200" height="12" fill="#d97757"/>
+</svg>

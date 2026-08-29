@@ -225,6 +225,7 @@ featured = true        # 进入首页「精选」分组
 indexable = false      # 从首页精选/最新列表中排除
 summary = "手动摘要文本" # 自定义摘要;缺省回退到自动生成
 cover = "cover.jpg"    # 社交卡片图候选(page bundle 资源)
+img = "cover.png"      # 列表封面缩略图(bundle 资源或 /static 路径)
 images = ["og.png"]    # 更多社交卡片图候选
 
 # 主题选项:隐藏本页侧边栏
@@ -244,6 +245,7 @@ featured: true         # 进入首页「精选」分组
 indexable: false       # 从首页精选/最新列表中排除
 summary: 手动摘要文本   # 自定义摘要;缺省回退到自动生成
 cover: cover.jpg       # 社交卡片图候选(page bundle 资源)
+img: cover.png         # 列表封面缩略图(bundle 资源或 /static 路径)
 images:                # 更多社交卡片图候选
   - og.png
 ---
@@ -258,6 +260,7 @@ images:                # 更多社交卡片图候选
   "indexable": false,
   "summary": "手动摘要文本",
   "cover": "cover.jpg",
+  "img": "cover.png",
   "images": ["og.png"]
 }
 ````

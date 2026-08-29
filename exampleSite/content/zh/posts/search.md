@@ -1,5 +1,6 @@
 ---
 title: "搜索"
+img: /images/cover-search.svg
 date: "2025-03-24T23:00:00-03:00"
 series: ["内容", "功能"]
 ---

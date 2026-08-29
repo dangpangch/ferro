@@ -225,6 +225,7 @@ featured = true         # listed in the home page "Featured" group
 indexable = false       # excluded from home featured/recent lists
 summary = "Manual text" # custom summary; falls back to auto-generated
 cover = "cover.jpg"     # social-card image candidate (page bundle resource)
+img = "cover.png"       # list cover thumbnail (bundle resource or /static path)
 images = ["og.png"]     # further social-card image candidates
 
 # Theme option: hide the side pane on this page
@@ -244,6 +245,7 @@ featured: true         # listed in the home page "Featured" group
 indexable: false       # excluded from home featured/recent lists
 summary: Manual text   # custom summary; falls back to auto-generated
 cover: cover.jpg       # social-card image candidate (page bundle resource)
+img: cover.png         # list cover thumbnail (bundle resource or /static path)
 images:                # further social-card image candidates
   - og.png
 ---
@@ -258,6 +260,7 @@ images:                # further social-card image candidates
   "indexable": false,
   "summary": "Manual text",
   "cover": "cover.jpg",
+  "img": "cover.png",
   "images": ["og.png"]
 }
 ````
