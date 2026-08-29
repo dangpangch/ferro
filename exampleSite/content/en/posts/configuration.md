@@ -27,6 +27,11 @@ The following options make up the full `params.ferro` namespace. Values shown ma
   showRecent = true
   hideRecentWhenFeatured = true
   countPosts = 8
+  # Custom tab list — omit for the default recent + featured pair
+  [[params.ferro.home.tabs]]
+    title = 'Documentation' # optional; defaults to the humanized term
+    taxonomy = 'topics'
+    term = 'documentation'
 
 [params.ferro.page]
   copyPage = true
@@ -139,6 +144,7 @@ params:
 | `ferro.home.showRecent` | `false` | Show the recent-posts group on the home page. |
 | `ferro.home.hideRecentWhenFeatured` | `false` | With both groups on, exclude featured posts from the recent list. |
 | `ferro.home.countPosts` | `5` | How many posts the featured/recent groups list. |
+| `ferro.home.tabs` | unset | Custom home tab list; entries are `"recent"`, `"featured"`, `"posts"` (all posts, newest first), or `{taxonomy, term, title?}` to filter posts by a taxonomy term (empty tabs are skipped; a list that resolves to nothing falls back to one all-posts tab). Unset keeps the default recent + featured pair. Overridable per language via `languages.<lang>.params`. |
 | `ferro.page.copyPage` | `false` | Show the "Copy page" button on single pages (fetches the raw Markdown). |
 | `ferro.page.showYearCount` | `false` | Show per-year post counts on section landing pages. |
 | `ferro.side.home.sidePaneSticky` | `false` | Make the home side pane stick while scrolling. |

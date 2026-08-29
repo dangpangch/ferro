@@ -27,6 +27,11 @@ weight: 2
   showRecent = true
   hideRecentWhenFeatured = true
   countPosts = 8
+  # 自定义 tab 列表——省略则使用默认的「最新 + 精选」组合
+  [[params.ferro.home.tabs]]
+    title = 'Documentation' # 可选;默认为 term 的人性化名称
+    taxonomy = 'topics'
+    term = 'documentation'
 
 [params.ferro.page]
   copyPage = true
@@ -139,6 +144,7 @@ params:
 | `ferro.home.showRecent` | `false` | 在首页显示最新文章分组。 |
 | `ferro.home.hideRecentWhenFeatured` | `false` | 两组同时开启时,从最新列表中排除精选文章。 |
 | `ferro.home.countPosts` | `5` | 精选/最新分组列出的文章数量。 |
+| `ferro.home.tabs` | 未设置 | 自定义首页 tab 列表;条目为 `"recent"`、`"featured"`、`"posts"`(全部文章,按时间倒序)或 `{taxonomy, term, title?}`(按 taxonomy term 过滤;空 tab 跳过;解析后为空则回退为单个全部文章 tab)。未设置保持默认的「最新 + 精选」组合。可通过 `languages.<lang>.params` 按语言覆盖。 |
 | `ferro.page.copyPage` | `false` | 在单页显示「复制页面」按钮(获取原始 Markdown)。 |
 | `ferro.page.showYearCount` | `false` | 在 section 落地页显示按年份的文章计数。 |
 | `ferro.side.home.sidePaneSticky` | `false` | 首页侧边栏随滚动固定。 |

@@ -16,7 +16,8 @@ All theme options live under `params.ferro` in your site configuration.
 | `showASCIIArt` | `true` | ASCII art header |
 | `showFeatured` | `true` | featured posts section |
 | `showRecent` | `true` | recent posts list |
-| `countRecent` | `5` | number of recent posts |
+| `countPosts` | `5` | number of posts per group |
+| `tabs` | unset | custom home tab list (`recent` / `featured` / `posts`, or `{taxonomy, term}` filters) — see the [configuration reference]({{< ref "/posts/configuration" >}}) |
 
 ## Side pane
 

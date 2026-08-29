@@ -16,7 +16,8 @@ weight: 2
 | `showASCIIArt` | `true` | ASCII 艺术标题 |
 | `showFeatured` | `true` | 精选文章区块 |
 | `showRecent` | `true` | 最近文章列表 |
-| `countRecent` | `5` | 最近文章数量 |
+| `countPosts` | `5` | 每个分组列出的文章数量 |
+| `tabs` | 未设置 | 自定义首页 tab 列表(`recent` / `featured` / `posts` 或 `{taxonomy, term}` 过滤)——详见[配置参考]({{< ref "/posts/configuration" >}}) |
 
 ## 侧边栏
 

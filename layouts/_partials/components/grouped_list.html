@@ -12,10 +12,12 @@
 {{- end -}}
 {{- $paginator := $page.Paginate $page.Pages (default 7 site.Params.ferro.countPageItems) -}}
 {{- range $paginator.Pages.GroupByDate "2006" -}}
+  {{- /* Year divider: mono year left, per-year count right; dashed rule
+    reads as a typewriter paper-feed perforation. */ -}}
   <div
-    class="border-border text-muted mt-6 mb-1 border-b pb-[0.4rem] text-right font-sans text-sm font-bold tracking-wider uppercase first:mt-0"
+    class="border-accent text-muted mt-6 mb-1 flex items-baseline justify-between gap-3 border-b border-dashed pb-[0.4rem] font-sans text-sm font-bold tracking-wider uppercase first:mt-0"
   >
-    {{- .Key -}}
+    <span class="text-fg font-mono text-base">{{- .Key -}}</span>
     {{- if $showYearCount -}}
       <span
         class="font-mono text-xs normal-case tabular-nums"

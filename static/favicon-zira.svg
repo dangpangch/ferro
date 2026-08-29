@@ -1,0 +1,12 @@
+<!-- "fe": f from Zira Sans Bold Italic, e from Zira Sans Bold (outlines pre-baked via opentype.js; e scaled to 0.87);
+     colors mirror dark-mode tokens in assets/css/main.css (bg/fg/accent).
+     Both paths share translate Y (baseline) - change them together to shift vertically (current: optically centered, 14px above bbox center).
+     To adjust f-e spacing: edit the X value in the second path's translate (bigger = wider gap). -->
+<!-- "fe": f from Zira Sans Bold Italic, e from Zira Sans Bold (outlines pre-baked via opentype.js; e scaled to 0.87);
+     colors mirror dark-mode tokens in assets/css/main.css (bg/fg/accent).
+     To adjust f-e spacing: edit the X value in the second path's transform translate (bigger = wider gap). -->
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="256" height="256" rx="52" fill="#292929"/>
+<path transform="translate(26.33 196.88) scale(0.22521)" d="M221 0L108 0L172-383L74-383L74-479L188-479L206-588Q209-609 215.50-628.50Q222-648 232.50-666Q243-684 257.50-699Q272-714 290-724Q308-734 328.50-738.50Q349-743 369-743Q395-743 420.50-737.50Q446-732 466.50-716Q487-700 497-676Q507-652 507-625Q507-617 506-609Q505-601 504-593L392-593Q393-597 393.50-601Q394-605 394-608Q394-616 392.50-623Q391-630 386.50-635.50Q382-641 375.50-644Q369-647 361-647Q350-647 341.50-637.50Q333-628 328-617.50Q323-607 320.50-595.50Q318-584 316-573L300-479L437-479L437-383L284-383" fill="#f0ede6"/>
+<path transform="translate(125.03 196.88) scale(0.19593)" d="M250 8Q222 8 195 3Q168-2 144-15Q120-28 101.50-48.50Q83-69 71.50-94Q60-119 55.50-146Q51-173 51-200L51-320Q51-347 55.50-374.50Q60-402 71.50-426.50Q83-451 102-471.50Q121-492 145-505Q169-518 196-523Q223-528 250-528Q275-528 299.50-525Q324-522 347-513Q370-504 390-489Q410-474 423.50-454Q437-434 443-409.50Q449-385 449-361Q449-336 443-312Q437-288 422.50-268.50Q408-249 387.50-235Q367-221 344-213Q321-205 296.50-202Q272-199 248-199L163-199Q163-179 167-159Q171-139 182-122.50Q193-106 211.50-97Q230-88 250-88Q265-88 280-91Q295-94 307.50-102.50Q320-111 327.50-125Q335-139 336-154L447-154Q447-130 440-107Q433-84 419-64Q405-44 385.50-30Q366-16 343.50-7Q321 2 297.50 5Q274 8 250 8M162-320L162-295L248-295Q264-295 279.50-297.50Q295-300 308.50-308.50Q322-317 330-331Q338-345 338-361Q338-377 331-392Q324-407 311-416Q298-425 282-428.50Q266-432 251-432Q230-432 211.50-423Q193-414 181.50-397Q170-380 166-360Q162-340 162-320" fill="#d97757"/>
+</svg>
