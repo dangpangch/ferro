@@ -11,11 +11,13 @@
 
     {{- /* Tabs are driven by params.ferro.home.tabs when set: a list mixing
       the built-in entries "recent" / "featured" / "posts" with custom
-      term-filter dicts {taxonomy, term, title?}. Unset falls back to the
-      legacy recent + featured pair (showRecent/showFeatured gate them
-      there); a configured list that resolves to nothing falls back to a
-      single all-posts tab. hideRecentWhenFeatured refines every recent
-      tab; countPosts still trims each tab's rows. */ -}}
+      dicts — {taxonomy, term, title?} filters posts by a taxonomy term,
+      {section, title?} lists another content section in weight order.
+      Unset falls back to the legacy recent + featured pair
+      (showRecent/showFeatured gate them there); a configured list that
+      resolves to nothing falls back to a single all-posts tab.
+      hideRecentWhenFeatured refines every recent tab; countPosts still
+      trims each tab's rows. */ -}}
     {{- $tabDefs := site.Params.ferro.home.tabs -}}
     {{- $legacy := false -}}
     {{- if not $tabDefs -}}
@@ -57,9 +59,25 @@
           -}}
         {{- end -}}
       {{- else if reflect.IsMap . -}}
-        {{- $tax := .taxonomy -}}
-        {{- $term := .term -}}
-        {{- if and $tax $term -}}
+        {{- if .section -}}
+          {{- /* Section tab: every indexable page of one section (docs,
+            notes, ...), in the section's own weight order. */ -}}
+          {{- $section := .section -}}
+          {{- $fallback := $section | humanize -}}
+          {{- with site.GetPage (printf "/%s" $section) -}}
+            {{- $fallback = .Title -}}
+          {{- end -}}
+          {{- $items := where (where site.RegularPages "Section" $section) "Params.indexable" "ne" false -}}
+          {{- if $items -}}
+            {{- $tabs = $tabs | append (dict
+              "id" (printf "section-%s" $section | urlize)
+              "title" (printf "%s (%d)" (default $fallback .title) (len $items))
+              "items" $items.ByWeight)
+            -}}
+          {{- end -}}
+        {{- else if and .taxonomy .term -}}
+          {{- $tax := .taxonomy -}}
+          {{- $term := .term -}}
           {{- $items := (where $indexablePages (printf "Params.%s" $tax) "intersect" (slice $term)).ByDate.Reverse -}}
           {{- if $items -}}
             {{- $tabs = $tabs | append (dict
@@ -69,7 +87,7 @@
             -}}
           {{- end -}}
         {{- else -}}
-          {{- warnf "ferro.home.tabs: term entry needs taxonomy and term (%v)" . -}}
+          {{- warnf "ferro.home.tabs: entry needs section, or taxonomy and term (%v)" . -}}
         {{- end -}}
       {{- else -}}
         {{- warnf "ferro.home.tabs: unknown entry %v" . -}}

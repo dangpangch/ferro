@@ -28,11 +28,11 @@ Any change under `layouts/` (templates, partials, render hooks, shortcodes) must
 4. **Runtime-test every change** per the skill's protocol (adapted to this repo):
    ```bash
    rm -f /tmp/hugo-ferro.log
-   npx hugo server --port 1315 >/tmp/hugo-ferro.log 2>&1 &
+   (cd exampleSite && hugo server --port 1315 >/tmp/hugo-ferro.log 2>&1 &)
    sleep 5
    grep -Ei "(error|fail)" /tmp/hugo-ferro.log | head -20
    curl -s -o /dev/null -w "%{http_code}" http://localhost:1315/PATH/TO/PAGE/
-   pkill -f "hugo server --port 1315"
+   pkill -x hugo
    ```
    Fetch every affected page template (home, single, list, taxonomy, 404…) and confirm HTTP 200 + zero errors in the log. For render hooks, exercise every branch with real content (e.g. bundle raster images, SVGs, pinned dimensions).
 5. **Never declare done on `hugo --quiet` alone** — it only checks syntax.

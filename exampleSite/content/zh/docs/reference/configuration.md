@@ -17,6 +17,7 @@ weight: 2
   enablei18n = true
   sidePane = true
   countPageItems = 7
+  search = 'flexsearch'
 
 [params.ferro.home]
   showBio = true
@@ -59,6 +60,7 @@ params:
     enablei18n: true
     sidePane: true
     countPageItems: 7
+    search: flexsearch
     home:
       showBio: true
       showAuthorImg: false
@@ -93,6 +95,7 @@ params:
       "enablei18n": true,
       "sidePane": true,
       "countPageItems": 7,
+      "search": "flexsearch",
       "home": {
         "showBio": true,
         "showAuthorImg": false,
@@ -137,6 +140,7 @@ params:
 | `ferro.sidePane` | `true` | 默认渲染侧边栏,可通过页面 front matter 覆盖。 |
 | `ferro.grain` | `false` | 页面背景的纸张颗粒纹理,需显式开启。 |
 | `ferro.countPageItems` | `7` | 列表页(section/taxonomy)每页条目数(分页大小)。 |
+| `ferro.search` | `flexsearch` | 搜索引擎:`flexsearch`(内置,零配置)、`pagefind`(同一面板,由 [Pagefind](https://pagefind.app) 驱动,构建后需运行 Pagefind CLI,见下文)或 `off`(隐藏全部搜索入口)。 |
 | `ferro.home.showBio` | `true` | 在首页显示问候/简介区块。 |
 | `ferro.home.showAuthorImg` | `false` | 在简介区块中显示作者图片(图片来自 `data/ferro/content.yaml`)。 |
 | `ferro.home.showASCIIArt` | `true` | 显示 ASCII 字符画代替作者图片(内容来自 `data/ferro/content.yaml`)。 |
@@ -144,7 +148,7 @@ params:
 | `ferro.home.showRecent` | `true` | 在首页显示最新文章分组。 |
 | `ferro.home.hideRecentWhenFeatured` | `false` | 两组同时开启时,从最新列表中排除精选文章。 |
 | `ferro.home.countPosts` | `5` | 精选/最新分组列出的文章数量。 |
-| `ferro.home.tabs` | 未设置 | 自定义首页 tab 列表;条目为 `"recent"`、`"featured"`、`"posts"`(全部文章,按时间倒序)或 `{taxonomy, term, title?}`(按 taxonomy term 过滤;空 tab 跳过;解析后为空则回退为单个全部文章 tab)。未设置保持默认的「最新 + 精选」组合。可通过 `languages.<lang>.params` 按语言覆盖。 |
+| `ferro.home.tabs` | 未设置 | 自定义首页 tab 列表;条目为 `"recent"`、`"featured"`、`"posts"`(全部文章,按时间倒序)、`{taxonomy, term, title?}`(按 taxonomy term 过滤文章)或 `{section, title?}`(按 weight 序列出另一个内容 section;空 tab 跳过;解析后为空则回退为单个全部文章 tab)。未设置保持默认的「最新 + 精选」组合。可通过 `languages.<lang>.params` 按语言覆盖。 |
 | `ferro.page.copyPage` | `false` | 在单页显示「复制页面」按钮(获取原始 Markdown)。 |
 | `ferro.page.showYearCount` | `false` | 在 section 落地页显示按年份的文章计数。 |
 | `ferro.side.home.sidePaneSticky` | `false` | 首页侧边栏随滚动固定。 |
@@ -157,6 +161,18 @@ params:
 | `ferro.side.single.showAttachments` | `false` | 单页侧边栏列出页面 bundle 资源作为附件。 |
 | `ferro.side.single.showRelated` | `false` | 单页侧边栏显示相关文章(需要下文的 `related` 配置)。 |
 | `ferro.side.single.countRelated` | `5` | 相关文章的列出数量。 |
+
+### 搜索引擎
+
+- `flexsearch`(默认)——基于构建时生成的按语言索引的客户端搜索;所需 `outputs` 见[搜索文档]({{< ref "/docs/features/search" >}})。
+- `pagefind`——同一面板改由 [Pagefind](https://pagefind.app) 驱动。在 Hugo 构建之后运行 Pagefind CLI;它会索引单页内容(posts、docs、about——列表页、分类页与错误页不参与),并自动把查询路由到页面语言(内置中日韩分词):
+
+  ```bash
+  hugo && npx pagefind --site public
+  ```
+
+  在 CI 中,把同一行加在构建步骤之后即可。开发阶段(`hugo server`)尚无 Pagefind 索引,面板会显示提示而非结果。
+- `off`——隐藏头部搜索按钮、首页搜索条与面板,不加载任何搜索 JS。`SearchIndex` 输出格式无法由参数关闭,如不需要该 JSON 文件,请自行从站点配置的 `outputs.home` 中移除。
 
 ## 其他 Params
 
@@ -274,7 +290,7 @@ images:                # 更多社交卡片图候选
 
 ## 站点配置要求
 
-除 `params` 外,主题依赖少量标准 Hugo 设置。具体功能见各自的文章([搜索]({{< ref "/posts/search" >}})、[国际化]({{< ref "/posts/internationalization" >}})、[社交链接]({{< ref "/docs/features/social-links" >}}));核心项如下:
+除 `params` 外,主题依赖少量标准 Hugo 设置。具体功能见[搜索文档]({{< ref "/docs/features/search" >}})与各自的文章([国际化]({{< ref "/posts/internationalization" >}})、[社交链接]({{< ref "/docs/features/social-links" >}}));核心项如下:
 
 ````toml {group="site-config" tab="TOML"}
 mainSections = ['posts'] # 首页各分组的内容来源
