@@ -47,12 +47,12 @@
     {{- with $.Resources.GetMatch . -}}
       {{- $ogImage = .Permalink -}}
     {{- else -}}
-      {{- $ogImage = . | absURL -}}
+      {{- $ogImage = strings.TrimPrefix "/" . | absURL -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
 {{- if not $ogImage -}}
-  {{- with site.Params.meta.ogImage -}}{{ $ogImage = . | absURL }}{{- end -}}
+  {{- with site.Params.meta.ogImage -}}{{ $ogImage = strings.TrimPrefix "/" . | absURL }}{{- end -}}
 {{- end -}}
 
 

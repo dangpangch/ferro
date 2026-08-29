@@ -15,7 +15,7 @@
 {{ $faviconPath := default "/favicon.svg" site.Params.favicon }}
 <link
   rel="icon"
-  href="{{ $faviconPath | relURL }}"
+  href="{{ strings.TrimPrefix "/" $faviconPath | relURL }}"
   sizes="any"
   type="image/svg+xml"
 />

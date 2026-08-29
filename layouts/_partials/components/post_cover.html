@@ -24,7 +24,7 @@
       {{- end -}}
     {{- end -}}
   {{- end -}}
-  {{- if not $src -}}{{- $src = $img | absURL -}}{{- end -}}
+  {{- if not $src -}}{{- $src = strings.TrimPrefix "/" $img | relURL -}}{{- end -}}
   <a
     class="border-border group/cover relative block aspect-[16/10] w-28 shrink-0 overflow-hidden rounded-md border"
     href="{{- .RelPermalink -}}"
