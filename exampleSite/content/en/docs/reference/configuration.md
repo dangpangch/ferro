@@ -17,6 +17,7 @@ The following options make up the full `params.ferro` namespace. Values shown ma
   enablei18n = true
   sidePane = true
   countPageItems = 7
+  search = 'flexsearch'
 
 [params.ferro.home]
   showBio = true
@@ -59,6 +60,7 @@ params:
     enablei18n: true
     sidePane: true
     countPageItems: 7
+    search: flexsearch
     home:
       showBio: true
       showAuthorImg: false
@@ -93,6 +95,7 @@ params:
       "enablei18n": true,
       "sidePane": true,
       "countPageItems": 7,
+      "search": "flexsearch",
       "home": {
         "showBio": true,
         "showAuthorImg": false,
@@ -137,6 +140,7 @@ params:
 | `ferro.sidePane` | `true` | Render the side pane by default. Can be overridden per page via front matter. |
 | `ferro.grain` | `false` | Paper-grain texture overlay on the page background (opt-in). |
 | `ferro.countPageItems` | `7` | Number of items per page on section/taxonomy list pages (paginator size). |
+| `ferro.search` | `flexsearch` | Search engine: `flexsearch` (built-in, zero config), `pagefind` (same panel backed by [Pagefind](https://pagefind.app), requires the Pagefind CLI after the build — see below), or `off` (hides every search entry point). |
 | `ferro.home.showBio` | `true` | Show the greeting/bio block on the home page. |
 | `ferro.home.showAuthorImg` | `false` | Show the author image inside the bio block (image comes from `data/ferro/content.yaml`). |
 | `ferro.home.showASCIIArt` | `true` | Show ASCII art instead of the author image (art comes from `data/ferro/content.yaml`). |
@@ -144,7 +148,7 @@ params:
 | `ferro.home.showRecent` | `true` | Show the recent-posts group on the home page. |
 | `ferro.home.hideRecentWhenFeatured` | `false` | With both groups on, exclude featured posts from the recent list. |
 | `ferro.home.countPosts` | `5` | How many posts the featured/recent groups list. |
-| `ferro.home.tabs` | unset | Custom home tab list; entries are `"recent"`, `"featured"`, `"posts"` (all posts, newest first), or `{taxonomy, term, title?}` to filter posts by a taxonomy term (empty tabs are skipped; a list that resolves to nothing falls back to one all-posts tab). Unset keeps the default recent + featured pair. Overridable per language via `languages.<lang>.params`. |
+| `ferro.home.tabs` | unset | Custom home tab list; entries are `"recent"`, `"featured"`, `"posts"` (all posts, newest first), `{taxonomy, term, title?}` to filter posts by a taxonomy term, or `{section, title?}` to list another content section in its weight order (empty tabs are skipped; a list that resolves to nothing falls back to one all-posts tab). Unset keeps the default recent + featured pair. Overridable per language via `languages.<lang>.params`. |
 | `ferro.page.copyPage` | `false` | Show the "Copy page" button on single pages (fetches the raw Markdown). |
 | `ferro.page.showYearCount` | `false` | Show per-year post counts on section landing pages. |
 | `ferro.side.home.sidePaneSticky` | `false` | Make the home side pane stick while scrolling. |
@@ -157,6 +161,18 @@ params:
 | `ferro.side.single.showAttachments` | `false` | List page-bundle resources as attachments in the side pane. |
 | `ferro.side.single.showRelated` | `false` | Show related posts in the single-page side pane (requires `related` config below). |
 | `ferro.side.single.countRelated` | `5` | How many related posts to list. |
+
+### Search engines
+
+- `flexsearch` (default) — client-side search over a per-language index generated at build time; see the [Search doc]({{< ref "/docs/features/search" >}}) for the required `outputs`.
+- `pagefind` — the same panel backed by [Pagefind](https://pagefind.app). Run the Pagefind CLI after the Hugo build; it indexes the rendered content of single pages (posts, docs, about — list, taxonomy and error pages are excluded) and routes queries to the page's language (including CJK segmentation) automatically:
+
+  ```bash
+  hugo && npx pagefind --site public
+  ```
+
+  In CI, add the same line after the build step. During development (`hugo server`) no Pagefind bundle exists yet, so the panel shows a hint instead of results.
+- `off` — hides the header button, the home search bar and the panel; no search JavaScript is loaded. The `SearchIndex` output format cannot be switched off by params, so remove it from `outputs.home` in your site config if you don't want the JSON file.
 
 ## Other Params
 
@@ -274,7 +290,7 @@ images:                # further social-card image candidates
 
 ## Site Config Requirements
 
-Beyond `params`, the theme depends on a few standard Hugo settings. Feature-specific walkthroughs live in their own posts ([Search]({{< ref "/posts/search" >}}), [Internationalization]({{< ref "/posts/internationalization" >}}), [Social Links]({{< ref "/docs/features/social-links" >}})); the essentials:
+Beyond `params`, the theme depends on a few standard Hugo settings. Feature-specific walkthroughs live in the [Search doc]({{< ref "/docs/features/search" >}}) and their own posts ([Internationalization]({{< ref "/posts/internationalization" >}}), [Social Links]({{< ref "/docs/features/social-links" >}})); the essentials:
 
 ````toml {group="site-config" tab="TOML"}
 mainSections = ['posts'] # content source for the home page groups

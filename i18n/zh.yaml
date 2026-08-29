@@ -28,6 +28,9 @@ search_no_results: '没有找到 "%s" 的结果'
 search_no_results_hint: 试试更少或更短的关键词
 search_empty: 输入关键词开始搜索…
 search_keys: "↑↓ 选择  ↵ 打开  esc 关闭"
+# Pagefind engine: shown when the index bundle is missing (e.g. hugo server
+# without a post-build pagefind run)
+search_pagefind_missing: 未找到 Pagefind 索引——请在 Hugo 构建后运行 npx pagefind --site public
 
 # Header
 switch_language: 切换语言

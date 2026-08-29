@@ -81,6 +81,19 @@
   @apply bg-selection rounded-[2px] px-px text-inherit;
 }
 
+/* Landing highlight: matches wrapped on the target page by
+   assets/js/search/highlight.js (?s= query param). Clicking one fades them
+   all out (JS unwraps the marks after the 150ms transition). Background
+   only — padding on inline marks would shift surrounding text. */
+mark.search-hit {
+  @apply bg-selection cursor-pointer text-inherit;
+  transition: background-color 150ms var(--ease-out);
+
+  &.is-fading {
+    background-color: transparent;
+  }
+}
+
 .search-result.is-active .search-result-title {
   @apply text-accent underline;
 }

@@ -41,6 +41,7 @@
       {{- partial "icon.html" (dict "name" "menu-2") -}}
     </a>
     {{- partial "menu.html" (dict "menuID" "main" "page" .) -}}
+    {{- if ne (default "flexsearch" site.Params.ferro.search) "off" }}
     <button
       class="search-bar-button nav-icon-button"
       type="button"
@@ -51,6 +52,7 @@
     >
       {{- partial "icon.html" (dict "name" "search") -}}
     </button>
+    {{- end }}
     <a
       id="theme-switcher"
       class="nav-icon-button"

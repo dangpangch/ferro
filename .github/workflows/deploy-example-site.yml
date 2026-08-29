@@ -50,6 +50,10 @@ jobs:
       - name: Build
         run: hugo --gc --minify --source exampleSite --baseURL https://dangpangch.github.io/ferro/
 
+      # The demo runs ferro.search: pagefind — index the built HTML.
+      - name: Pagefind index
+        run: npx pagefind --site exampleSite/public
+
       - uses: actions/upload-pages-artifact@v4
         with:
           path: exampleSite/public
