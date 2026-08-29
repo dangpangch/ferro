@@ -33,14 +33,14 @@
               >
                 <img
                   class="mb-2 h-auto max-w-full rounded-sm"
-                  src="{{- absURL .imagePath -}}"
+                  src="{{- strings.TrimPrefix "/" .imagePath | relURL -}}"
                   width="{{- default "80%" .imageWidth -}}"
                 />
               </a>
             {{- else -}}
               <img
                 class="mb-2 h-auto max-w-full rounded-sm"
-                src="{{- absURL .imagePath -}}"
+                src="{{- strings.TrimPrefix "/" .imagePath | relURL -}}"
                 width="{{- default "80%" .imageWidth -}}"
               />
             {{- end -}}

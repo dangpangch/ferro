@@ -20,7 +20,7 @@
         class="border-border mx-auto block rounded-full border"
         width="70"
         height="70"
-        src="{{- absURL ($home.image | default "images/profile.jpg") -}}"
+        src="{{- strings.TrimPrefix "/" ($home.image | default "images/profile.jpg") | relURL -}}"
         alt="{{- with site.Params.author }}{{ .name | default "Author" }}{{ else }}Author{{ end -}}"
         loading="lazy"
       />
