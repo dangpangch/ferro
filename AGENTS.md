@@ -37,6 +37,18 @@ Any change under `layouts/` (templates, partials, render hooks, shortcodes) must
    Fetch every affected page template (home, single, list, taxonomy, 404…) and confirm HTTP 200 + zero errors in the log. For render hooks, exercise every branch with real content (e.g. bundle raster images, SVGs, pinned dimensions).
 5. **Never declare done on `hugo --quiet` alone** — it only checks syntax.
 
+## Theme Config Options — Registry Rule
+
+Every `params.ferro.*` option must be registered with its canonical default in
+the theme root `hugo.yaml` (`params.ferro` block — the single source of truth)
+and documented in `exampleSite/content/{en,zh}/posts/configuration.md`.
+Template reads may keep defensive `default` pipes, but their values must agree
+with the registry. Demo-tuned values belong only in
+`exampleSite/hugo.yaml`, never in the registry. Two exceptions live in code:
+`reading_speed` (a theme-side `languages` block does not propagate
+per-language params) and the home `tabs` fallback (structural logic, not a
+value).
+
 ## Git Commits — Ask First
 
 Never run `git commit` (or any commit-creating command) without presenting the

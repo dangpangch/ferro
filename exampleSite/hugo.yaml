@@ -75,6 +75,8 @@ params:
   ferro:
     enablei18n: true
     sidePane: true
+    # grain: true opts in to the paper-grain background texture (off by default)
+    grain: false
     countPageItems: 7
     home:
       showBio: true

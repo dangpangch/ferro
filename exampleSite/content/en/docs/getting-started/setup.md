@@ -1,9 +1,9 @@
 ---
 title: "Getting Started"
+linkTitle: "Setup"
 date: "2025-03-24T23:00:00-03:00"
 tags: ["starter", "guide"]
 topics: ["documentation"]
-featured: true
 weight: 1
 ---
 
@@ -71,6 +71,6 @@ Also, make sure to give the [content management docs](https://gohugo.io/content-
 
 At last, if you need directions as to where to go next:
 
-- Tweak the `hugo.toml` config file based on [the boilerplate one]({{< ref "/posts/configuration" >}});
+- Tweak the `hugo.toml` config file based on [the boilerplate one]({{< ref "/docs/reference/configuration" >}});
 - Get ~~ricing~~ styling your themed site from with CSS;
 - Make sure to leave a star at the theme repo and support my work if you enjoy it!

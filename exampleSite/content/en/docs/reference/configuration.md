@@ -3,7 +3,6 @@ title: "Configuration"
 date: "2025-03-24T23:00:00-03:00"
 tags: ["guide"]
 topics: ["documentation"]
-featured: true
 weight: 2
 ---
 
@@ -136,12 +135,13 @@ params:
 | ------ | ----------------- | ----------- |
 | `ferro.enablei18n` | `true` | Show the language switcher in the navbar (only meaningful with more than one language configured). |
 | `ferro.sidePane` | `true` | Render the side pane by default. Can be overridden per page via front matter. |
+| `ferro.grain` | `false` | Paper-grain texture overlay on the page background (opt-in). |
 | `ferro.countPageItems` | `7` | Number of items per page on section/taxonomy list pages (paginator size). |
-| `ferro.home.showBio` | `false` | Show the greeting/bio block on the home page. |
+| `ferro.home.showBio` | `true` | Show the greeting/bio block on the home page. |
 | `ferro.home.showAuthorImg` | `false` | Show the author image inside the bio block (image comes from `data/ferro/content.yaml`). |
-| `ferro.home.showASCIIArt` | `false` | Show ASCII art instead of the author image (art comes from `data/ferro/content.yaml`). |
-| `ferro.home.showFeatured` | `false` | Show the "Featured" group on the home page. |
-| `ferro.home.showRecent` | `false` | Show the recent-posts group on the home page. |
+| `ferro.home.showASCIIArt` | `true` | Show ASCII art instead of the author image (art comes from `data/ferro/content.yaml`). |
+| `ferro.home.showFeatured` | `true` | Show the "Featured" group on the home page. |
+| `ferro.home.showRecent` | `true` | Show the recent-posts group on the home page. |
 | `ferro.home.hideRecentWhenFeatured` | `false` | With both groups on, exclude featured posts from the recent list. |
 | `ferro.home.countPosts` | `5` | How many posts the featured/recent groups list. |
 | `ferro.home.tabs` | unset | Custom home tab list; entries are `"recent"`, `"featured"`, `"posts"` (all posts, newest first), or `{taxonomy, term, title?}` to filter posts by a taxonomy term (empty tabs are skipped; a list that resolves to nothing falls back to one all-posts tab). Unset keeps the default recent + featured pair. Overridable per language via `languages.<lang>.params`. |
@@ -247,7 +247,6 @@ ferro:
   sidePane: false
 
 # Flags the theme uses when building lists and social cards
-featured: true         # listed in the home page "Featured" group
 indexable: false       # excluded from home featured/recent lists
 summary: Manual text   # custom summary; falls back to auto-generated
 cover: cover.jpg       # social-card image candidate (page bundle resource)
@@ -275,7 +274,7 @@ images:                # further social-card image candidates
 
 ## Site Config Requirements
 
-Beyond `params`, the theme depends on a few standard Hugo settings. Feature-specific walkthroughs live in their own posts ([Search]({{< ref "/posts/search" >}}), [Internationalization]({{< ref "/posts/internationalization" >}}), [Social Links]({{< ref "/posts/social-links" >}})); the essentials:
+Beyond `params`, the theme depends on a few standard Hugo settings. Feature-specific walkthroughs live in their own posts ([Search]({{< ref "/posts/search" >}}), [Internationalization]({{< ref "/posts/internationalization" >}}), [Social Links]({{< ref "/docs/features/social-links" >}})); the essentials:
 
 ````toml {group="site-config" tab="TOML"}
 mainSections = ['posts'] # content source for the home page groups

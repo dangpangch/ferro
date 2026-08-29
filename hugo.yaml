@@ -1,52 +1,3 @@
-baseURL: https://example.org/
-title: "ferro"
-enableRobotsTXT: true
-hasCJKLanguage: true
-defaultContentLanguage: en
-
-mainSections: [posts]
-
-languages:
-  en:
-    weight: 1
-    locale: en-US
-    label: English
-    contentDir: content/en
-    params:
-      # Reading speed for the reading-time formula; English pages count words.
-      reading_speed: 212
-    menus:
-      main:
-        - name: Posts
-          pageRef: /posts
-          weight: 1
-        - name: Docs
-          pageRef: /docs
-          weight: 3
-        - name: About
-          pageRef: /about
-          weight: 4
-  zh:
-    weight: 2
-    locale: zh-CN
-    label: 中文
-    contentDir: content/zh
-    params:
-      # CJK pages count characters, so reading speed is chars per minute
-      # (matches Hugo's own CJK default of 500).
-      reading_speed: 500
-    menus:
-      main:
-        - name: 文章
-          pageRef: /posts
-          weight: 1
-        - name: 文档
-          pageRef: /docs
-          weight: 3
-        - name: 关于
-          pageRef: /about
-          weight: 4
-
 params:
   summaryLength: 70
   favicon: /favicon.svg
@@ -55,38 +6,41 @@ params:
     description: ""
     # ogImage: /images/og-default.png
     # twitter: "@yourhandle"
-  author:
-    name: DangPang
+  # Theme-level defaults only — the complete option registry; docs mirror this
+  # table (exampleSite/content/*/posts/configuration.md). Demo-tuned values
+  # live in exampleSite/hugo.yaml. Code-level exceptions (reading_speed, tabs
+  # fallback): see AGENTS.md "Theme Config Options — Registry Rule".
   ferro:
     enablei18n: true
     sidePane: true
+    # Opt-in paper-grain background texture
+    grain: false
     countPageItems: 7
     home:
+      # Without these the out-of-box home renders no bio and no tabs
       showBio: true
-      showAuthorImg: false
       showASCIIArt: true
       showFeatured: true
       showRecent: true
-      hideRecentWhenFeatured: true
-      countPosts: 8
+      showAuthorImg: false
+      hideRecentWhenFeatured: false
+      countPosts: 5
     page:
-      copyPage: true
+      copyPage: false
       showYearCount: false
     side:
       home:
         sidePaneSticky: false
-        taxonomies:
-          - tags
-          - series
+        taxonomies: []
         countTaxonomy: 3
       term:
         sidePaneSticky: false
       single:
-        sidePaneSticky: true
-        showDetails: true
-        showTableOfContents: true
-        showAttachments: true
-        showRelated: true
+        sidePaneSticky: false
+        showDetails: false
+        showTableOfContents: false
+        showAttachments: false
+        showRelated: false
         countRelated: 5
   links:
     hugo: https://gohugo.io/
