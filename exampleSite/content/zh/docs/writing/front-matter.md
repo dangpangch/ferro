@@ -27,6 +27,12 @@ ferro:
   sidePane: false     # 该页面关闭侧边栏
 ```
 
-## 摘要
+## 摘要与描述
 
-`description` 用于文档卡片、翻页器与社交分享摘要。
+```yaml
+summary: "手动摘要文本"                 # 列表行与搜索索引
+description: "给 meta 标签用的一句话"  # docs 卡片、翻页器、社交标签，
+                                       # 以及列表摘要的最后兜底
+```
+
+列表摘要的解析顺序：`summary`、正文的第一个段落、`description`。
