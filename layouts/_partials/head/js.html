@@ -1,13 +1,9 @@
 {{- /* js/_*.js concatenate into one bundle; dev serves readable output,
-  production minifies and fingerprints with SRI. */}}
+  production minifies and fingerprints with SRI. No build params on purpose:
+  language-dependent values would fork the shared dev script URL per language
+  (last render wins) — per-page data rides on data-* attributes instead. */}}
 {{- $dev := hugo.IsDevelopment }}
-{{- $opts := dict
-    "minify" (not $dev)
-    "sourceMap" (cond $dev "linked" "none")
-    "params" (dict
-      "searchLimit" (site.Params.searchLimit | default 20)
-      "basePath" site.Home.RelPermalink)
--}}
+{{- $opts := dict "minify" (not $dev) "sourceMap" (cond $dev "linked" "none") -}}
 
 {{- $bundle := resources.Match "js/_*.js" | resources.Concat "js/bundle.js" | js.Build $opts -}}
 {{- if $dev }}
@@ -18,15 +14,30 @@
   {{- end }}
 {{- end }}
 
-{{- with resources.Get "js/search/flexsearch.compact.js" | fingerprint }}
-  <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
-{{- end }}
-
-{{- $search := resources.Get "js/search/search.js" | js.Build $opts -}}
-{{- if $dev }}
-  <script defer src="{{ $search.RelPermalink }}"></script>
-{{- else }}
-  {{- with $search | fingerprint }}
-    <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+{{- /* Search adapter chosen by ferro.search: "flexsearch" pairs the adapter
+  with the vendored FlexSearch core (core first, so the deferred scripts
+  execute in order and the global exists when the adapter runs); "pagefind"
+  loads only its adapter — the index bundle itself is imported lazily at
+  runtime; "off" loads nothing. */ -}}
+{{- $engine := default "flexsearch" site.Params.ferro.search -}}
+{{- if not (in (slice "flexsearch" "pagefind" "off") $engine) -}}
+  {{- warnf "ferro.search: unknown engine %q, falling back to flexsearch" $engine -}}
+  {{- $engine = "flexsearch" -}}
+{{- end -}}
+{{- if ne $engine "off" -}}
+  {{- if eq $engine "flexsearch" -}}
+    {{- with resources.Get "js/search/flexsearch.compact.js" | fingerprint }}
+      <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+    {{- end }}
+  {{- end -}}
+  {{- with resources.Get (printf "js/search/%s.js" $engine) -}}
+    {{- $adapter := . | js.Build $opts -}}
+    {{- if $dev }}
+      <script defer src="{{ $adapter.RelPermalink }}"></script>
+    {{- else }}
+      {{- with $adapter | fingerprint }}
+        <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- end }}
+    {{- end -}}
   {{- end }}
 {{- end }}

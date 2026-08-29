@@ -1,4 +1,7 @@
-{{/* A sanitized summary that will get the first paragraph content or .Page.Params.Summary */}}
+{{/* A sanitized summary for list rows and the search index: front matter
+  summary, else the first content paragraph, else front matter description
+  (docs-style pages often open with lists or code and have no plain first
+  paragraph). */}}
 
 {{- with .Page.Params.Summary -}}
   {{- . -}}
@@ -6,5 +9,7 @@
   {{- $first_p_match := (findRE `<p>(.*?)</p>` .Content 1) -}}
   {{- if $first_p_match -}}
     {{- (replaceRE `<.*?>` "" (index $first_p_match 0)) | safeHTML -}}
+  {{- else -}}
+    {{- with .Page.Description -}}{{- . -}}{{- end -}}
   {{- end -}}
 {{- end -}}

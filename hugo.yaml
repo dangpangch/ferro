@@ -16,6 +16,9 @@ params:
     # Opt-in paper-grain background texture
     grain: false
     countPageItems: 7
+    # Search engine: "flexsearch" (built-in, zero config) | "pagefind"
+    # (requires `npx pagefind --site public` after the Hugo build) | "off".
+    search: flexsearch
     home:
       # Without these the out-of-box home renders no bio and no tabs
       showBio: true

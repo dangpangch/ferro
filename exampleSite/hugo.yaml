@@ -50,6 +50,14 @@ languages:
       # CJK pages count characters, so reading speed is chars per minute
       # (matches Hugo's own CJK default of 500).
       reading_speed: 500
+      ferro:
+        home:
+          # Per-language tab titles: without this override the Documents
+          # tab would inherit the site-level English title.
+          tabs:
+            - posts
+            - title: 文档
+              section: docs
     menus:
       main:
         - name: 文章
@@ -75,6 +83,9 @@ params:
   ferro:
     enablei18n: true
     sidePane: true
+    # Demo runs Pagefind: `npx pagefind --site public` after the Hugo build
+    # indexes the rendered pages (see the deploy workflow).
+    search: pagefind
     # grain: true opts in to the paper-grain background texture (off by default)
     grain: false
     countPageItems: 7
@@ -85,17 +96,16 @@ params:
       showFeatured: true
       showRecent: true
       hideRecentWhenFeatured: true
-      countPosts: 8
-      # Custom tab list: mixes built-in entries ("recent" / "featured" /
-      # "posts" = all posts, newest first) with taxonomy-term filters.
-      # Omit tabs entirely to fall back to the legacy recent + featured pair;
-      # a list that resolves to nothing falls back to a single posts tab.
+      countPosts: 10
+      # Custom tab list: built-in entries ("recent" / "featured" / "posts"
+      # = all posts, newest first) plus dicts — {section, title?} lists
+      # another content section in weight order, {taxonomy, term, title?}
+      # filters posts by a taxonomy term. Omit tabs entirely to fall back
+      # to the legacy recent + featured pair.
       tabs:
-        - recent
-        - featured
-        - title: Documentation
-          taxonomy: topics
-          term: documentation
+        - posts
+        - title: Documents
+          section: docs
     page:
       copyPage: true
       showYearCount: false

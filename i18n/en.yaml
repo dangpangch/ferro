@@ -28,6 +28,9 @@ search_no_results: 'No results for "%s"'
 search_no_results_hint: Try fewer or shorter keywords
 search_empty: Start typing to search…
 search_keys: "↑↓ navigate  ↵ open  esc close"
+# Pagefind engine: shown when the index bundle is missing (e.g. hugo server
+# without a post-build pagefind run)
+search_pagefind_missing: Pagefind index not found. Run "npx pagefind --site public" after the Hugo build.
 
 # Header
 switch_language: Switch language

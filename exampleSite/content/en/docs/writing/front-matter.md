@@ -27,6 +27,12 @@ ferro:
   sidePane: false     # opt out of the side pane on this page
 ```
 
-## Descriptions
+## Summaries and descriptions
 
-`description` feeds the docs cards, the pager, and social summaries.
+```yaml
+summary: "Manual text"                 # list rows and the search index
+description: "One line for meta tags"  # docs cards, pager, social tags,
+                                       # and the list-summary fallback
+```
+
+List summaries resolve in order: `summary`, the first content paragraph, then `description`.
