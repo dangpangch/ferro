@@ -166,6 +166,10 @@ markup:
     noClasses: false
     style: gruvbox
   goldmark:
+    renderer:
+      # Required by the callout shortcodes (nested shortcodes render through a
+      # second Markdown pass that strips raw HTML unless unsafe is on).
+      unsafe: true
     parser:
       # Standalone images stay block-level: lets the image hook emit <figure>
       # and apply {width=...} attributes to the image, not a wrapping <p>.

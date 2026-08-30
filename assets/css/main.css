@@ -24,6 +24,14 @@
   --color-accent-hover-light: #9a3a32;
   --color-accent-dark: #d97757;
   --color-accent-hover-dark: #e8956f;
+  --color-warning-light: #915c00; /* warning callout title/icon, light */
+  --color-warning-dark: #e0a458; /* warning callout title/icon, dark */
+  --color-info-light: #1c5d99; /* info callout title/icon, light */
+  --color-info-dark: #6fb1f2; /* info callout title/icon, dark */
+  --color-tip-light: #2b6e2f; /* tip callout title/icon, light */
+  --color-tip-dark: #7cc484; /* tip callout title/icon, dark */
+  --color-danger-light: #a62920; /* danger callout title/icon, light */
+  --color-danger-dark: #ea726b; /* danger callout title/icon, dark */
   --color-on-accent-light: #ffffff; /* text on accent fill, light — white only variant passing AA 4.5:1 */
   --color-on-accent-dark: #292929; /* text on accent fill, dark */
   --color-border-light: #5c504438;
@@ -43,6 +51,10 @@
   --color-muted: var(--color-muted-light);
   --color-accent: var(--color-accent-light);
   --color-accent-hover: var(--color-accent-hover-light);
+  --color-warning: var(--color-warning-light);
+  --color-info: var(--color-info-light);
+  --color-tip: var(--color-tip-light);
+  --color-danger: var(--color-danger-light);
   --color-border: var(--color-border-light);
   --color-selection: var(--color-selection-light);
   --color-code-canvas: var(--color-code-canvas-light);
@@ -92,6 +104,10 @@
   --color-muted: var(--color-muted-dark);
   --color-accent: var(--color-accent-dark);
   --color-accent-hover: var(--color-accent-hover-dark);
+  --color-warning: var(--color-warning-dark);
+  --color-info: var(--color-info-dark);
+  --color-tip: var(--color-tip-dark);
+  --color-danger: var(--color-danger-dark);
   --color-border: var(--color-border-dark);
   --color-selection: var(--color-selection-dark);
   --color-code-canvas: var(--color-code-canvas-dark);

@@ -104,6 +104,11 @@ markup:
     noClasses: false
     style: gruvbox
   goldmark:
+    renderer:
+      # Nested shortcodes (e.g. a note inside details) render through a second
+      # Markdown pass that strips raw HTML unless unsafe is on. markup merges
+      # shallowly, so sites defining their own markup block must repeat it.
+      unsafe: true
     parser:
       # Standalone images stay block-level: lets the image hook emit <figure>
       # and apply {width=...} attributes to the image, not a wrapping <p>.

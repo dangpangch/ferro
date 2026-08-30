@@ -1,0 +1,36 @@
+{{- /* Callout box — the shared markup behind the note shortcode and the
+  blockquote alert render hook. Expects a dict:
+  - type: "note" | "info" | "tip" | "warning" | "danger" (validated by callers)
+  - title: optional heading override; falls back to the i18n default
+  - content: pre-rendered HTML (shortcode inner / blockquote hook .Text)
+
+  icon.html takes the Tabler sprite name, not the icons.config key; colors
+  reference the semantic callout tokens (main.css) and appear as complete
+  literals for Tailwind class detection. */
+-}}
+{{- $icons := dict
+  "note" "note"
+  "info" "info-circle"
+  "tip" "bulb"
+  "warning" "alert-triangle"
+  "danger" "alert-octagon"
+-}}
+{{- $colors := dict
+  "note" "text-accent"
+  "info" "text-info"
+  "tip" "text-tip"
+  "warning" "text-warning"
+  "danger" "text-danger"
+-}}
+{{- $title := .title | default (i18n (printf "shortcode_%s" .type)) -}}
+<div class="border-border my-6 rounded-md border px-4 py-3" role="note">
+  <div
+    class="{{ index $colors .type }} flex items-center gap-1.5 font-sans text-sm font-bold"
+  >
+    {{- partial "icon.html" (dict "name" (index $icons .type) "size" 16) -}}
+    <span>{{- $title -}}</span>
+  </div>
+  <div class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
+    {{- .content -}}
+  </div>
+</div>

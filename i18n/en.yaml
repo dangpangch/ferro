@@ -48,6 +48,13 @@ see_all: See all...
 breadcrumb_home: Home
 copy_page: Copy page
 
+# Shortcodes (default callout titles)
+shortcode_note: Note
+shortcode_info: Info
+shortcode_tip: Tip
+shortcode_warning: Warning
+shortcode_danger: Danger
+
 # External links (render-link hook)
 ext_link_new_tab: Opens in new tab
 
