@@ -11,7 +11,11 @@
 -}}
 {{- $size := default 16 .size -}}
 {{- $class := .class | default "" -}}
-{{- $sprite := (resources.Get "icons/tabler.svg").RelPermalink -}}
+{{- /* Fingerprinted so regenerating the sprite busts the browser cache —
+  the URL must change when symbol ids are added (use hrefs break silently
+  against a stale cached sprite). */
+-}}
+{{- $sprite := (resources.Get "icons/tabler.svg" | fingerprint).RelPermalink -}}
 <svg
   aria-hidden="true"
   {{ if $class }}class="{{ $class }}"{{ end }}
@@ -28,4 +32,5 @@
 </svg>
 {{- /* Trailing newline chomped: the partial is often inlined inside underlined
   links (render-link.html), where the stray space renders as a visible
-  underline segment after the icon. Flex call sites ignore whitespace. */ -}}
+  underline segment after the icon. Flex call sites ignore whitespace. */
+-}}

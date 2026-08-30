@@ -48,6 +48,13 @@ see_all: 查看全部...
 breadcrumb_home: 首页
 copy_page: 复制页面
 
+# Shortcodes (default callout titles)
+shortcode_note: 注意
+shortcode_info: 信息
+shortcode_tip: 提示
+shortcode_warning: 警告
+shortcode_danger: 危险
+
 # External links (render-link hook)
 ext_link_new_tab: 在新标签页中打开
 

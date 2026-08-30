@@ -1,0 +1,39 @@
+{{- /* Collapsible <details> block — native HTML, zero JS. Inner content is
+  Markdown, rendered via RenderString; the angle bracket delimiters keep the
+  block's own HTML out of the page's goldmark pass, where raw HTML would be
+  stripped with unsafe off.
+
+  Params:
+  - summary: required visible heading (warned and left empty when missing,
+  so the content is never silently swallowed)
+  - open: optional flag (open=true) rendering the block expanded
+
+  Usage: details summary="Title" open=true … /details, with the angle
+  bracket shortcode delimiters.
+  */
+-}}
+{{- $title := .Get "summary" -}}
+{{- if not $title -}}
+  {{- warnf "details shortcode: summary param is required (%s)" .Page.File.Path -}}
+{{- end -}}
+<details
+  class="group border-border my-6 rounded-md border"
+  {{ if .Get "open" }}open{{ end }}
+>
+  <summary
+    class="text-fg hover:bg-border flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-md px-4 font-sans text-sm font-bold select-none [&::-webkit-details-marker]:hidden"
+  >
+    {{- $title -}}
+    {{- partial "icon.html" (dict
+      "name" "chevron-down"
+      "size" 16
+      "class" "ml-auto transition-transform duration-150 ease-out group-open:rotate-180"
+      )
+    -}}
+  </summary>
+  <div
+    class="border-border group-open:border-t group-open:px-4 group-open:py-3 [&>*:first-child]:mt-0 [&>*:last-child]:mb-0"
+  >
+    {{- with .Inner -}}{{- . | $.Page.RenderString -}}{{- end -}}
+  </div>
+</details>

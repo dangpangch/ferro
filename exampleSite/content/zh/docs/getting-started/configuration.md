@@ -36,7 +36,8 @@ weight: 2
 | `showDetails` | `false` | 日期与阅读元信息 |
 | `showTableOfContents` | `false` | 目录 |
 | `showRelated` | `false` | 相关文章 |
-| `copyPage` | `false` | 复制页面为 Markdown 按钮 |
+
+「复制页面」按钮通过在站点配置的 `outputs.page` 中加入 `CopyPage` 启用——详见[配置参考]({{< ref "/docs/reference/configuration" >}})。
 
 ## 多语言
 

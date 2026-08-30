@@ -1,0 +1,24 @@
+{{- /* Note shortcode — callout box; the shared markup lives in
+  components/callout.html (also used by the blockquote alert render hook).
+
+  Params:
+  - type: "note" (default), "info", "tip", "warning" or "danger"
+  - title: optional heading override
+
+  Usage: note … /note, or note type="warning" title="…" … /note, with the
+  angle bracket shortcode delimiters. The inner content is Markdown,
+  rendered via RenderString so the box's own HTML never passes through the
+  page's goldmark pass (where raw HTML would be stripped with unsafe off).
+  */
+-}}
+{{- $type := lower (default "note" (.Get "type" | default (.Get 0))) -}}
+{{- if not (in (slice "note" "info" "tip" "warning" "danger") $type) -}}
+  {{- warnf "note shortcode: unknown type %q, falling back to note" $type -}}
+  {{- $type = "note" -}}
+{{- end -}}
+{{- partial "components/callout.html" (dict
+  "type" $type
+  "title" (.Get "title")
+  "content" (.Inner | default "" | $.Page.RenderString)
+  )
+-}}
