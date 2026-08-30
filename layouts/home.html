@@ -113,10 +113,5 @@
 {{- end -}}
 
 {{- define "side" -}}
-  <aside
-    class="side-pane{{ cond site.Params.ferro.side.home.sidePaneSticky " side-sticky" "" }} border-border border"
-  >
-    {{- partial "side/home.html" . -}}
-    {{- partial "components/to-top.html" . -}}
-  </aside>
+  {{- partial "side/pane.html" (dict "page" . "section" "home") -}}
 {{- end -}}

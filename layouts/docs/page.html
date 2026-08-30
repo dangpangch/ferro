@@ -21,8 +21,5 @@
 {{- end -}}
 
 {{- define "side" -}}
-  <aside class="side-pane side-sticky">
-    {{- partial "side/single.html" . -}}
-    {{- partial "components/to-top.html" . -}}
-  </aside>
+  {{- partial "side/pane.html" (dict "page" . "section" "single" "sticky" true) -}}
 {{- end -}}

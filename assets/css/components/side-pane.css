@@ -1,9 +1,9 @@
 /* ── Side pane ── */
 .side-pane {
-  @apply h-fit w-[220px] overflow-hidden rounded-lg px-4 pb-5 text-sm leading-normal;
+  @apply h-fit w-55 overflow-hidden rounded-lg px-4 pb-5 text-sm leading-normal;
 
   /* Hide below the widescreen breakpoint (--breakpoint-widescreen in
-     main.css); docs/section.html mirrors this for its TOC spacer */
+     main.css); docs/section.html's spacer uses the same w-55 token */
   @variant max-widescreen {
     display: none;
   }
