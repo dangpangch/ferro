@@ -29,7 +29,6 @@ params:
       hideRecentWhenFeatured: false
       countPosts: 5
     page:
-      copyPage: false
       showYearCount: false
     side:
       home:
@@ -117,7 +116,10 @@ markup:
         block: true
         title: true
 
-# Search index output format
+# Search index output format. The CopyPage format is also defined here but
+# intentionally NOT mounted in outputs: sites opt in via outputs.page, so no
+# per-page index.md is generated until they do (the copy-page button renders
+# only when the format is mounted).
 outputFormats:
   SearchIndex:
     mediaType: application/json
@@ -145,6 +147,3 @@ outputs:
     - HTML
     - RSS
     - SearchIndex
-  page:
-    - HTML
-    - CopyPage

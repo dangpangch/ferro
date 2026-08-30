@@ -34,7 +34,6 @@ weight: 2
     term = 'documentation'
 
 [params.ferro.page]
-  copyPage = true
   showYearCount = false
 
 [params.ferro.side.home]
@@ -70,7 +69,6 @@ params:
       hideRecentWhenFeatured: true
       countPosts: 8
     page:
-      copyPage: true
       showYearCount: false
     side:
       home:
@@ -106,7 +104,6 @@ params:
         "countPosts": 8
       },
       "page": {
-        "copyPage": true,
         "showYearCount": false
       },
       "side": {
@@ -149,7 +146,6 @@ params:
 | `ferro.home.hideRecentWhenFeatured` | `false` | 两组同时开启时,从最新列表中排除精选文章。 |
 | `ferro.home.countPosts` | `5` | 精选/最新分组列出的文章数量。 |
 | `ferro.home.tabs` | 未设置 | 自定义首页 tab 列表;条目为 `"recent"`、`"featured"`、`"posts"`(全部文章,按时间倒序)、`{taxonomy, term, title?}`(按 taxonomy term 过滤文章)或 `{section, title?}`(按 weight 序列出另一个内容 section;空 tab 跳过;解析后为空则回退为单个全部文章 tab)。未设置保持默认的「最新 + 精选」组合。可通过 `languages.<lang>.params` 按语言覆盖。 |
-| `ferro.page.copyPage` | `false` | 在单页显示「复制页面」按钮(获取原始 Markdown)。 |
 | `ferro.page.showYearCount` | `false` | 在 section 落地页显示按年份的文章计数。 |
 | `ferro.side.home.sidePaneSticky` | `false` | 首页侧边栏随滚动固定。 |
 | `ferro.side.home.taxonomies` | `[]` | 首页侧边栏列出的分类法(如 `tags`、`series`)。为空时隐藏该区块。 |

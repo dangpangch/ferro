@@ -107,7 +107,6 @@ params:
         - title: Documents
           section: docs
     page:
-      copyPage: true
       showYearCount: false
     side:
       home:

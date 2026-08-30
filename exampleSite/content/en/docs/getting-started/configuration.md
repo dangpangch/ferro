@@ -36,7 +36,8 @@ The side pane can be toggled globally with `sidePane`, per page with front matte
 | `showDetails` | `false` | date/reading meta block |
 | `showTableOfContents` | `false` | table of contents |
 | `showRelated` | `false` | related posts |
-| `copyPage` | `false` | copy page as Markdown button |
+
+The "Copy page" button is enabled by adding `CopyPage` to `outputs.page` in your site config — see the [configuration reference]({{< ref "/docs/reference/configuration" >}}).
 
 ## Multilingual
 
