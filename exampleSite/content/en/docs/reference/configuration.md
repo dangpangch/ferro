@@ -365,3 +365,15 @@ outputs:
 ````
 
 The `SearchIndex` and `CopyPage` output formats themselves ship with the theme and only need activating through `outputs`, as shown above. For a ready-to-use starting point, clone the [starter template](https://github.com/dangpangch/ferro-starter-template), which wires all of this up.
+
+## Analytics
+
+Google Analytics 4 is wired through Hugo's standard `services` config — set an ID and the tag ships at the end of `<body>` (skipped on the dev server, so local builds don't pollute stats):
+
+````yaml
+services:
+  googleAnalytics:
+    ID: G-XXXXXXXXXX
+````
+
+Other providers (Plausible, Umami, …) are supported by overriding the theme's `layouts/_partials/analytics.html` partial: create `layouts/_partials/analytics.html` in your own site with your snippet, and it replaces the built-in one.

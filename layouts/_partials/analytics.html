@@ -1,0 +1,15 @@
+{{- /* Analytics snippet, emitted at the end of <body>.
+
+  Ships Google Analytics 4 through Hugo's standard services config — set
+  services.googleAnalytics.ID in the site config (skipped on the dev server
+  so local builds don't pollute stats).
+
+  Other providers (Plausible, Umami, …): override this partial by placing
+  your own layouts/_partials/analytics.html in the site — the site's layouts
+  dir wins over the theme's. */
+-}}
+{{- if not hugo.IsDevelopment -}}
+  {{- with site.Config.Services.GoogleAnalytics.ID -}}
+    {{- template "_internal/google_analytics.html" $ -}}
+  {{- end -}}
+{{- end -}}

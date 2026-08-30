@@ -365,3 +365,15 @@ outputs:
 ````
 
 `SearchIndex` 与 `CopyPage` 输出格式本身随主题提供,只需像上面这样通过 `outputs` 启用。若想直接使用现成配置,可克隆 [starter template](https://github.com/dangpangch/ferro-starter-template),其中已完成全部接线。
+
+## 网站统计
+
+Google Analytics 4 通过 Hugo 标准的 `services` 配置接入——设置 ID 后,统计脚本会输出到 `<body>` 末尾(开发服务器下跳过,本地构建不会污染数据):
+
+````yaml
+services:
+  googleAnalytics:
+    ID: G-XXXXXXXXXX
+````
+
+其他统计服务(Plausible、Umami 等)可通过覆盖主题的 `layouts/_partials/analytics.html` partial 接入:在站点自己的 `layouts/_partials/analytics.html` 中放置统计代码,即可替换内置实现。
