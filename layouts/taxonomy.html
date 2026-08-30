@@ -51,8 +51,7 @@
         {{- range sort . "name" -}}
           <a
             href="{{- absLangURL .name -}}"
-            class="text-muted hover:text-accent hover:border-accent/40{{ if eq .name $taxonomyKey }}
-            {{ end }} border-b-2 border-transparent pb-0.5 font-sans text-sm transition-[color,border-color] duration-150 ease-out"
+            class="text-muted hover:text-accent hover:border-accent/40 border-b-2 border-transparent pb-0.5 font-sans text-sm transition-[color,border-color] duration-150 ease-out"
             {{- if eq .name $taxonomyKey }}
               aria-current="page"
             {{- end -}}

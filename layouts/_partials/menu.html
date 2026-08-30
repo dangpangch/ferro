@@ -13,11 +13,7 @@
     aria-label="{{ if not $isDropdown }}{{ $menuID }}{{ end }}"
   >
     {{- range . }}
-      {{- $attrs := dict "href" .URL }}
       {{- $isCurrent := or ($page.IsMenuCurrent .Menu .) ($page.HasMenuCurrent .Menu .) }}
-      {{- if $isCurrent }}
-        {{- $attrs = merge $attrs (dict "aria-current" "page") }}
-      {{- end }}
       {{- $name := .Name }}
       {{- with .Identifier }}
         {{- with T . }}
@@ -30,28 +26,16 @@
         {{ end }}"
         role="listitem"
       >
-        <a
-          {{- range $k, $v := $attrs }}
-            {{- with $v }}
-              {{- printf " %s=%q" $k $v | safeHTMLAttr }}
-            {{- end }}
-          {{- end }}
+        <a href="{{ .URL }}"{{ if $isCurrent }} aria-current="page"{{ end }}
           >{{ $name }}</a
         >
         {{- if .HasChildren }}
           <ul class="nav-submenu" role="list">
             {{- range .Children }}
-              {{- $cAttrs := dict "href" .URL }}
-              {{- if $page.IsMenuCurrent .Menu . }}
-                {{- $cAttrs = merge $cAttrs (dict "aria-current" "page") }}
-              {{- end }}
               <li>
                 <a
-                  {{- range $k, $v := $cAttrs }}
-                    {{- with $v }}
-                      {{- printf " %s=%q" $k $v | safeHTMLAttr }}
-                    {{- end }}
-                  {{- end }}
+                  href="{{ .URL }}"
+                  {{- if $page.IsMenuCurrent .Menu . }} aria-current="page"{{ end }}
                   >{{ .Name }}</a
                 >
               </li>

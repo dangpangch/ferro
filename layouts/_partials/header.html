@@ -8,14 +8,9 @@
 -}}
 {{- $homeURL := relLangURL "" -}}
 {{- if not $enableI18n -}}
-  {{- /* i18n disabled: point the logo at the default content language home */ -}}
-  {{- $defaultSite := index hugo.Sites 0 -}}
-  {{- range hugo.Sites -}}
-    {{- if lt .Language.Weight $defaultSite.Language.Weight -}}
-      {{- $defaultSite = . -}}
-    {{- end -}}
-  {{- end -}}
-  {{- $homeURL = $defaultSite.Home.RelPermalink -}}
+  {{- /* i18n disabled: point the logo at the default content language home.
+    hugo.Sites is weight-ordered, so [0] is the default language. */ -}}
+  {{- $homeURL = (index hugo.Sites 0).Home.RelPermalink -}}
 {{- end -}}
 <div class="px-5" role="navigation" aria-label="Main">
   <div
