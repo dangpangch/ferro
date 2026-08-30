@@ -8,7 +8,7 @@ const OUT_PATH = resolve("assets/icons/tabler.svg");
 const symbols = [];
 const missing = [];
 
-for (const [partial, name] of Object.entries(icons)) {
+for (const name of icons) {
   const file = resolve(ICONS_DIR, `${name}.svg`);
   if (!existsSync(file)) {
     missing.push(name);
