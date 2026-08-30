@@ -1,22 +1,21 @@
 {{- /* "Copy page" button — copies the article as Markdown (raw source).
-  Reads params.ferro.page.copyPage; the markdown itself is fetched on
-  click from the page's CopyPage output format (hugo.yaml outputs.page,
-  template page.copypage.md), keeping .RawContent out of every HTML page.
-  Requires the CopyPage format — no button without it. */
+  Renders only when the page has the CopyPage output format, i.e. the site
+  opted in via outputs.page in its hugo.yaml (the theme does not mount the
+  format by default). The markdown itself is fetched on click from the
+  format's endpoint (template page.copypage.md), keeping .RawContent out of
+  every HTML page. */
 -}}
-{{- if site.Params.ferro.page.copyPage -}}
-  {{- with .OutputFormats.Get "CopyPage" -}}
-    <button
-      type="button"
-      data-copy-page
-      data-copy-page-url="{{ .RelPermalink }}"
-      aria-label="{{ i18n "copy_page" }}"
-      title="{{ i18n "copy_page" }}"
-      class="text-muted hover:text-fg border-border inline-flex cursor-pointer items-center gap-1 rounded-sm border p-1.5 font-sans text-sm transition-colors duration-150 ease-out [&.is-copied_.icon-check]:block [&.is-copied_.icon-copy]:hidden"
-    >
-      {{- partial "icon.html" (dict "name" "copy" "size" 16 "class" "icon-copy") -}}
-      {{- partial "icon.html" (dict "name" "copy-check" "size" 16 "class" "icon-check hidden") -}}
-      <span>{{ i18n "copy_page" }}</span>
-    </button>
-  {{- end -}}
+{{- with .OutputFormats.Get "CopyPage" -}}
+  <button
+    type="button"
+    data-copy-page
+    data-copy-page-url="{{ .RelPermalink }}"
+    aria-label="{{ i18n "copy_page" }}"
+    title="{{ i18n "copy_page" }}"
+    class="text-muted hover:text-fg border-border inline-flex cursor-pointer items-center gap-1 rounded-sm border p-1.5 font-sans text-sm transition-colors duration-150 ease-out [&.is-copied_.icon-check]:block [&.is-copied_.icon-copy]:hidden"
+  >
+    {{- partial "icon.html" (dict "name" "copy" "size" 16 "class" "icon-copy") -}}
+    {{- partial "icon.html" (dict "name" "copy-check" "size" 16 "class" "icon-check hidden") -}}
+    <span>{{ i18n "copy_page" }}</span>
+  </button>
 {{- end -}}

@@ -34,7 +34,6 @@ The following options make up the full `params.ferro` namespace. Values shown ma
     term = 'documentation'
 
 [params.ferro.page]
-  copyPage = true
   showYearCount = false
 
 [params.ferro.side.home]
@@ -70,7 +69,6 @@ params:
       hideRecentWhenFeatured: true
       countPosts: 8
     page:
-      copyPage: true
       showYearCount: false
     side:
       home:
@@ -106,7 +104,6 @@ params:
         "countPosts": 8
       },
       "page": {
-        "copyPage": true,
         "showYearCount": false
       },
       "side": {
@@ -149,7 +146,6 @@ params:
 | `ferro.home.hideRecentWhenFeatured` | `false` | With both groups on, exclude featured posts from the recent list. |
 | `ferro.home.countPosts` | `5` | How many posts the featured/recent groups list. |
 | `ferro.home.tabs` | unset | Custom home tab list; entries are `"recent"`, `"featured"`, `"posts"` (all posts, newest first), `{taxonomy, term, title?}` to filter posts by a taxonomy term, or `{section, title?}` to list another content section in its weight order (empty tabs are skipped; a list that resolves to nothing falls back to one all-posts tab). Unset keeps the default recent + featured pair. Overridable per language via `languages.<lang>.params`. |
-| `ferro.page.copyPage` | `false` | Show the "Copy page" button on single pages (fetches the raw Markdown). |
 | `ferro.page.showYearCount` | `false` | Show per-year post counts on section landing pages. |
 | `ferro.side.home.sidePaneSticky` | `false` | Make the home side pane stick while scrolling. |
 | `ferro.side.home.taxonomies` | `[]` | Taxonomies listed in the home side pane (e.g. `tags`, `series`). Empty hides the section. |
@@ -365,3 +361,15 @@ outputs:
 ````
 
 The `SearchIndex` and `CopyPage` output formats themselves ship with the theme and only need activating through `outputs`, as shown above. For a ready-to-use starting point, clone the [starter template](https://github.com/dangpangch/ferro-starter-template), which wires all of this up.
+
+## Analytics
+
+Google Analytics 4 is wired through Hugo's standard `services` config — set an ID and the tag ships at the end of `<body>` (skipped on the dev server, so local builds don't pollute stats):
+
+````yaml
+services:
+  googleAnalytics:
+    ID: G-XXXXXXXXXX
+````
+
+Other providers (Plausible, Umami, …) are supported by overriding the theme's `layouts/_partials/analytics.html` partial: create `layouts/_partials/analytics.html` in your own site with your snippet, and it replaces the built-in one.

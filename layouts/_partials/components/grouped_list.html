@@ -28,44 +28,32 @@
   </div>
   {{- range .Pages -}}
     {{- $cover := partial "components/post_cover.html" . -}}
-    {{- if $cover -}}
-      <div class="mt-3 grid md:grid-cols-[1fr_auto] md:gap-[1em]">
-        <a
-          class="font-sans text-[1.0625rem] font-bold wrap-anywhere hover:underline"
-          href="{{- .RelPermalink -}}"
-          >{{- partial "title.html" . -}}</a
-        >
-        <time
-          class="dim float-right text-sm"
-          datetime="{{- .Date | time.Format "2006-01-02T15:04:05-07:00" -}}"
-        >
-          {{- .Date | time.Format (or site.Params.dateFormat ":date_medium") -}}
-        </time>
-      </div>
+    {{- $summary := "text-muted line-clamp-3 text-base leading-[1.6]" -}}
+    <div class="mt-3 grid md:grid-cols-[1fr_auto] md:gap-[1em]">
+      <a
+        class="font-sans text-[1.0625rem] font-bold wrap-anywhere hover:underline"
+        href="{{- .RelPermalink -}}"
+        >{{- partial "title.html" . -}}</a
+      >
+      <time
+        class="dim float-right text-sm"
+        datetime="{{- .Date | time.Format "2006-01-02T15:04:05-07:00" -}}"
+      >
+        {{- .Date | time.Format (or site.Params.dateFormat ":date_medium") -}}
+      </time>
+    </div>
+    {{- if $cover }}
       <div class="mt-1 flex items-center gap-4">
-        {{- $cover -}}
-        <div class="text-muted line-clamp-3 min-w-0 flex-1 text-base leading-[1.6]">
+        {{- $cover }}
+        <div class="{{ $summary }} min-w-0 flex-1">
           {{- partial "components/summary.html" . -}}
         </div>
       </div>
-    {{- else -}}
-      <div class="mt-3 grid md:grid-cols-[1fr_auto] md:gap-[1em]">
-        <a
-          class="font-sans text-[1.0625rem] font-bold wrap-anywhere hover:underline"
-          href="{{- .RelPermalink -}}"
-          >{{- partial "title.html" . -}}</a
-        >
-        <time
-          class="dim float-right text-sm"
-          datetime="{{- .Date | time.Format "2006-01-02T15:04:05-07:00" -}}"
-        >
-          {{- .Date | time.Format (or site.Params.dateFormat ":date_medium") -}}
-        </time>
-      </div>
-      <div class="text-muted line-clamp-3 text-base leading-[1.6]">
+    {{- else }}
+      <div class="{{ $summary }}">
         {{- partial "components/summary.html" . -}}
       </div>
-    {{- end -}}
+    {{- end }}
   {{- end -}}
 {{- end -}}
 {{- partial "pagination.html" $page -}}

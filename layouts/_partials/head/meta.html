@@ -61,6 +61,10 @@
 
 {{- /* ---- hreflang alternates (multi-language sites only) ---- */ -}}
 {{- if gt (len hugo.Sites) 1 -}}
+  {{- /* hugo.Sites is weight-ordered; [0] is the default content language
+    whose variant doubles as the x-default target. */ -}}
+  {{- $defaultLang := (index hugo.Sites 0).Language.Lang -}}
+  {{- $xDefault := "" -}}
   {{- range $site := hugo.Sites -}}
     {{- $href := "" -}}
     {{- if eq $site.Language.Lang $.Language.Lang -}}
@@ -78,27 +82,10 @@
         hreflang="{{ $site.Language.Locale | default $site.Language.Lang }}"
         href="{{ . }}"
       />
-    {{- end -}}
-  {{- end -}}
-  {{- /* x-default → default content language variant */ -}}
-  {{- $defaultSite := index hugo.Sites 0 -}}
-  {{- range hugo.Sites -}}
-    {{ if lt .Language.Weight $defaultSite.Language.Weight }}
-      {{ $defaultSite = . }}
-    {{ end }}
-  {{- end -}}
-  {{- $xDefault := "" -}}
-  {{- if eq $defaultSite.Language.Lang $.Language.Lang -}}
-    {{- $xDefault = $.Permalink -}}
-  {{- else -}}
-    {{- range $.Translations -}}
-      {{- if eq .Language.Lang $defaultSite.Language.Lang -}}
-        {{ $xDefault = .Permalink }}
+      {{- if eq $site.Language.Lang $defaultLang }}
+        <link rel="alternate" hreflang="x-default" href="{{ . }}" />
       {{- end -}}
     {{- end -}}
-  {{- end -}}
-  {{- with $xDefault -}}
-    <link rel="alternate" hreflang="x-default" href="{{ . }}" />
   {{- end -}}
 {{- end -}}
 

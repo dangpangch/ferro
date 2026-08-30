@@ -1,0 +1,25 @@
+{{- /* Blockquote render hook. GitHub/Obsidian alert blockquotes ([!NOTE]
+  etc., parsed by goldmark's alert extension) render as the theme's callouts
+  — same markup, icons and colors as the note shortcode
+  (components/callout.html); GitHub's five keywords map onto the theme's
+  five types. Regular blockquotes reproduce goldmark's default output
+  (goldmark attaches no block attributes to blockquotes). */
+-}}
+{{- if eq .Type "alert" -}}
+  {{- /* GitHub alert keywords → theme callout types. */ -}}
+  {{- $alertTypes := dict
+    "note" "note"
+    "important" "info"
+    "tip" "tip"
+    "warning" "warning"
+    "caution" "danger"
+  -}}
+  {{- partial "components/callout.html" (dict
+    "type" (index $alertTypes .AlertType | default "note")
+    "title" (.AlertTitle | default "" | plainify | chomp)
+    "content" .Text
+    )
+  -}}
+{{- else -}}
+  <blockquote>{{- .Text -}}</blockquote>
+{{- end -}}

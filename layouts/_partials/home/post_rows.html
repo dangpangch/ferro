@@ -3,44 +3,32 @@
 -}}
 {{- range first (default 5 site.Params.ferro.home.countPosts) .items -}}
   {{- $cover := partial "components/post_cover.html" . -}}
+  {{- $summary := "text-muted line-clamp-2 text-[0.9375rem] leading-[1.6]" -}}
   <div class="group border-border border-t py-4 first:border-t-0">
-    {{- if $cover -}}
-      <div class="grid grid-cols-[1fr_auto] items-baseline gap-x-[1em]">
-        <a
-          class="text-fg group-hover:text-accent font-sans font-bold wrap-anywhere transition-colors duration-150 ease-out hover:underline"
-          href="{{- .RelPermalink -}}"
-          >{{- .LinkTitle -}}</a
-        >
-        <time
-          class="dim text-sm whitespace-nowrap tabular-nums"
-          datetime="{{- .Date | time.Format "2006-01-02T15:04:05-07:00" -}}"
-        >
-          {{- .Date | time.Format (or site.Params.dateFormat ":date_medium") -}}
-        </time>
-      </div>
+    <div class="grid grid-cols-[1fr_auto] items-baseline gap-x-[1em]">
+      <a
+        class="text-fg group-hover:text-accent font-sans font-bold wrap-anywhere transition-colors duration-150 ease-out hover:underline"
+        href="{{- .RelPermalink -}}"
+        >{{- .LinkTitle -}}</a
+      >
+      <time
+        class="dim text-sm whitespace-nowrap tabular-nums"
+        datetime="{{- .Date | time.Format "2006-01-02T15:04:05-07:00" -}}"
+      >
+        {{- .Date | time.Format (or site.Params.dateFormat ":date_medium") -}}
+      </time>
+    </div>
+    {{- if $cover }}
       <div class="mt-1 flex items-center gap-4">
-        {{- $cover -}}
-        <p class="text-muted line-clamp-2 min-w-0 flex-1 text-[0.9375rem] leading-[1.6]">
+        {{- $cover }}
+        <p class="{{ $summary }} min-w-0 flex-1">
           {{- partial "components/summary.html" . -}}
         </p>
       </div>
-    {{- else -}}
-      <div class="grid grid-cols-[1fr_auto] items-baseline gap-x-[1em]">
-        <a
-          class="text-fg group-hover:text-accent font-sans font-bold wrap-anywhere transition-colors duration-150 ease-out hover:underline"
-          href="{{- .RelPermalink -}}"
-          >{{- .LinkTitle -}}</a
-        >
-        <time
-          class="dim text-sm whitespace-nowrap tabular-nums"
-          datetime="{{- .Date | time.Format "2006-01-02T15:04:05-07:00" -}}"
-        >
-          {{- .Date | time.Format (or site.Params.dateFormat ":date_medium") -}}
-        </time>
-      </div>
-      <p class="text-muted mt-1 line-clamp-2 text-[0.9375rem] leading-[1.6]">
+    {{- else }}
+      <p class="{{ $summary }} mt-1">
         {{- partial "components/summary.html" . -}}
       </p>
-    {{- end -}}
+    {{- end }}
   </div>
 {{- end -}}
