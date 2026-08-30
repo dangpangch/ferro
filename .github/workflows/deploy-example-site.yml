@@ -1,7 +1,11 @@
 name: Deploy exampleSite to GitHub Pages
 
-# Manual trigger only: run from the Actions tab ("Run workflow").
+# Deploy on every push to main — a merge landing there is a push, so this
+# covers branch merges and direct pushes alike. workflow_dispatch stays for
+# manual redeploys from the Actions tab.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
