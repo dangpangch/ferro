@@ -22,6 +22,14 @@ Headings are larger text intended for section titles, and they vary in size from
 
 ###### Heading 5
 
+### Anchor Links
+
+Headings get a hover-revealed self link, and an anchor id can be set explicitly:
+
+## Heading with a custom anchor {#custom-anchor}
+
+Jump to it: [go to the custom anchor](#custom-anchor).
+
 ## Paragraphs
 
 Paragraphs are containers for standard page content. Its font is defined and configurable via CSS as mentioned in [customization](/posts/customization) post.
@@ -40,6 +48,11 @@ Paragraphs are containers for standard page content. Its font is defined and con
 - Unordered Item
 - Another Item
 - Yet another
+
+### Task List
+
+- [x] Render checkboxes
+- [ ] Style them per theme
 
 ## Tables
 
@@ -76,3 +89,17 @@ Media like images may be inserted using the syntax `![alt](/images/file.png)`
 
 > Blockquotes, with support for markdown syntax like **bold text**, ~~strike through~~, [links](#) and _others_.  
 > — Here, Some name
+
+## Footnotes
+
+Footnotes render at the end of the page, with a backlink to jump back up.[^1]
+
+[^1]: This is the footnote body. Inline **markdown** works here too.
+
+## Math
+
+Inline math like \(\alpha + \beta\) renders via KaTeX, as does block math:
+
+$$
+\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}
+$$

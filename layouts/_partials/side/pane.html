@@ -1,0 +1,18 @@
+{{- /* Side pane shell shared by every template's "side" block. Expects a
+  dict: "page" (page context), "section" (key under site.Params.ferro.side
+  that selects side/<section>.html), optional "sticky" (bool override for
+  pages that pin the pane regardless of params) and optional "class"
+  (extra classes appended to the aside). */ -}}
+{{- $sticky := false -}}
+{{- if isset . "sticky" -}}
+  {{- $sticky = .sticky -}}
+{{- else -}}
+  {{- $cfg := default dict (index site.Params.ferro.side .section) -}}
+  {{- $sticky = default false (index $cfg "sidePaneSticky") -}}
+{{- end -}}
+<aside
+  class="side-pane border-border border{{ cond $sticky " side-sticky" "" }}{{ with .class }} {{ . }}{{ end }}"
+>
+  {{- partial (printf "side/%s.html" .section) .page -}}
+  {{- partial "components/to-top.html" .page -}}
+</aside>

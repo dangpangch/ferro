@@ -30,10 +30,5 @@
 {{- end -}}
 
 {{- define "side" -}}
-  <aside
-    class="side-pane pt-4{{ cond site.Params.ferro.side.term.sidePaneSticky " side-sticky" "" }}"
-  >
-    {{- partial "side/term.html" . -}}
-    {{- partial "components/to-top.html" . -}}
-  </aside>
+  {{- partial "side/pane.html" (dict "page" . "section" "term" "class" "pt-4") -}}
 {{- end -}}

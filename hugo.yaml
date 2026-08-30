@@ -103,6 +103,17 @@ markup:
     noClasses: false
     style: gruvbox
   goldmark:
+    extensions:
+      # Passthrough hands TeX math to render-passthrough.html, which renders
+      # it at build time via transform.ToMath; only the KaTeX stylesheet is
+      # loaded at runtime (head.html, gated on the hasMath page-store flag).
+      # Inline $..$ is deliberately not enabled (collides with dollar signs in
+      # prose); sites can add it under passthrough.delimiters.inline.
+      passthrough:
+        enable: true
+        delimiters:
+          block: [["\\[", "\\]"], ["$$", "$$"]]
+          inline: [["\\(", "\\)"]]
     renderer:
       # Nested shortcodes (e.g. a note inside details) render through a second
       # Markdown pass that strips raw HTML unless unsafe is on. markup merges

@@ -1,0 +1,16 @@
+{{- /* Heading render hook: keeps Hugo's auto id (.Anchor, so .TableOfContents
+  and existing deep links keep working) and appends a hover-revealed self
+  link. {#custom-id} block attributes override the id for both. */ -}}
+{{- $id := .Anchor -}}
+{{- with .Attributes.id -}}{{- $id = . -}}{{- end -}}
+{{- $class := "group" -}}
+{{- with .Attributes.class -}}{{- $class = printf "%s group" . -}}{{- end -}}
+<h{{ .Level }} id="{{ $id }}" class="{{ $class }}"{{ range $k, $v := .Attributes }}{{ if and (ne $k "id") (ne $k "class") }} {{ $k }}="{{ $v }}"{{ end }}{{ end }}>
+  {{- .Text -}}
+  <a
+    href="#{{ $id }}"
+    aria-label="{{ i18n "heading_anchor_label" }}"
+    class="text-muted ml-1.5 no-underline opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100 focus-visible:text-accent"
+    >#</a
+  >
+</h{{ .Level }}>
