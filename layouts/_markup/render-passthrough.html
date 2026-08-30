@@ -1,0 +1,16 @@
+{{- /* Math passthrough render hook: TeX from the passthrough extension is
+  rendered at build time by transform.ToMath (embedded KaTeX), no client JS.
+  .Type is "block" for $$..$$/\[..\] and "inline" for \(..\). head.html loads
+  the KaTeX stylesheet only when this hook sets the hasMath page-store flag.
+*/ -}}
+{{- $opts := dict "output" "htmlAndMathml" "displayMode" (eq .Type "block") -}}
+{{- with try (transform.ToMath .Inner $opts) -}}
+  {{- $.Page.Store.Set "hasMath" true -}}
+  {{- if eq $.Type "block" -}}
+    <div class="math-block">{{ .Value }}</div>
+  {{- else -}}
+    <span class="math-inline">{{ .Value }}</span>
+  {{- end -}}
+{{- else -}}
+  {{- errorf "KaTeX could not render math in %s: %s" $.Position .Err -}}
+{{- end -}}

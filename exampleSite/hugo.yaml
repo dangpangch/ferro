@@ -165,6 +165,13 @@ markup:
     noClasses: false
     style: gruvbox
   goldmark:
+    extensions:
+      # Mirrors the theme registry: build-time math via transform.ToMath.
+      passthrough:
+        enable: true
+        delimiters:
+          block: [["\\[", "\\]"], ["$$", "$$"]]
+          inline: [["\\(", "\\)"]]
     renderer:
       # Required by the callout shortcodes (nested shortcodes render through a
       # second Markdown pass that strips raw HTML unless unsafe is on).

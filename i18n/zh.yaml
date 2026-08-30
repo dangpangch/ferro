@@ -58,6 +58,9 @@ shortcode_danger: 危险
 # External links (render-link hook)
 ext_link_new_tab: 在新标签页中打开
 
+# Heading self link (render-heading hook)
+heading_anchor_label: 链接到本节
+
 # Taxonomies
 # Display names shown on taxonomy overview and term pages
 taxonomies:

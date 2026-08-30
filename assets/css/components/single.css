@@ -64,6 +64,27 @@ section.page-section {
   hr {
     @apply border-border my-8 border-t;
   }
+  /* Task list items (goldmark checkbox input, no list class emitted):
+     drop the disc marker and tint the box. */
+  li:has(> input[type="checkbox"]) {
+    @apply list-none;
+    & > input[type="checkbox"] {
+      @apply accent-accent mr-1.5;
+    }
+  }
+  /* Footnotes (goldmark output): soften the endnote section, keep the
+     backref arrow from looking like a content link. */
+  .footnotes {
+    @apply text-muted text-sm;
+  }
+  .footnote-backref {
+    @apply no-underline;
+  }
+  /* Math blocks emitted by render-passthrough.html; inline math needs no
+     extra styling. KaTeX output scrolls if a formula is wider than the page. */
+  .math-block {
+    @apply my-6 overflow-x-auto;
+  }
 }
 
 /* ── Code block chrome (language label + copy button) ── */
